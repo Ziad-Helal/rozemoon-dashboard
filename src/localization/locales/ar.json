@@ -46,10 +46,11 @@
       "cashiers": "الصرافون",
       "providers": "الموردون",
       "all providers": "كل الموردين",
-      "public providers": "موردون اجمهور",
+      "public providers": "موردون الجمهور",
       "reviews": "التقييمات",
       "products reviews": "تقييمات السلع",
       "company reviews": "تقييمات الشركة",
+      "orders reviews": "تقييمات الطلبيات",
       "notifications": "إشعارات",
       "all notifications": "كل الإشعارات",
       "discounts": "الخصومات",
@@ -289,7 +290,8 @@
     "downloadDocuments": {
       "download": "تحميل ",
       "documents": "الملفات",
-      "invoice": "الفاتورة"
+      "invoice": "الفاتورة",
+      "empty": "لا يوجد نتائج."
     },
     "rejectScheduledOrder": {
       "tooltip": "رفض الطلبية",
@@ -356,7 +358,8 @@
     "expandModal": {
       "tooltip": {
         "order": "تفاصيل الطلبية",
-        "issue": "تفاصيل المشكلة"
+        "issue": "تفاصيل المشكلة",
+        "notification": "تفاصيل الإشعار"
       },
       "total": "الإجمالي"
     },

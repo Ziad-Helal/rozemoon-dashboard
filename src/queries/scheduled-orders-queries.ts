@@ -144,12 +144,10 @@ export function useSetScheduledOrderAsCODPaid() {
 
 export function usePrepareScheduledOrder() {
   const { t } = useTranslation();
-  const queryClient = useQueryClient();
   const mutation = useMutation<void, AxiosError<ApiError, PrepareScheduledOrder_Request>, { requestBody: PrepareScheduledOrder_Request; operation: "add" | "reduce" }>({
     mutationFn: ({ requestBody, operation }) => prepareScheduledOrder(requestBody, operation),
     onSuccess: () => {
       goodHint(t("hints.good.prepareForScheduledOrder"));
-      queryClient.invalidateQueries({ queryKey: [queryKeys.storeScheduledOrders] });
     },
     onError: ({ response }) => {
       const error = response?.data;

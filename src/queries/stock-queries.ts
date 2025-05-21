@@ -1,5 +1,6 @@
 import {
   ApiError,
+  AuthenticatedUser,
   AuthenticateStockRefill_Request,
   CreateStockRefill_Request,
   GetStock_Response,
@@ -18,11 +19,13 @@ import { badHint, goodHint } from "@/services/hint";
 import { approveStockRefill, createStockRefill, getStock, getStockRefills, rejectStockRefill } from "@/lib/api";
 import { getRefillCartProps } from "@/lib/utils";
 import { useTranslation } from "react-i18next";
+import { useQuerySubscribe } from "@/hooks/misc";
 
 export function useGetStock(pagination: Pagination) {
+  const user = useQuerySubscribe<AuthenticatedUser>([queryKeys.userAuth]);
   const query = useQuery<GetStock_Response, AxiosError<ApiError, Pagination>, { items: StockProduct[]; pagination: Pagination }>({
     queryKey: [queryKeys.stock],
-    queryFn: () => getStock(pagination),
+    queryFn: () => getStock(pagination, user!.roles[0]),
     select: ({ items, ...paginationData }) => ({ items, pagination: { ...pagination, ...paginationData, filters: { ...pagination.filters, ...paginationData.filters } } }),
   });
 

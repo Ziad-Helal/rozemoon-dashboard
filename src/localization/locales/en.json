@@ -50,6 +50,7 @@
       "reviews": "reviews",
       "products reviews": "products reviews",
       "company reviews": "company reviews",
+      "orders reviews": "orders reviews",
       "notifications": "notifications",
       "all notifications": "all notifications",
       "discounts": "discounts",
@@ -289,7 +290,8 @@
     "downloadDocuments": {
       "download": "download ",
       "documents": "documents",
-      "invoice": "invoice"
+      "invoice": "invoice",
+      "empty": "There are nothing to display!"
     },
     "rejectScheduledOrder": {
       "tooltip": "reject order",
@@ -356,7 +358,8 @@
     "expandModal": {
       "tooltip": {
         "order": "expand order",
-        "issue": "expand issue"
+        "issue": "expand issue",
+        "notification": "read notification"
       },
       "total": "total"
     },

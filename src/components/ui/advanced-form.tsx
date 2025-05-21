@@ -10,7 +10,8 @@ import { t } from "i18next";
 interface AdvancedForm_Props<TFieldValues extends FieldValues, TResponse> {
   form: UseFormReturn<TFieldValues>;
   inputFields: ReactNode;
-  onSubmit: (values: TFieldValues) => Promise<TResponse>;
+  onSubmit?: (values: TFieldValues) => Promise<TResponse>;
+  onSubmitSync?: (values: TFieldValues) => void;
   className?: string;
   resetErrors?: () => void;
   isSubmitting?: boolean;
@@ -26,6 +27,7 @@ export function AdvancedForm<TFieldValues extends FieldValues, TResponse>({
   form,
   inputFields,
   onSubmit,
+  onSubmitSync,
   className,
   resetErrors,
   isSubmitting,
@@ -52,7 +54,7 @@ export function AdvancedForm<TFieldValues extends FieldValues, TResponse>({
   }
 
   async function submitHandler(values: TFieldValues) {
-    onSubmit(values)
+    onSubmit?.(values)
       .then(formResetHandler)
       .catch((error: AxiosError<ApiError, TFieldValues>) => {
         const errors = error.response?.data.errors;
@@ -62,6 +64,8 @@ export function AdvancedForm<TFieldValues extends FieldValues, TResponse>({
           }
         }
       });
+
+    onSubmitSync?.(values);
   }
 
   return (

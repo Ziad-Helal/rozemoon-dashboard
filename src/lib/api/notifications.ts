@@ -1,5 +1,13 @@
-import { postRequest } from "@/services/api";
-import { ApiError, GetAllNotifications_Response, GetMyNotifications_Response, Pagination, SendNotification_Request } from "@/types/api-types";
+import { getRequest, postRequest } from "@/services/api";
+import {
+  ApiError,
+  GetAllNotifications_Response,
+  GetANotification_Request,
+  GetANotification_Response,
+  GetMyNotifications_Response,
+  Pagination,
+  SendNotification_Request,
+} from "@/types/api-types";
 
 const endpoints = {
   sendNotificationToAll: import.meta.env.VITE_API_END_POINT_SEND_NOTIFICATION_TO_ALL as string,
@@ -10,6 +18,7 @@ const endpoints = {
   sendNotificationToUser: import.meta.env.VITE_API_END_POINT_SEND_NOTIFICATION_TO_USER as string,
   getAllNotifications: import.meta.env.VITE_API_END_POINT_GET_ALL_NOTIFICATIONS as string,
   getMyNotifications: import.meta.env.VITE_API_END_POINT_GET_MY_NOTIFICATIONS as string,
+  getANotification: import.meta.env.VITE_API_END_POINT_GET_A_NOTIFICATION as string,
 };
 
 export function sendNotification(requestBody: SendNotification_Request) {
@@ -26,4 +35,8 @@ export function getAllNotifications(requestBody: Pagination) {
 
 export function getMyNotifications(requestBody: Pagination) {
   return postRequest<Pagination, GetMyNotifications_Response, ApiError>(endpoints.getMyNotifications, requestBody);
+}
+
+export function getANotification(requestBody: GetANotification_Request) {
+  return getRequest<GetANotification_Response, ApiError>(endpoints.getANotification + requestBody.id, { params: requestBody });
 }

@@ -1,8 +1,17 @@
-import { ApiError, GetAllNotifications_Response, GetMyNotifications_Response, Notification, Pagination, SendNotification_Request } from "@/types/api-types";
+import {
+  ApiError,
+  GetAllNotifications_Response,
+  GetANotification_Request,
+  GetANotification_Response,
+  GetMyNotifications_Response,
+  Notification,
+  Pagination,
+  SendNotification_Request,
+} from "@/types/api-types";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { queryKeys } from "./query-keys";
-import { getAllNotifications, getMyNotifications, sendNotification } from "@/lib/api";
+import { getAllNotifications, getANotification, getMyNotifications, sendNotification } from "@/lib/api";
 import { badHint, goodHint } from "@/services/hint";
 import { useTranslation } from "react-i18next";
 
@@ -35,6 +44,15 @@ export function useGetMyNotifications(pagination: Pagination) {
     queryKey: [queryKeys.myNotifications],
     queryFn: () => getMyNotifications(pagination),
     select: ({ items, ...paginationData }) => ({ items, pagination: { ...pagination, ...paginationData, filters: { ...pagination.filters, ...paginationData.filters } } }),
+  });
+  return query;
+}
+
+export function useGetANotification(requestBody: GetANotification_Request) {
+  const query = useQuery<GetANotification_Response, AxiosError<ApiError, GetANotification_Request>, GetANotification_Response>({
+    queryKey: [queryKeys.aNotification],
+    queryFn: () => getANotification(requestBody),
+    enabled: false,
   });
   return query;
 }

@@ -5,18 +5,20 @@ import { cn } from "@/lib/utils";
 import { formatCounts, formatNumber, handleDirectionChange, Language } from "@/localization";
 import { queryKeys } from "@/queries";
 import { AuthenticatedUser, Currency, ScheduledOrderItem, ScheduledOrderStatus } from "@/types/api-types";
+import { Dispatch, SetStateAction } from "react";
 import { useTranslation } from "react-i18next";
 
 const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
 interface ScheduledOrderItem_Card_Props {
-  orderId: number;
   item: ScheduledOrderItem;
   status: ScheduledOrderStatus;
   currency: Currency;
+  setToBeAdded: Dispatch<SetStateAction<{ productId: number; quantity: number }[]>>;
+  setToBeReduced: Dispatch<SetStateAction<{ productId: number; quantity: number }[]>>;
 }
 
-export default function ScheduledOrderItem_Card({ orderId, item, status, currency }: ScheduledOrderItem_Card_Props) {
+export default function ScheduledOrderItem_Card({ item, status, currency, setToBeAdded, setToBeReduced }: ScheduledOrderItem_Card_Props) {
   const { i18n, t } = useTranslation();
   const user = useQuerySubscribe<AuthenticatedUser>([queryKeys.userAuth]);
   const { productId, productName, quantity, preparedQuantity, productType, productImages, discountPercentage, price } = item;
@@ -67,7 +69,7 @@ export default function ScheduledOrderItem_Card({ orderId, item, status, currenc
         </div>
       </div>
       {user?.roles[0] == "StoreKeeper" && (status == "AssignedToBranch" || status == "FullyPrepared" || status == "HasIssue" || status == "IssueReported") && (
-        <ProductPreparedQuantity_Form bookingId={orderId} productId={productId} quantity={preparedQuantity} />
+        <ProductPreparedQuantity_Form productId={productId} quantity={preparedQuantity} setToBeAdded={setToBeAdded} setToBeReduced={setToBeReduced} />
       )}
     </div>
   );

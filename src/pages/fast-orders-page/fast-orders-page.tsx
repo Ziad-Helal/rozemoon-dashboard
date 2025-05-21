@@ -1,5 +1,5 @@
-import { useDataGetter } from "@/hooks/api";
 import useTable from "./table";
+import { useDataGetter } from "@/hooks/api";
 import { defaultPagination } from "@/lib/constants";
 import { queryKeys, useGetAllFastOrders, useGetMyFastOrders, useGetStoreFastOrders } from "@/queries";
 import { TablePage } from "@/components/layouts";
@@ -13,9 +13,9 @@ export default function FastOrders_Page() {
   const { t } = useTranslation();
   const user = useQuerySubscribe<AuthenticatedUser>([queryKeys.userAuth]);
   const userRole = user?.roles[0];
-  const { columnsDefinition, searchableColumns, filters } = useTable();
+  const { columnsDefinition, searchableColumns, filters, defaultSorting } = useTable();
   const { data, isLoading, setPagination, refetch } = useDataGetter({
-    defaultPagination,
+    defaultPagination: { ...defaultPagination, sortBy: defaultSorting[0].id, sortDirection: defaultSorting[0].desc ? "desc" : "asc" },
     query: userRole == "Admin" ? useGetAllFastOrders : userRole == "Cashier" ? useGetMyFastOrders : useGetStoreFastOrders,
     refetchOnLanguageChange: true,
   });
@@ -29,7 +29,7 @@ export default function FastOrders_Page() {
         changePagination={setPagination}
         searchableColumns={searchableColumns}
         filters={filters}
-        defaultFilters={[]}
+        defaultSorting={defaultSorting}
         isLoading={isLoading}
       />
     </TablePage>

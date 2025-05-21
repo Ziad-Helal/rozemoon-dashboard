@@ -44,7 +44,7 @@ export default function useTable() {
       label: t("dataTable.createdAt"),
       type: "date",
     },
-    { accessorKey: "actions", label: t("dataTable.actions"), type: "actions", actions: Actions, actionsProps: [] },
+    { accessorKey: "actions", label: t("dataTable.actions"), type: "actions", actions: Actions, actionsProps: ["id", "title"] },
   ];
 
   const filterColumns = {

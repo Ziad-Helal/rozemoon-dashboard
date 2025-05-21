@@ -30,6 +30,7 @@ export const queryKeys = {
   companyReviews: "companyReviews",
   allNotifications: "allNotifications",
   myNotifications: "myNotifications",
+  aNotification: "aNotification",
   allDiscounts: "allDiscounts",
   fastOrderCart: "fastOrderCart",
   allOrdersIssues: "allOrdersIssues",

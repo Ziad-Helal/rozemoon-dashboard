@@ -1,4 +1,5 @@
 import * as XLSX from "xlsx";
+import imagePlaceholder from "/images/flower-placeholder.jpg";
 import { Form_Page } from "@/components/layouts";
 import { Button } from "@/components/ui";
 import { cn, fetchImageAsFile } from "@/lib/utils";
@@ -6,7 +7,6 @@ import { CreateProduct_Request } from "@/types/api-types";
 import { ChangeEvent, useEffect, useState } from "react";
 import { createProduct } from "@/lib/api";
 import { UploadIcon } from "lucide-react";
-import imagePlaceholder from "/images/flower-placeholder.jpg";
 import { emptyProduct } from "@/lib/constants";
 import { useTranslation } from "react-i18next";
 import { formatNumber, Language } from "@/localization";
@@ -38,6 +38,13 @@ export default function UploadProducts_Page() {
         const workSheet = workBook.Sheets[sheetName];
         const jsonData = XLSX.utils.sheet_to_json(workSheet) as CreateProduct_Request[];
         setUploadedProducts(jsonData);
+        // const contacts = [];
+        // jsonData.forEach(({ firstName, lastName, phone1, phone2 }) => {
+        //   if ((phone1 || phone2) && (firstName || lastName))
+        //     return contacts.push({ firstName: firstName ? firstName.trim() : "", lastName: lastName ? lastName.trim() : "", phone1, phone2 });
+        // });
+        // console.log(jsonData.length, contacts.length);
+        // console.log(convertToVCF(contacts));
       };
       reader.readAsArrayBuffer(file);
     }
@@ -66,6 +73,31 @@ export default function UploadProducts_Page() {
       }
     })();
   }, [uploadedProducts, startCreating]);
+
+  //   function convertToVCF(data) {
+  //     return data
+  //       .map(({ firstName, lastName, phone1, phone2 }) => {
+  //         const fullName = `${firstName} ${lastName} RM`.trim();
+  //         const structuredName = `${lastName};${firstName};;RM;`;
+  //         const phoneFields = [];
+  //         if (phone1 && phone2 && phone1 == phone2) {
+  //           console.log(firstName, " ", lastName);
+  //           phoneFields.push(`TEL;TYPE=CELL:+9660${phone1}`);
+  //         } else {
+  //           if (phone1) phoneFields.push(`TEL;TYPE=CELL:+9660${phone1}`);
+  //           if (phone2) phoneFields.push(`TEL;TYPE=WORK:+9660${phone2}`);
+  //         }
+
+  //         return `BEGIN:VCARD
+  // VERSION:3.0
+  // N:${structuredName}
+  // FN:${fullName}
+  // ${phoneFields.join("\n")}
+  // CATEGORIES:RM
+  // END:VCARD`;
+  //       })
+  //       .join("\n");
+  //   }
 
   return (
     <Form_Page heading={t("forms.product.uploadHeading")}>

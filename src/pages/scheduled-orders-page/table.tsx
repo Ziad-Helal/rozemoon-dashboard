@@ -1,8 +1,11 @@
 import { Column, Filter } from "@/types/table-types";
 import Actions, { Actions_Props } from "./actions";
 import { useTranslation } from "react-i18next";
+import { SortingState } from "@tanstack/react-table";
 
 const searchableColumns = ["id", "note", "customerId"];
+
+const defaultSorting: SortingState = [{ id: "createdAt", desc: true }];
 
 export default function useTable() {
   const { t } = useTranslation();
@@ -233,5 +236,5 @@ export default function useTable() {
     },
   ];
 
-  return { columnsDefinition, searchableColumns, filters };
+  return { columnsDefinition, searchableColumns, filters, defaultSorting };
 }

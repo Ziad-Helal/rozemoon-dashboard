@@ -27,3 +27,19 @@ export interface SendNotification_Request {
   receiverId?: number;
   image?: File;
 }
+
+export interface GetANotification_Request {
+  id: number;
+}
+
+export interface GetANotification_Response {
+  id: number;
+  title: string;
+  content: string;
+  type: string;
+  typeLocalized: string;
+  isRead: boolean;
+  senderId: number;
+  receiverId: number;
+  createdAt: Date;
+}

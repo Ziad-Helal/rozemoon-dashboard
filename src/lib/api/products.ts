@@ -80,7 +80,9 @@ export function updateProduct(requestBody: UpdateProduct_Request) {
 
 export async function getProductDetails(requestBody: GetProductsDetails_Request) {
   const productDetails = await getRequest<GetProductDetails_Response, ApiError>(endpoints.getProductDetails + requestBody.id + "/admin", { params: requestBody });
-  const files = await Promise.all(productDetails.images.map(({ imageUrl }) => fetchImageAsFile(baseUrl + imageUrl)));
+  const files = (await Promise.allSettled(productDetails.images.map(({ imageUrl }) => fetchImageAsFile(baseUrl + imageUrl)))).map((response) =>
+    response.status == "fulfilled" ? response.value : ({ preview: "", name: "CORS.image", size: 0, type: "image" } as File)
+  );
   return { ...productDetails, files };
 }
 

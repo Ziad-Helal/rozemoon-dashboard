@@ -22,3 +22,4 @@ export { default as ToggleActiveness } from "./toggle-activeness";
 export { default as AuthenticateReturnRequest } from "./authenticate-return-request";
 export { default as PayOrder } from "./pay-order";
 export { default as ChangeUserStatus } from "./change-user-status";
+export { default as ReadNotification } from "./read-notification";

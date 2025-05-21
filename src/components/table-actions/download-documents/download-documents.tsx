@@ -1,5 +1,6 @@
 import { Dialog, Image, LoadingSpinner } from "@/components";
 import { Button } from "@/components/ui";
+import { cn } from "@/lib/utils";
 import { FileTextIcon } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
@@ -13,6 +14,7 @@ interface DownloadDocuments_Props {
 
 export default function DownloadDocuments({ documents, disabled, isLoading, onOpen, item }: DownloadDocuments_Props) {
   const { t } = useTranslation();
+  const isMoreThanOneFile = documents.length > 1;
 
   const toolTip =
     t("tableActions.downloadDocuments.download") +
@@ -20,9 +22,9 @@ export default function DownloadDocuments({ documents, disabled, isLoading, onOp
 
   return (
     <Dialog
-      title="tt"
-      description="dd"
-      className="lg:max-w-screen-md 2xl:max-w-screen-2xl"
+      title={item ? t(`tableActions.downloadDocuments.${item}`) : t("tableActions.downloadDocuments.documents")}
+      description=""
+      className={cn("lg:max-w-screen-md", isMoreThanOneFile ? "2xl:max-w-screen-2xl" : "")}
       toolTip={toolTip}
       trigger={
         <Button variant="ghost" size="icon" icon={FileTextIcon} onClick={onOpen} disabled={disabled}>
@@ -33,7 +35,7 @@ export default function DownloadDocuments({ documents, disabled, isLoading, onOp
       {isLoading ? (
         <LoadingSpinner />
       ) : documents.length ? (
-        <div className="grid gap-3 2xl:grid-cols-2">
+        <div className={cn("grid gap-3", isMoreThanOneFile ? "2xl:grid-cols-2" : "")}>
           {documents.map((url) => {
             const extension = url.split(".").pop();
             return extension && extension.length > 4 ? (
@@ -44,7 +46,7 @@ export default function DownloadDocuments({ documents, disabled, isLoading, onOp
           })}
         </div>
       ) : (
-        <p>There are nothing to display!</p>
+        <p>{t("tableActions.downloadDocuments.empty")}</p>
       )}
     </Dialog>
   );

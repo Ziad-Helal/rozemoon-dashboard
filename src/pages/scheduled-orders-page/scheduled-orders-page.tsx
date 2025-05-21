@@ -12,9 +12,9 @@ import { useTranslation } from "react-i18next";
 export default function ScheduledOrders_Page() {
   const { t } = useTranslation();
   const user = useQuerySubscribe<AuthenticatedUser>([queryKeys.userAuth]);
-  const { columnsDefinition, searchableColumns, filters } = useTable();
+  const { columnsDefinition, searchableColumns, filters, defaultSorting } = useTable();
   const { data, isLoading, setPagination, refetch } = useDataGetter({
-    defaultPagination,
+    defaultPagination: { ...defaultPagination, sortBy: defaultSorting[0].id, sortDirection: defaultSorting[0].desc ? "desc" : "asc" },
     query: user?.roles[0] == "Admin" ? useGetAllScheduledOrders : useGetStoreScheduledOrders,
     refetchOnLanguageChange: true,
   });
@@ -28,7 +28,7 @@ export default function ScheduledOrders_Page() {
         changePagination={setPagination}
         searchableColumns={searchableColumns}
         filters={filters}
-        defaultFilters={[]}
+        defaultSorting={defaultSorting}
         isLoading={isLoading}
       />
     </TablePage>

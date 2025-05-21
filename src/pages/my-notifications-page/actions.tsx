@@ -1,5 +1,10 @@
-export interface Actions_Props {}
+import { ReadNotification } from "@/components/table-actions";
 
-export default function Actions({}: Actions_Props) {
-  return null;
+export interface Actions_Props {
+  id: number;
+  title: string;
+}
+
+export default function Actions({ id, title }: Actions_Props) {
+  return <ReadNotification id={id} title={title} />;
 }

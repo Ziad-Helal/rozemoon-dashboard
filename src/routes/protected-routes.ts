@@ -66,7 +66,6 @@ export const protectedRoutes = {
     routes.categories,
     routes.publicCategories,
     routes.colors,
-    routes.allColors,
     routes.publicColors,
     routes.stock,
     routes.stockProducts,
