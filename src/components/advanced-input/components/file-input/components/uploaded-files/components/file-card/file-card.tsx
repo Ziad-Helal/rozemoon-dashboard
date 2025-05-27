@@ -10,9 +10,10 @@ interface File_Card_Props {
   file: File;
   onRemove: () => void;
   disabled?: boolean;
+  isRemovable?: boolean;
 }
 
-export default function File_Card({ file, onRemove, disabled }: File_Card_Props) {
+export default function File_Card({ file, onRemove, disabled, isRemovable }: File_Card_Props) {
   const { i18n, t } = useTranslation();
 
   useEffect(() => {
@@ -33,22 +34,24 @@ export default function File_Card({ file, onRemove, disabled }: File_Card_Props)
         ) : (
           <FileTextIcon className="size-full text-muted-foreground" aria-hidden="true" />
         )}
-        <ToolTip
-          content={t("keyWords.remove")}
-          trigger={
-            <Button
-              variant="destructive"
-              size="icon"
-              icon={Trash2Icon}
-              iconClassName="!size-4"
-              className={cn("bg-destructive/75 size-7 absolute top-1", handleDirectionChange(i18n.dir(), "right-1", "left-1"))}
-              onClick={onRemove}
-              disabled={disabled}
-            >
-              <span className="sr-only">{t("keyWords.remove")}</span>
-            </Button>
-          }
-        />
+        {isRemovable ? (
+          <ToolTip
+            content={t("keyWords.remove")}
+            trigger={
+              <Button
+                variant="destructive"
+                size="icon"
+                icon={Trash2Icon}
+                iconClassName="!size-4"
+                className={cn("bg-destructive/75 size-7 absolute top-1", handleDirectionChange(i18n.dir(), "right-1", "left-1"))}
+                onClick={onRemove}
+                disabled={disabled}
+              >
+                <span className="sr-only">{t("keyWords.remove")}</span>
+              </Button>
+            }
+          />
+        ) : null}
       </div>
       <div className="flex w-full flex-col gap-2 p-1">
         <div className="flex flex-col gap-px">

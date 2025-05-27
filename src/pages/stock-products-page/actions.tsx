@@ -1,5 +1,5 @@
 import { UpdateFastOrderCart_Form, UpdateRefillCart_Form } from "@/components/forms";
-import { UpdateCart } from "@/components/table-actions";
+import { Expand_ProductImages, UpdateCart } from "@/components/table-actions";
 import { useQuerySubscribe } from "@/hooks/misc";
 import { queryKeys } from "@/queries";
 import { AuthenticatedUser, FastOrder_Cart, Refill_Cart, StockProduct } from "@/types/api-types";
@@ -21,19 +21,24 @@ export default function Actions(product: Actions_Props) {
   const purchasePrice = stockRefillCart!.items.find(({ productId }) => productId == product.productId)?.purchasePrice || null;
   const userRole = user?.roles[0];
 
-  return userRole == "Cashier" || userRole == "StoreKeeper" ? (
-    <UpdateCart
-      productName={product.name}
-      cartQuantity={cartQuantity}
-      isOpen={addToCartIsOpen}
-      setIsOpen={setAddToCartIsOpen}
-      tooltip={cartQuantity ? t("tableActions.updateCart.tooltip.1") : t("tableActions.updateCart.tooltip.2")}
-    >
-      {userRole == "Cashier" ? (
-        <UpdateFastOrderCart_Form defaultValues={{ cartQuantity }} product={product} onSuccess={() => setAddToCartIsOpen(false)} />
-      ) : (
-        <UpdateRefillCart_Form defaultValues={{ cartQuantity, purchasePrice }} product={product} onSuccess={() => setAddToCartIsOpen(false)} />
-      )}
-    </UpdateCart>
-  ) : null;
+  return (
+    <>
+      <Expand_ProductImages id={product.id} name={product.name} images={product.images} />
+      {userRole == "Cashier" || userRole == "StoreKeeper" ? (
+        <UpdateCart
+          productName={product.name}
+          cartQuantity={cartQuantity}
+          isOpen={addToCartIsOpen}
+          setIsOpen={setAddToCartIsOpen}
+          tooltip={cartQuantity ? t("tableActions.updateCart.tooltip.1") : t("tableActions.updateCart.tooltip.2")}
+        >
+          {userRole == "Cashier" ? (
+            <UpdateFastOrderCart_Form defaultValues={{ cartQuantity }} product={product} onSuccess={() => setAddToCartIsOpen(false)} />
+          ) : (
+            <UpdateRefillCart_Form defaultValues={{ cartQuantity, purchasePrice }} product={product} onSuccess={() => setAddToCartIsOpen(false)} />
+          )}
+        </UpdateCart>
+      ) : null}
+    </>
+  );
 }

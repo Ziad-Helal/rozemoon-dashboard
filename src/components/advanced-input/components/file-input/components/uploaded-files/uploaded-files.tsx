@@ -16,7 +16,7 @@ export default function UploadedFiles({ files, updateFiles, disabled }: Uploaded
   return (
     <div className="!mt-2 grid grid-cols-2 sm:grid-cols-4 gap-2">
       {files?.map((file, index) => (
-        <File_Card key={index} file={file} onRemove={() => onRemove(index)} disabled={disabled} />
+        <File_Card key={index} file={file} onRemove={() => onRemove(index)} disabled={disabled} isRemovable={!!updateFiles} />
       ))}
     </div>
   );

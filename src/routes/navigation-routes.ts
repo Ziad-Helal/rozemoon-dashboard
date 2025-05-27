@@ -94,4 +94,9 @@ export const navigationRoutes: {
     url: routes.discounts,
     items: [{ title: "all discounts", url: routes.allDiscounts }],
   },
+  {
+    title: "coupons",
+    url: routes.coupons,
+    items: [{ title: "all coupons", url: routes.allCoupons }],
+  },
 ];

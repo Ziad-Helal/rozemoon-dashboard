@@ -26,3 +26,4 @@ export { default as PayOrder_Form } from "./pay-order-form";
 export { default as Setting_Form } from "./setting-form";
 export { default as ChangePassword_Form } from "./change-password-form";
 export { default as UpdateUserStatus_Form } from "./update-user-status-form";
+export { default as Coupon_Form } from "./coupon-form";

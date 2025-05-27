@@ -2,6 +2,7 @@ export { default as DownloadDocuments } from "./download-documents";
 export { default as AuthenticateRegister } from "./authenticate-register";
 export { default as UpdateCart } from "./update-cart";
 export { default as Expand_Issue } from "./expand-issue";
+export { default as Expand_ProductImages } from "./expand-product-images";
 export { default as Expand_FastOrder } from "./expand-fast-order";
 export { default as Expand_ScheduledOrder } from "./expand-scheduled-order";
 export { default as ToggleVisibility } from "./toggle-visibility";

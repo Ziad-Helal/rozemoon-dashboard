@@ -5,7 +5,7 @@ import { Dispatch, ReactNode, SetStateAction } from "react";
 import { useTranslation } from "react-i18next";
 
 export interface UpdateItem_Props {
-  item: "category" | "color" | "product" | "provider" | "store" | "review" | "issue" | "discount" | "setting";
+  item: "category" | "color" | "product" | "provider" | "store" | "review" | "issue" | "discount" | "coupon" | "setting";
   description: string;
   children: ReactNode;
   disabled?: boolean;

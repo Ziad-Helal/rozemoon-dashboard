@@ -23,4 +23,5 @@ export * from "./invoices";
 export * from "./settings";
 export * from "./profile";
 export * from "./orders-reviews";
+export * from "./coupons";
 export * from "./utils";

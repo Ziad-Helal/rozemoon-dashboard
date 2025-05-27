@@ -56,6 +56,8 @@
       "discounts": "الخصومات",
       "all discounts": "كل الخصومات",
       "settings": "الإعدادات",
+      "coupons": "قسائم الخصومات",
+      "all coupons": "كل قسائم الخصومات",
       "profile": "الصفحة الشخصية"
     }
   },
@@ -132,6 +134,7 @@
     "fastOrders": "طلبيات سريعة",
     "scheduledOrders": "طلبيات آجلة",
     "stockRefillRequests": "طلبات تعبئة المخزون",
+    "allCoupons": "قسائم الخصومات",
     "settings": "الإعدادات",
     "selectedRows": {
       "1": "من أصل",
@@ -225,7 +228,18 @@
     "value": "القيمة",
     "deliveryTime": "توقيت الشحن",
     "driverBehavior": "سلوك المندوب",
-    "packagingCondition": "حالة التغليف"
+    "packagingCondition": "حالة التغليف",
+    "couponString": "قسيمة الخصم",
+    "maxSAR": "أعلى قيمة للخصم بالريال",
+    "maxUSD": "أعلى قيمة للخصم بالدولار",
+    "maxUsesPerUser": "مرات الاستخدام لكل مستخدم",
+    "maxUses": "مرات الاستخدام",
+    "allowedUsers": "المستخدمين المسموحون",
+    "bannedUsers": "المستخدمين المحظورون",
+    "allowedCountries": "الدول المسموحة",
+    "isForFastOrder": "للطلبيات السريعة",
+    "isForScheduledOrder": "للطلبيات الآجلة",
+    "exprationDate": "تاريخ الانتهاء"
   },
   "tableActions": {
     "alertTitle": "هل أنت متأكد؟",
@@ -353,13 +367,15 @@
       "review": "تعديل التعليق بمعرف ",
       "issue": "تعديل المشكلة بمعرف ",
       "discount": "تعديل الخصم بمعرف ",
+      "coupon": "تعديل قسيمة الخصم بمعرف ",
       "setting": "تعديل الإعداد بمعرف "
     },
     "expandModal": {
       "tooltip": {
         "order": "تفاصيل الطلبية",
         "issue": "تفاصيل المشكلة",
-        "notification": "تفاصيل الإشعار"
+        "notification": "تفاصيل الإشعار",
+        "productImages": "عرض صور السلعة"
       },
       "total": "الإجمالي"
     },
@@ -496,7 +512,10 @@
       "toggleStoreVisibility": "تم تغيير ظهور المتجر بنجاح.",
       "createUser": "تم إنشاء المستخدم بنجاح.",
       "createSetting": "تم إنشاء المستخدم بنجاح.",
-      "updateSetting": "تم تحديث المستخدم بنجاح."
+      "updateSetting": "تم تحديث المستخدم بنجاح.",
+      "createCoupon": "تم إنشاء قسيمة الخصم بنجاح.",
+      "updateCoupon": "تم تحديث قسيمة الخصم بنجاح.",
+      "toggleCouponActiveness": "تم تغيير نشاط قسيمة الخصم بنجاح."
     }
   },
   "forms": {
@@ -531,6 +550,9 @@
     "setting": {
       "heading": "إنشاء إعداد"
     },
+    "coupons": {
+      "heading": "إنشاء قسيمة خصم"
+    },
     "labels": {
       "providerId": "معرف المورد",
       "storeId": "معرف المتجر",
@@ -560,10 +582,12 @@
       "price_SAR": "السعر بالريال السعودي",
       "price_USD": "السعر بالدولار الأمريكي",
       "uploadImages": "رفع الصور",
+      "isMinimumFlowersPerStem": "يمكن وجود المزيد من الأزهار في كل ساق",
       "flowersPerStem": "أزهار في كل ساق",
       "stemsPerBunch": "سيقان في كل حزمة",
-      "stemSize": "طول الحزمة (بالسانتي متر)",
       "vaseLife": "الحياة في المزهرية (بالأيام)",
+      "stemSize": "طول الحزمة (بالسانتي متر)",
+      "headSize": "طول الرأس (بالسانتي متر)",
       "quantity": "العدد",
       "firstName": "الاسم الأول",
       "lastName": "الاسم الأخير",
@@ -577,6 +601,14 @@
       "amount": "المبلغ",
       "value": "القيمة",
       "currency": "العملة",
+      "couponString": "قسيمة الخصم",
+      "maxSAR": "أعلى قيمة للخصم بالريال السعودي",
+      "maxUSD": "أعلى قيمة للخصم بالدولار الأمريكي",
+      "redeemsPerUser": "عدد الاستخدامات الأقصى للمستخدم الواحد",
+      "allRedeems": "عدد الاستخدامات الأقصى",
+      "redeemFastOrder": "يمكن استخدامه للطلبيات السريعة",
+      "redeemScheduledOrder": "يمكن استخدامه للطلبيات الآجلة",
+      "expirationDate": "تاريخ الانتهاء",
       "name": {
         "default": "الاسم",
         "en": "الاسم الإنجليزي",
@@ -1097,6 +1129,7 @@
     "signOut": "تسجيل الخروج",
     "total": "الإجمالي",
     "pay": "ادفع",
+    "coupon": "قسيمة الخصم",
     "setting": "الإعداد"
   }
 }

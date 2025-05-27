@@ -30,6 +30,7 @@ export default function Product_Form({ product, onSuccess }: Product_Form_Props)
       stemPerBunch: values.stemPerBunch!,
       stemSizePerCM: values.stemSizePerCM!,
       vaseLifePerDay: values.vaseLifePerDay!,
+      headSizeInCm: values.headSizeInCm || undefined,
       id: product?.id || 0,
     }).then((response) => {
       onSuccess?.();

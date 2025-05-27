@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 
 interface ToggleActiveness_Props {
   action: "activate" | "deactivate";
-  item: "discount";
+  item: "discount" | "coupon";
   isLoading: boolean;
   disabled: boolean;
   onConfirm: VoidFunction;

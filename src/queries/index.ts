@@ -25,3 +25,4 @@ export * from "./return-requests-queries";
 export * from "./settings-queries";
 export * from "./profile-queries";
 export * from "./orders-reviews-queries";
+export * from "./coupons-queries";

@@ -88,6 +88,11 @@ const Discounts_Page = lazy(() => import("@/pages/discounts-page"));
 const CreateDiscount_Page = lazy(() => import("@/pages/create-discount-page"));
 const AllDiscounts_Page = lazy(() => import("@/pages/all-discounts-page"));
 
+// Coupons Routes
+const Coupons_Page = lazy(() => import("@/pages/coupons-page"));
+const CreateCoupon_Page = lazy(() => import("@/pages/create-coupon-page"));
+const AllCoupons_Page = lazy(() => import("@/pages/all-coupons-page"));
+
 // Authentications Routes
 const SignIn_Page = lazy(() => import("@/pages/sign-in-page"));
 
@@ -197,6 +202,11 @@ export const pageRoutes = createBrowserRouter([
           { path: routes.discounts, element: <Discounts_Page /> },
           { path: routes.createDiscount, element: <CreateDiscount_Page /> },
           { path: routes.allDiscounts, element: <AllDiscounts_Page /> },
+
+          // Coupons Routes
+          { path: routes.coupons, element: <Coupons_Page /> },
+          { path: routes.createCoupon, element: <CreateCoupon_Page /> },
+          { path: routes.allCoupons, element: <AllCoupons_Page /> },
         ],
       },
     ],

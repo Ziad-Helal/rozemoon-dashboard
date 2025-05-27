@@ -59,9 +59,11 @@ export interface CreateProduct_Request extends Name_Localization, Description_Lo
   price_SAR: number;
   price_USD: number;
   discountId?: number;
+  isMinimumFlowersPerStem?: boolean;
   flowersPerStem: number;
   stemPerBunch: number;
   stemSizePerCM: number;
+  headSizeInCm?: number;
   vaseLifePerDay: number;
   isHidden: boolean;
   isFeatured: boolean;

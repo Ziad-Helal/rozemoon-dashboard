@@ -164,6 +164,7 @@ const formSchema = z
       .number({ invalid_type_error: t("forms.errors.number") })
       .min(1, t("forms.errors.min1"))
       .nullable(),
+    isMinimumFlowersPerStem: z.boolean(),
     stemPerBunch: z
       .number({ invalid_type_error: t("forms.errors.number") })
       .min(1, t("forms.errors.min1"))
@@ -171,6 +172,11 @@ const formSchema = z
     stemSizePerCM: z
       .number({ invalid_type_error: t("forms.errors.number") })
       .positive(t("forms.errors.positive"))
+      .nullable(),
+    headSizeInCm: z
+      .number({ invalid_type_error: t("forms.errors.number") })
+      .min(0, t("forms.errors.min0"))
+      .optional()
       .nullable(),
     vaseLifePerDay: z
       .number({ invalid_type_error: t("forms.errors.number") })
@@ -233,10 +239,12 @@ const defaultValues: FormFields = {
   price_SAR: null,
   price_USD: null,
   discountId: null,
+  isMinimumFlowersPerStem: false,
   flowersPerStem: null,
   stemPerBunch: null,
-  stemSizePerCM: null,
   vaseLifePerDay: null,
+  stemSizePerCM: null,
+  headSizeInCm: null,
   isHidden: true,
   isFeatured: false,
   files: [],
@@ -291,16 +299,23 @@ export function useFormDataGetter(initialValues?: GetProductDetails_Response) {
     },
     { id: "categoryId", label: t("forms.labels.categoryId"), type: "number" },
     { id: "colorId", label: t("forms.labels.colorId"), type: "number" },
+    { id: "discountId", label: t("forms.labels.discountId"), type: "number", className: "lg:col-span-2" },
     { id: "price_SAR", label: t("forms.labels.price_SAR"), type: "number" },
     { id: "price_USD", label: t("forms.labels.price_USD"), type: "number" },
-    { id: "discountId", label: t("forms.labels.discountId"), type: "number", className: "lg:col-span-2" },
     { id: "flowersPerStem", label: t("forms.labels.flowersPerStem"), type: "number" },
+    { id: "isMinimumFlowersPerStem", label: t("forms.labels.isMinimumFlowersPerStem"), type: "switch", containerClassName: "grid items-end" },
     { id: "stemPerBunch", label: t("forms.labels.stemsPerBunch"), type: "number" },
-    { id: "stemSizePerCM", label: t("forms.labels.stemSize"), type: "number" },
     { id: "vaseLifePerDay", label: t("forms.labels.vaseLife"), type: "number" },
+    { id: "stemSizePerCM", label: t("forms.labels.stemSize"), type: "number" },
+    { id: "headSizeInCm", label: t("forms.labels.headSize"), type: "number" },
     { id: "isHidden", label: t("forms.labels.hide"), type: "switch" },
     { id: "isFeatured", label: t("forms.labels.featured"), type: "switch" },
     { id: "files", label: t("forms.labels.uploadImages"), type: "file", containerClassName: "col-span-full", maxFileSize: maxFileUploadSize, maxFilesCount: 4 },
   ];
-  return { formSchema, inputFields, defaultValues: initialValues || defaultValues, mutation };
+  return {
+    formSchema,
+    inputFields,
+    defaultValues: initialValues ? { ...initialValues, isMinimumFlowersPerStem: initialValues?.isMinimumFlowersPerStem || false } : defaultValues,
+    mutation,
+  };
 }

@@ -56,6 +56,8 @@
       "discounts": "discounts",
       "all discounts": "all discounts",
       "settings": "settings",
+      "coupons": "coupons",
+      "all coupons": "all coupons",
       "profile": "profile"
     }
   },
@@ -132,6 +134,7 @@
     "fastOrders": "fast orders",
     "scheduledOrders": "scheduled orders",
     "stockRefillRequests": "stock refill requests",
+    "allCoupons": "coupons",
     "settings": "settings",
     "selectedRows": {
       "1": "of",
@@ -225,7 +228,18 @@
     "value": "value",
     "deliveryTime": "shipment timing",
     "driverBehavior": "agent behaviour",
-    "packagingCondition": "packaging condition"
+    "packagingCondition": "packaging condition",
+    "couponString": "coupon",
+    "maxSAR": "max discount in SAR",
+    "maxUSD": "max discount in USD",
+    "maxUsesPerUser": "max uses per user",
+    "maxUses": "max uses",
+    "allowedUsers": "allowed users",
+    "bannedUsers": "banned users",
+    "allowedCountries": "allowed countries",
+    "isForFastOrder": "can use in fast order",
+    "isForScheduledOrder": "can use in scheduled order",
+    "exprationDate": "expration date"
   },
   "tableActions": {
     "alertTitle": "Are you absolutely sure?",
@@ -353,13 +367,15 @@
       "review": "Update review #",
       "issue": "Update review #",
       "discount": "Update discount #",
+      "coupon": "Update coupon #",
       "setting": "Update setting #"
     },
     "expandModal": {
       "tooltip": {
         "order": "expand order",
         "issue": "expand issue",
-        "notification": "read notification"
+        "notification": "read notification",
+        "productImages": "see product images"
       },
       "total": "total"
     },
@@ -496,7 +512,10 @@
       "toggleStoreVisibility": "The store visibility is set successfully.",
       "createUser": "The user is created successfully.",
       "createSetting": "The setting is created successfully.",
-      "updateSetting": "The setting is updated successfully."
+      "updateSetting": "The setting is updated successfully.",
+      "createCoupon": "The coupon is created successfully.",
+      "updateCoupon": "The coupon is updated successfully.",
+      "toggleCouponActiveness": "The coupon activeness is set successfully."
     }
   },
   "forms": {
@@ -531,6 +550,9 @@
     "setting": {
       "heading": "create a setting"
     },
+    "coupons": {
+      "heading": "create a coupon"
+    },
     "labels": {
       "providerId": "provider id",
       "storeId": "store id",
@@ -560,10 +582,12 @@
       "price_SAR": "price in SAR",
       "price_USD": "price in USD",
       "uploadImages": "upload images",
+      "isMinimumFlowersPerStem": "can have more flowers per stem",
       "flowersPerStem": "flowers in a stem",
       "stemsPerBunch": "stems in a bunch",
-      "stemSize": "stem size (in cm)",
       "vaseLife": "vase life (in days)",
+      "stemSize": "stem size (in cm)",
+      "headSize": "head size (in cm)",
       "quantity": "quantity",
       "firstName": "first name",
       "lastName": "last name",
@@ -577,6 +601,14 @@
       "amount": "amount",
       "value": "value",
       "currency": "currency",
+      "couponString": "coupon",
+      "maxSAR": "maximum discount in SAR",
+      "maxUSD": "maximum discount in USD",
+      "redeemsPerUser": "maximum uses per user",
+      "allRedeems": "maximum uses",
+      "redeemFastOrder": "can use for fast orders",
+      "redeemScheduledOrder": "can use for scheduled order",
+      "expirationDate": "expiration date",
       "name": {
         "default": "name",
         "en": "english name",
@@ -1097,6 +1129,7 @@
     "signOut": "sign out",
     "total": "total",
     "pay": "pay",
+    "coupon": "coupon",
     "setting": "setting"
   }
 }

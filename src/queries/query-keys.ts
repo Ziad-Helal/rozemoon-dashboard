@@ -42,4 +42,6 @@ export const queryKeys = {
   settings: "settings",
   profile: "profile",
   ordersReviews: "ordersReviews",
+  allCoupons: "allCoupons",
+  couponDetails: "couponDetails",
 };

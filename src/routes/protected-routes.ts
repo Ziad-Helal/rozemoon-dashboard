@@ -54,6 +54,9 @@ export const protectedRoutes = {
     routes.allDiscounts,
     routes.settings,
     routes.createSetting,
+    routes.coupons,
+    routes.createCoupon,
+    routes.allCoupons,
     routes.notFound,
   ],
   Manager: [

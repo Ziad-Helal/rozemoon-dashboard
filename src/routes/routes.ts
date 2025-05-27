@@ -52,6 +52,9 @@ export const routes = {
   allDiscounts: "/discounts/all",
   settings: "/settings",
   createSetting: "/settings/create",
+  coupons: "/coupons",
+  createCoupon: "/coupons/create",
+  allCoupons: "/coupons/all",
   signIn: "/sign-in",
   notFound: "/not-found",
 };

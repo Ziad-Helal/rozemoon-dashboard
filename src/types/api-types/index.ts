@@ -23,3 +23,4 @@ export * from "./invoice-types";
 export * from "./return-requests-types";
 export * from "./settings-types";
 export * from "./profile-types";
+export * from "./coupons-types";
