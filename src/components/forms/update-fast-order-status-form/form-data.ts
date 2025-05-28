@@ -12,7 +12,7 @@ const formSchema = z.object({
     invalid_type_error: t("forms.errors.selectOne"),
   }),
 });
-8;
+
 export function useFormDataGetter(status: FastOrderStatus) {
   const { t } = useTranslation();
   const mutation = useUpdateFastOrderStatus();
