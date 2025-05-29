@@ -23,8 +23,9 @@ export default function Coupon_Form({ coupon, onSuccess }: Coupon_Form_Props) {
       ...values,
       maxAmountSar: values.maxAmountSar || undefined,
       maxAmountUsd: values.maxAmountUsd || undefined,
-      maxNumOfRedeemsPerUser: values.maxNumOfRedeemsPerUser || undefined,
-      maxRedeems: values.maxRedeems || undefined,
+      // maxNumOfRedeemsPerUser: values.maxNumOfRedeemsPerUser || undefined,
+      // maxRedeems: values.maxRedeems || undefined,
+      expiryDateTime: values.expiryDateTime || undefined,
     }).then((response) => {
       onSuccess?.();
       return response;

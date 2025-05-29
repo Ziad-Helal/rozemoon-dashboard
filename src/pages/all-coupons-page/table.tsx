@@ -36,28 +36,28 @@ export default function useTable() {
       type: "price",
       currency: "USD",
     },
-    {
-      accessorKey: "maxNumOfRedeemsPerUser",
-      label: t("dataTable.maxUsesPerUser"),
-      type: "number",
-    },
-    {
-      accessorKey: "maxRedeems",
-      label: t("dataTable.maxUses"),
-      type: "number",
-    },
-    {
-      accessorKey: "userIds",
-      label: t("dataTable.allowedUsers"),
-    },
-    {
-      accessorKey: "bannedIds",
-      label: t("dataTable.bannedUsers"),
-    },
-    {
-      accessorKey: "countries",
-      label: t("dataTable.allowedCountries"),
-    },
+    // {
+    //   accessorKey: "maxNumOfRedeemsPerUser",
+    //   label: t("dataTable.maxUsesPerUser"),
+    //   type: "number",
+    // },
+    // {
+    //   accessorKey: "maxRedeems",
+    //   label: t("dataTable.maxUses"),
+    //   type: "number",
+    // },
+    // {
+    //   accessorKey: "userIds",
+    //   label: t("dataTable.allowedUsers"),
+    // },
+    // {
+    //   accessorKey: "bannedIds",
+    //   label: t("dataTable.bannedUsers"),
+    // },
+    // {
+    //   accessorKey: "countries",
+    //   label: t("dataTable.allowedCountries"),
+    // },
     {
       accessorKey: "isForOrder",
       label: t("dataTable.isForFastOrder"),

@@ -410,6 +410,7 @@
       "Pending": "pending",
       "Delivering": "delivering",
       "Delivered": "delivered",
+      "pickedUp": "picked up",
       "Returned": "returned",
       "Cancelled": "cancelled",
       "PartiallyReturned": "partially returned",

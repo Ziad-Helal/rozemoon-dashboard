@@ -11,7 +11,7 @@ const formSchema = z
   .object({
     branchId: z.number({ invalid_type_error: t("forms.errors.number") }).positive(t("forms.errors.positive")),
     currency: z.enum(["SAR", "USD"], { invalid_type_error: t("forms.errors.selectOne") }),
-    status: z.enum(["Pending", "Delivering", "Delivered"], { invalid_type_error: t("forms.errors.selectOne") }).nullable(),
+    status: z.enum(["Pending", "Delivering", "Delivered", "pickedUp"], { invalid_type_error: t("forms.errors.selectOne") }).nullable(),
     paymentWay: z.enum(["Cash", "CreditCard", "BankTransfer", "Cheque", "COD", "Other"], { invalid_type_error: t("forms.errors.selectOne") }).nullable(),
     deliveryAddress: z.string({ invalid_type_error: t("forms.errors.string") }),
     deliveryDate: z.date(),
@@ -42,6 +42,7 @@ export function useFormDataGetter() {
         { label: t("types&statuses.fastOrderStatus.Pending"), value: "Pending" },
         { label: t("types&statuses.fastOrderStatus.Delivering"), value: "Delivering" },
         { label: t("types&statuses.fastOrderStatus.Delivered"), value: "Delivered" },
+        { label: t("types&statuses.fastOrderStatus.pickedUp"), value: "pickedUp" },
       ],
       autoFocus: true,
     },
@@ -89,7 +90,7 @@ export function useFormDataGetter() {
   const defaultValues: FormFields = {
     branchId: +user?.branchId!,
     currency: "SAR",
-    status: null,
+    status: "pickedUp",
     paymentWay: null,
     deliveryAddress: "",
     deliveryDate: new Date(),

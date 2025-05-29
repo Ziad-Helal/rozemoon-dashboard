@@ -410,6 +410,7 @@
       "Pending": "قيد الانتظار",
       "Delivering": "قيد الشحن",
       "Delivered": "تم الشحن",
+      "pickedUp": "تم الاستلام",
       "Returned": "مرتجع",
       "Cancelled": "ملغي",
       "PartiallyReturned": "مرتجع بجزء",

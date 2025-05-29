@@ -3,6 +3,7 @@ import { OrderBase, OrderItemBase, Pagination, PaymentMethod, StockProduct } fro
 export type FastOrderStatus =
   | "NotPaied"
   | "Pending"
+  | "pickedUp"
   | "Charged"
   | "Delivering"
   | "Delivered"
