@@ -37,4 +37,7 @@ export interface PaginationFilters {
   docsVerified?: "true" | "false";
   isHidden?: "true" | "false";
   docVerifiedStatus?: UserStatus;
+  firstName?: string;
+  lastName?: string;
+  phoneNumber?: string;
 }

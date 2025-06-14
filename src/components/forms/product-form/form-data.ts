@@ -156,6 +156,22 @@ const formSchema = z
       .number({ invalid_type_error: t("forms.errors.number") })
       .positive(t("forms.errors.positive"))
       .nullable(),
+    indiPriceSAR: z
+      .number({ invalid_type_error: t("forms.errors.number") })
+      .positive(t("forms.errors.positive"))
+      .nullable(),
+    indiPriceUSD: z
+      .number({ invalid_type_error: t("forms.errors.number") })
+      .positive(t("forms.errors.positive"))
+      .nullable(),
+    merchPriceSAR: z
+      .number({ invalid_type_error: t("forms.errors.number") })
+      .positive(t("forms.errors.positive"))
+      .nullable(),
+    merchPriceUSD: z
+      .number({ invalid_type_error: t("forms.errors.number") })
+      .positive(t("forms.errors.positive"))
+      .nullable(),
     discountId: z
       .number({ invalid_type_error: t("forms.errors.number") })
       .optional()
@@ -195,6 +211,10 @@ const formSchema = z
   .refine(({ colorId }) => colorId != null, { message: t("forms.errors.required"), path: ["colorId"] })
   .refine(({ price_SAR }) => price_SAR != null, { message: t("forms.errors.required"), path: ["price_SAR"] })
   .refine(({ price_USD }) => price_USD != null, { message: t("forms.errors.required"), path: ["price_USD"] })
+  .refine(({ indiPriceSAR }) => indiPriceSAR != null, { message: t("forms.errors.required"), path: ["indiPriceSAR"] })
+  .refine(({ indiPriceUSD }) => indiPriceUSD != null, { message: t("forms.errors.required"), path: ["indiPriceUSD"] })
+  .refine(({ merchPriceSAR }) => merchPriceSAR != null, { message: t("forms.errors.required"), path: ["merchPriceSAR"] })
+  .refine(({ merchPriceUSD }) => merchPriceUSD != null, { message: t("forms.errors.required"), path: ["merchPriceUSD"] })
   .refine(({ flowersPerStem }) => flowersPerStem != null, { message: t("forms.errors.required"), path: ["flowersPerStem"] })
   .refine(({ stemPerBunch }) => stemPerBunch != null, { message: t("forms.errors.required"), path: ["stemPerBunch"] })
   .refine(({ stemSizePerCM }) => stemSizePerCM != null, { message: t("forms.errors.required"), path: ["stemSizePerCM"] })
@@ -238,6 +258,10 @@ const defaultValues: FormFields = {
   colorId: null,
   price_SAR: null,
   price_USD: null,
+  indiPriceSAR: null,
+  indiPriceUSD: null,
+  merchPriceSAR: null,
+  merchPriceUSD: null,
   discountId: null,
   isMinimumFlowersPerStem: false,
   flowersPerStem: null,
@@ -302,6 +326,10 @@ export function useFormDataGetter(initialValues?: GetProductDetails_Response) {
     { id: "discountId", label: t("forms.labels.discountId"), type: "number", className: "lg:col-span-2" },
     { id: "price_SAR", label: t("forms.labels.price_SAR"), type: "number" },
     { id: "price_USD", label: t("forms.labels.price_USD"), type: "number" },
+    { id: "indiPriceSAR", label: t("forms.labels.indiPrice_SAR"), type: "number" },
+    { id: "indiPriceUSD", label: t("forms.labels.indiPrice_USD"), type: "number" },
+    { id: "merchPriceSAR", label: t("forms.labels.merchPrice_SAR"), type: "number" },
+    { id: "merchPriceUSD", label: t("forms.labels.merchPrice_USD"), type: "number" },
     { id: "flowersPerStem", label: t("forms.labels.flowersPerStem"), type: "number" },
     { id: "isMinimumFlowersPerStem", label: t("forms.labels.isMinimumFlowersPerStem"), type: "switch", containerClassName: "grid items-end" },
     { id: "stemPerBunch", label: t("forms.labels.stemsPerBunch"), type: "number" },

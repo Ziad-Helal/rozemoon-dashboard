@@ -3,10 +3,10 @@ import { UpdateFastOrderCart_Form, UpdateRefillCart_Form } from "@/components/fo
 import { UpdateCart } from "@/components/table-actions";
 import { Button } from "@/components/ui";
 import { useQuerySubscribe } from "@/hooks/misc";
-import { cn } from "@/lib/utils";
+import { cn, switchPrices } from "@/lib/utils";
 import { formatNumber, handleDirectionChange, Language } from "@/localization";
 import { queryKeys, useRemoveFromFastOrderCart, useRemoveFromRefillCart } from "@/queries";
-import { AuthenticatedUser, FastOrder_CartItem, Refill_CartItem } from "@/types/api-types";
+import { AuthenticatedUser, FastOrder_Cart, FastOrder_CartItem, Refill_CartItem } from "@/types/api-types";
 import { Trash2Icon } from "lucide-react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -19,11 +19,26 @@ interface CartItem_Props {
 
 export default function CartItem({ product }: CartItem_Props) {
   const { productId, name, images, productType, cartQuantity } = product;
-  const { discountPercentage, price, newPrice, totalPrice, totalDiscount } = product as FastOrder_CartItem;
+  const {
+    discountPercentage,
+    price,
+    indiPrice,
+    merchPrice,
+    newPrice,
+    newIndiPrice,
+    newMerchPrice,
+    totalPrice,
+    totalIndiPrice,
+    totalMerchPrice,
+    totalDiscount,
+    totalIndiDiscount,
+    totalMerchDiscount,
+  } = product as FastOrder_CartItem;
   const { purchasePrice } = product as Refill_CartItem;
   const { i18n, t } = useTranslation();
   const [updateCartIsOpen, setUpdateCartIsOpen] = useState(false);
   const user = useQuerySubscribe<AuthenticatedUser>([queryKeys.userAuth]);
+  const priceType = useQuerySubscribe<FastOrder_Cart>([queryKeys.fastOrderCart])!.priceType;
   const { mutateAsync: removeOrderProduct } = useRemoveFromFastOrderCart();
   const { mutateAsync: removeRefillProduct } = useRemoveFromRefillCart();
 
@@ -37,19 +52,32 @@ export default function CartItem({ product }: CartItem_Props) {
             {totalDiscount ? (
               <>
                 -{formatNumber(i18n.language as Language, discountPercentage / 100, "percent")}{" "}
-                <span className="line-through">{formatNumber(i18n.language as Language, price, "decimal")}</span>{" "}
+                <span className="line-through">{formatNumber(i18n.language as Language, switchPrices(priceType, indiPrice, merchPrice, price), "decimal")}</span>{" "}
               </>
             ) : null}
-            {formatNumber(i18n.language as Language, newPrice || purchasePrice, "currency", "SAR", "name")} / {t(`keyWords.${productType.toLowerCase() as "stem" | "bunch"}`)}
+            {formatNumber(i18n.language as Language, newPrice ? switchPrices(priceType, newIndiPrice, newMerchPrice, newPrice) : purchasePrice, "currency", "SAR", "name")} /{" "}
+            {t(`keyWords.${productType.toLowerCase() as "stem" | "bunch"}`)}
           </p>
           <p className="capitalize">
             {t("pages.cart.totalCost")}:{" "}
             {totalDiscount ? (
               <>
-                <span className="line-through text-muted-foreground">{formatNumber(i18n.language as Language, totalPrice + totalDiscount, "decimal")}</span>{" "}
+                <span className="line-through text-muted-foreground">
+                  {formatNumber(
+                    i18n.language as Language,
+                    switchPrices(priceType, totalIndiPrice + totalIndiDiscount, totalMerchPrice + totalMerchDiscount, totalPrice + totalDiscount),
+                    "decimal"
+                  )}
+                </span>{" "}
               </>
             ) : null}
-            {formatNumber(i18n.language as Language, totalPrice || purchasePrice * cartQuantity, "currency", "SAR", "name")}
+            {formatNumber(
+              i18n.language as Language,
+              totalPrice ? switchPrices(priceType, totalIndiPrice, totalMerchPrice, totalPrice) : purchasePrice * cartQuantity,
+              "currency",
+              "SAR",
+              "name"
+            )}
           </p>
         </div>
       </div>

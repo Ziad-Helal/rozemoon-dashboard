@@ -1,41 +1,87 @@
 import { Form_Page } from "@/components/layouts";
 import { useQuerySubscribe } from "@/hooks/misc";
-import { queryKeys, useClearFastOrderCart, useClearRefillCart } from "@/queries";
-import { AuthenticatedUser, FastOrder_Cart, Refill_Cart } from "@/types/api-types";
-import { CartItem } from "./components";
-import { Button, Separator } from "@/components/ui";
+import { queryKeys, useClearFastOrderCart, useClearRefillCart, useUpdateFastOrderCartPriceType } from "@/queries";
+import { CartItem, Choosen_User, OrderUser } from "./components";
+import { Button, Separator, Switch } from "@/components/ui";
 import { useTranslation } from "react-i18next";
 import { formatNumber, Language } from "@/localization";
 import { EraserIcon } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AlertDialog, Dialog } from "@/components";
 import { FastOrder_Form, StockRefill_Form } from "@/components/forms";
+import { cn, switchPrices } from "@/lib/utils";
+import type { AuthenticatedUser, Client, FastOrder_Cart, Pagination, Refill_Cart } from "@/types/api-types";
 
 export default function Cart_Page() {
   const { i18n, t } = useTranslation();
   const [isCreateOrderOpen, setIsCreateOrderOpen] = useState(false);
+  const [orderUser, setOrderUser] = useState<{ customerId?: number; guestName?: string; guestPhone?: string }>();
+  const [confirmedOrderUser, setConfirmedOrderUser] = useState<{ guestName: string; guestPhone: string }>();
+  const orderUsers = useQuerySubscribe<{ items: Client[]; pagination: Pagination }>([queryKeys.orderUsers])?.items;
   const user = useQuerySubscribe<AuthenticatedUser>([queryKeys.userAuth]);
   const fastOrderCart = useQuerySubscribe<FastOrder_Cart>([queryKeys.fastOrderCart]);
   const stockRefillCart = useQuerySubscribe<Refill_Cart>([queryKeys.refillCart]);
+  const { mutateAsync: setPriceType } = useUpdateFastOrderCartPriceType();
   const { mutateAsync: clearFastOrderCart } = useClearFastOrderCart();
   const { mutateAsync: clearRefillCart } = useClearRefillCart();
   const userRole = user?.roles[0];
-  const cartDiscount = fastOrderCart!.discount / fastOrderCart!.originalPrice;
+  const cartDiscount = switchPrices(
+    fastOrderCart!.priceType,
+    fastOrderCart!.indiDiscount / fastOrderCart!.originalIndiPrice,
+    fastOrderCart!.merchDiscount / fastOrderCart!.originalMerchPrice,
+    fastOrderCart!.discount / fastOrderCart!.originalPrice
+  );
+
+  useEffect(() => {
+    const choosenUser = orderUsers?.find((user) => user.id == orderUser?.customerId);
+    setConfirmedOrderUser(
+      orderUser
+        ? orderUser.customerId
+          ? choosenUser
+            ? { guestName: choosenUser.firstName + " " + choosenUser.lastName, guestPhone: choosenUser.phoneNumber }
+            : undefined
+          : { guestName: orderUser.guestName!, guestPhone: orderUser.guestPhone! }
+        : undefined
+    );
+  }, [orderUser, orderUsers]);
 
   return (
-    <Form_Page heading={userRole == "Cashier" ? t("pages.cart.heading.fastOrder") : t("pages.cart.heading.scheuledOrder")}>
+    <Form_Page
+      heading={userRole == "Cashier" ? t("pages.cart.heading.fastOrder") : t("pages.cart.heading.scheuledOrder")}
+      quickActions={
+        userRole == "Cashier" ? (
+          <div className="flex items-center gap-2 text-sm capitalize">
+            <p>{t("types&statuses.productPricingType.merchant")}</p>
+            <Switch defaultChecked={fastOrderCart!.priceType == "indi"} onCheckedChange={(isIndi) => setPriceType(isIndi ? "indi" : "merch")} />
+            <p>{t("types&statuses.productPricingType.individual")}</p>
+          </div>
+        ) : undefined
+      }
+    >
       {(userRole == "Cashier" ? fastOrderCart : stockRefillCart)?.items.length ? (
         <div className="space-y-2">
           {(userRole == "Cashier" ? fastOrderCart : stockRefillCart)!.items.map((product) => (
             <CartItem key={product.id} product={product} />
           ))}
           <Separator className="!my-6" />
-          <div className="p-3 border rounded-lg capitalize">
+          {userRole == "Cashier" ? (
+            <>
+              <OrderUser setOrderUser={setOrderUser} user={confirmedOrderUser} />
+              {confirmedOrderUser ? <Choosen_User user={confirmedOrderUser} /> : null}
+            </>
+          ) : null}
+          <div className={cn("p-3 border rounded-lg capitalize transition-colors", fastOrderCart?.priceType == "indi" ? "bg-primary/25" : "")}>
             {userRole == "Cashier" ? (
               <>
                 <p>
                   <span className="font-medium">{t("pages.cart.originalPrice")}:</span>{" "}
-                  {formatNumber(i18n.language as Language, fastOrderCart!.originalPrice, "currency", "SAR", "name")}
+                  {formatNumber(
+                    i18n.language as Language,
+                    switchPrices(fastOrderCart!.priceType, fastOrderCart!.originalIndiPrice, fastOrderCart!.originalMerchPrice, fastOrderCart!.originalPrice),
+                    "currency",
+                    "SAR",
+                    "name"
+                  )}
                 </p>
                 <p>
                   <span className="font-medium">{t("pages.cart.discount")}:</span> {formatNumber(i18n.language as Language, fastOrderCart!.discount, "currency", "SAR", "name")}{" "}
@@ -43,7 +89,13 @@ export default function Cart_Page() {
                 </p>
                 <p>
                   <span className="font-medium text-lg">{t("pages.cart.finalPrice")}:</span>{" "}
-                  {formatNumber(i18n.language as Language, fastOrderCart!.finalPrice, "currency", "SAR", "name")}
+                  {formatNumber(
+                    i18n.language as Language,
+                    switchPrices(fastOrderCart!.priceType, fastOrderCart!.finalIndiPrice, fastOrderCart!.finalMerchPrice, fastOrderCart!.finalPrice),
+                    "currency",
+                    "SAR",
+                    "name"
+                  )}
                 </p>
               </>
             ) : (
@@ -57,13 +109,14 @@ export default function Cart_Page() {
             <Dialog
               title={t("pages.cart.modal.title") + (userRole == "Cashier" ? t("keyWords.fast order") : t("keyWords.stockRefillRequest"))}
               description={t("pages.cart.modal.description") + (userRole == "Cashier" ? t("keyWords.fast order") : t("keyWords.stockRefillRequest"))}
-              trigger={<Button>{t("keyWords.continue")}</Button>}
+              trigger={<Button disabled={!confirmedOrderUser}>{t("keyWords.continue")}</Button>}
               isOpen={isCreateOrderOpen}
               setIsOpen={setIsCreateOrderOpen}
             >
               {userRole == "Cashier" ? (
                 <FastOrder_Form
                   products={fastOrderCart!.items.map(({ productId, cartQuantity }) => ({ productId, quantity: cartQuantity }))}
+                  user={orderUser!}
                   onSuccess={() => setIsCreateOrderOpen(false)}
                 />
               ) : (

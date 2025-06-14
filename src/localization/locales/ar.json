@@ -82,6 +82,11 @@
         "updateQuantity": "تعديل الكمية",
         "remove": "إزالة السلعة"
       },
+      "orderUser": {
+        "label": "المستخدم",
+        "title": "مستخدم جديد",
+        "description": "إنشاء مستخدم جديد"
+      },
       "clearAlert": "هل أنت متأكد من أنك تريد محو العربة؟",
       "originalPrice": "السعر الأصلي",
       "discount": "الخصم",
@@ -405,6 +410,11 @@
       "Stem": "ساق",
       "Bunch": "حزمة"
     },
+    "productPricingType": {
+      "individual": "فردي",
+      "merchant": "تاجر",
+      "standard": "التطبيق"
+    },
     "fastOrderStatus": {
       "NotPaied": "ليس مدفوعًا",
       "Pending": "قيد الانتظار",
@@ -517,6 +527,9 @@
       "createCoupon": "تم إنشاء قسيمة الخصم بنجاح.",
       "updateCoupon": "تم تحديث قسيمة الخصم بنجاح.",
       "toggleCouponActiveness": "تم تغيير نشاط قسيمة الخصم بنجاح."
+    },
+    "bad": {
+      "selectUser": "حدد المستخدم اولا"
     }
   },
   "forms": {
@@ -582,6 +595,10 @@
       "discountId": "معرف الخصم",
       "price_SAR": "السعر بالريال السعودي",
       "price_USD": "السعر بالدولار الأمريكي",
+      "indiPrice_SAR": "سعر الفرد بالريال السعودي",
+      "indiPrice_USD": "سعر الفرد بالدولار الأمريكي",
+      "merchPrice_SAR": "سعر التاجر بالريال السعودي",
+      "merchPrice_USD": "سعر التاجر بالدولار الأمريكي",
       "uploadImages": "رفع الصور",
       "isMinimumFlowersPerStem": "يمكن وجود المزيد من الأزهار في كل ساق",
       "flowersPerStem": "أزهار في كل ساق",
@@ -1131,6 +1148,7 @@
     "total": "الإجمالي",
     "pay": "ادفع",
     "coupon": "قسيمة الخصم",
-    "setting": "الإعداد"
+    "setting": "الإعداد",
+    "empty": "فارغ"
   }
 }

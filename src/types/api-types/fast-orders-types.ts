@@ -1,4 +1,4 @@
-import { OrderBase, OrderItemBase, Pagination, PaymentMethod, StockProduct } from "@/types/api-types";
+import type { OrderBase, OrderItemBase, Pagination, PaymentMethod, ProductPricingType, StockProduct } from "@/types/api-types";
 
 export type FastOrderStatus =
   | "NotPaied"
@@ -38,17 +38,31 @@ export interface FastOrder_CartItem extends StockProduct {
   newPrice: number;
   totalPrice: number;
   totalDiscount: number;
+  newIndiPrice: number;
+  totalIndiPrice: number;
+  totalIndiDiscount: number;
+  newMerchPrice: number;
+  totalMerchPrice: number;
+  totalMerchDiscount: number;
 }
 
 export interface FastOrder_Cart {
+  priceType: ProductPricingType;
   originalPrice: number;
   discount: number;
+  originalIndiPrice: number;
+  indiDiscount: number;
+  originalMerchPrice: number;
+  merchDiscount: number;
   finalPrice: number;
+  finalIndiPrice: number;
+  finalMerchPrice: number;
   items: FastOrder_CartItem[];
 }
 
 export interface CreateFastOrder_Request {
-  paymentWay: string;
+  priceType: ProductPricingType;
+  paymentWay: PaymentMethod;
   status: string;
   currency: string;
   deliveryAddress: string;
@@ -61,6 +75,10 @@ export interface CreateFastOrder_Request {
   extraDiscountAmount?: number;
   taxAmount?: number;
   note?: string;
+  customerId?: number;
+  guestName?: string;
+  guestPhone?: string;
+  paymentMethod?: PaymentMethod;
 }
 
 export interface CreateFastOrder_Response extends CreateFastOrder_Request {}

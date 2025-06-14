@@ -82,6 +82,11 @@
         "updateQuantity": "update quantity",
         "remove": "remove product"
       },
+      "orderUser": {
+        "label": "user",
+        "title": "New user",
+        "description": "Create a new user"
+      },
       "clearAlert": "Are you sure that you want to clear the cart?",
       "originalPrice": "original price",
       "discount": "discount",
@@ -405,6 +410,11 @@
       "Stem": "stem",
       "Bunch": "bunch"
     },
+    "productPricingType": {
+      "individual": "individual",
+      "merchant": "merchant",
+      "standard": "standard"
+    },
     "fastOrderStatus": {
       "NotPaied": "not paid",
       "Pending": "pending",
@@ -517,6 +527,9 @@
       "createCoupon": "The coupon is created successfully.",
       "updateCoupon": "The coupon is updated successfully.",
       "toggleCouponActiveness": "The coupon activeness is set successfully."
+    },
+    "bad": {
+      "selectUser": "Select a user first"
     }
   },
   "forms": {
@@ -582,6 +595,10 @@
       "discountId": "discount id",
       "price_SAR": "price in SAR",
       "price_USD": "price in USD",
+      "indiPrice_SAR": "individual price in SAR",
+      "indiPrice_USD": "individual price in USD",
+      "merchPrice_SAR": "merchant price in SAR",
+      "merchPrice_USD": "merchant price in USD",
       "uploadImages": "upload images",
       "isMinimumFlowersPerStem": "can have more flowers per stem",
       "flowersPerStem": "flowers in a stem",
@@ -1131,6 +1148,7 @@
     "total": "total",
     "pay": "pay",
     "coupon": "coupon",
-    "setting": "setting"
+    "setting": "setting",
+    "empty": "empty"
   }
 }

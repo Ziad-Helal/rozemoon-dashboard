@@ -19,10 +19,10 @@ const formSchema = z
       .number({ invalid_type_error: t("forms.errors.number") })
       .positive(t("forms.errors.positive"))
       .optional(),
-    taxAmount: z
-      .number({ invalid_type_error: t("forms.errors.number") })
-      .positive(t("forms.errors.positive"))
-      .optional(),
+    // taxAmount: z
+    //   .number({ invalid_type_error: t("forms.errors.number") })
+    //   .positive(t("forms.errors.positive"))
+    //   .optional(),
     note: z.string({ invalid_type_error: t("forms.errors.string") }).optional(),
   })
   .refine(({ status }) => status !== null, { message: "Required", path: ["status"] })
@@ -61,11 +61,6 @@ export function useFormDataGetter() {
       ],
     },
     {
-      id: "deliveryAddress",
-      label: t("forms.labels.address.default"),
-      type: "text",
-    },
-    {
       id: "deliveryDate",
       label: t("forms.labels.date"),
       type: "date",
@@ -76,10 +71,16 @@ export function useFormDataGetter() {
       type: "number",
     },
     {
-      id: "taxAmount",
-      label: t("forms.labels.taxes"),
-      type: "number",
+      id: "deliveryAddress",
+      label: t("forms.labels.address.default"),
+      type: "text",
+      containerClassName: "lg:col-span-full",
     },
+    // {
+    //   id: "taxAmount",
+    //   label: t("forms.labels.taxes"),
+    //   type: "number",
+    // },
     {
       id: "note",
       label: t("forms.labels.notes"),
@@ -95,7 +96,7 @@ export function useFormDataGetter() {
     deliveryAddress: "",
     deliveryDate: new Date(),
     extraDiscountAmount: undefined,
-    taxAmount: undefined,
+    // taxAmount: undefined,
     note: "",
   };
 

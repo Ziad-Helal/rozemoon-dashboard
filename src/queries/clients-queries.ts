@@ -1,14 +1,14 @@
-import { ApiError, Client, GetClients_Response, Pagination, UpdateUserWallet_Request } from "@/types/api-types";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { queryKeys } from "./query-keys";
 import { getAllClients, updateUserWallet } from "@/lib/api";
 import { badHint, goodHint } from "@/services/hint";
 import { useTranslation } from "react-i18next";
+import type { ApiError, Client, GetClients_Response, Pagination, UpdateUserWallet_Request } from "@/types/api-types";
 
-export function useGetAllClients(pagination: Pagination) {
+export function useGetAllClients(pagination: Pagination, isForOrder?: boolean) {
   const query = useQuery<GetClients_Response, AxiosError<ApiError, Pagination>, { items: Client[]; pagination: Pagination }>({
-    queryKey: [queryKeys.allClients],
+    queryKey: [isForOrder ? queryKeys.orderUsers : queryKeys.allClients],
     queryFn: () => getAllClients(pagination),
     select: ({ items, ...paginationData }) => ({ items, pagination: { ...pagination, ...paginationData, filters: { ...pagination.filters, ...paginationData.filters } } }),
   });

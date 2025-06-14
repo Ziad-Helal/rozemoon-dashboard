@@ -6,6 +6,7 @@ import type { NavigateFunction } from "react-router";
 import { routes } from "@/routes";
 import { queryKeys } from "@/queries";
 import { getFastOrderCartProps, getRefillCartProps } from "./cart";
+import { startTransition } from "react";
 
 interface JWTUserPayload extends JwtPayload {
   email: string;
@@ -20,10 +21,12 @@ export function logIn(data: SuccessfulAuth_Response) {
 }
 
 export function logOut(queryClient: QueryClient, navigate: NavigateFunction) {
-  setCookie("accessToken", null, -1);
-  setCookie("refreshToken", null, -1);
-  queryClient.setQueryData([queryKeys.userAuth], null);
-  queryClient.setQueryData([queryKeys.fastOrderCart], { items: [], ...getFastOrderCartProps([]) });
-  queryClient.setQueryData([queryKeys.refillCart], { items: [], ...getRefillCartProps([]) });
-  navigate(routes.signIn);
+  startTransition(() => {
+    setCookie("accessToken", null, -1);
+    setCookie("refreshToken", null, -1);
+    queryClient.setQueryData([queryKeys.userAuth], null);
+    queryClient.setQueryData([queryKeys.fastOrderCart], { items: [], ...getFastOrderCartProps([]) });
+    queryClient.setQueryData([queryKeys.refillCart], { items: [], ...getRefillCartProps([]) });
+    navigate(routes.signIn);
+  });
 }

@@ -16,6 +16,7 @@ interface SelectInput_Props<TFieldValues extends FieldValues> {
   options?: SelectOption[];
   onChange?: (value: string) => void;
   onBlur?: FocusEventHandler<HTMLButtonElement>;
+  onSearch?: (value: string) => void;
   triggerClassName?: string;
   triggerPlaceholder?: string;
   searchPlaceholder?: string;
@@ -33,6 +34,7 @@ export const SelectInput = forwardRef(
       value,
       onChange,
       onBlur,
+      onSearch,
       options,
       triggerClassName,
       triggerPlaceholder,
@@ -44,7 +46,7 @@ export const SelectInput = forwardRef(
     }: SelectInput_Props<TFieldValues>,
     ref: ForwardedRef<HTMLDivElement>
   ) => {
-    const { i18n } = useTranslation();
+    const { i18n, t } = useTranslation();
     const [isOpen, setIsOpen] = useState(false);
     const [selectedValue, setSelectedValue] = useState(value || "");
 
@@ -77,18 +79,22 @@ export const SelectInput = forwardRef(
       <Popover open={isOpen} onOpenChange={setIsOpen} modal>
         <PopoverTrigger id={id || name} name={name} onBlur={onBlur} disabled={disabled} asChild>
           <Button variant="outline" role="combobox" aria-expanded={isOpen} className={cn("w-full justify-between", triggerClassName)} ref={triggerRef}>
-            {options ? (selectedValue ? tryFormattingNumber(i18n.language as Language, options.find(({ value }) => value === selectedValue)?.label) : triggerPlaceholder) : "Empty"}
+            {options?.length
+              ? selectedValue
+                ? tryFormattingNumber(i18n.language as Language, options.find(({ value }) => value === selectedValue)?.label)
+                : triggerPlaceholder || t("forms.placeholders.selectOne")
+              : t("keyWords.empty")}
             <ChevronsUpDownIcon className="size-4 shrink-0 opacity-50" />
           </Button>
         </PopoverTrigger>
         <PopoverContent className="p-0 capitalize" align="start" ref={ref} style={{ width: `${triggerWidth}px` }}>
           <Command>
-            <CommandInput placeholder={searchPlaceholder} />
+            <CommandInput placeholder={searchPlaceholder} onInput={(event) => onSearch?.(event.currentTarget.value)} />
             {isLoading ? (
-              <LoadingSpinner className="my-5" loadingText={loadingPlaceholder || "Loading..."} />
+              <LoadingSpinner className="my-5" loadingText={loadingPlaceholder || t("keyWords.loading")} />
             ) : (
               <CommandList>
-                <CommandEmpty>{emptyPlaceholder || "Empty"}</CommandEmpty>
+                <CommandEmpty>{emptyPlaceholder || t("keyWords.empty")}</CommandEmpty>
                 <CommandGroup>
                   {options?.map(({ label, value, disabled }) => (
                     <CommandItem

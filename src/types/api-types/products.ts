@@ -2,11 +2,15 @@ import { CategoryBase, ColorBase, Description_Localization, DiscountBase, Image,
 
 export type ProductType = "Stem" | "Bunch";
 
+export type ProductPricingType = "indi" | "merch" | "standard";
+
 export interface ProductCore {
   id: number;
   name: string;
   description: string;
   price: number;
+  indiPrice: number;
+  merchPrice: number;
   categoryId: number;
   productType: ProductType;
   productTypeLocalized: string;
@@ -58,6 +62,10 @@ export interface CreateProduct_Request extends Name_Localization, Description_Lo
   colorId: number;
   price_SAR: number;
   price_USD: number;
+  indiPriceSAR: number;
+  indiPriceUSD: number;
+  merchPriceSAR: number;
+  merchPriceUSD: number;
   discountId?: number;
   isMinimumFlowersPerStem?: boolean;
   flowersPerStem: number;

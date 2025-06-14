@@ -10,6 +10,7 @@ import {
   CreateFastOrder_Response,
   UpdateFastOrderStatus_Request,
   SetFastOrderAsCODPaid_Request,
+  ProductPricingType,
 } from "@/types/api-types";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
@@ -82,7 +83,7 @@ export function useCreateFastOrder() {
 export function useInitializeFastOrderCart() {
   const query = useQuery<FastOrder_Cart, AxiosError<ApiError>, FastOrder_Cart>({
     queryKey: [queryKeys.fastOrderCart],
-    queryFn: () => ({ items: [], ...getFastOrderCartProps([]) }),
+    queryFn: () => ({ items: [], priceType: "merch", ...getFastOrderCartProps([]) }),
   });
   return query;
 }
@@ -91,13 +92,26 @@ export function useUpdateFastOrderCart() {
   const queryClient = useQueryClient();
   const mutation = useMutation<FastOrder_Cart, AxiosError<ApiError>, FastOrder_CartItem>({
     mutationFn: async (fastOrderItem) => {
-      let { items } = queryClient.getQueryData<FastOrder_Cart>([queryKeys.fastOrderCart]) as FastOrder_Cart;
-      const itemIndex = items.findIndex(({ productId }) => productId == fastOrderItem.productId);
+      let prevCart = queryClient.getQueryData<FastOrder_Cart>([queryKeys.fastOrderCart]) as FastOrder_Cart;
+      const itemIndex = prevCart.items.findIndex(({ productId }) => productId == fastOrderItem.productId);
       if (itemIndex != undefined && itemIndex != -1)
-        if (fastOrderItem.quantity) items = items.map((item) => (item.productId == fastOrderItem.productId ? fastOrderItem : item));
-        else items.splice(itemIndex, 1);
-      else items.push(fastOrderItem);
-      const newCart = { items, ...getFastOrderCartProps(items) };
+        if (fastOrderItem.quantity) prevCart.items = prevCart.items.map((item) => (item.productId == fastOrderItem.productId ? fastOrderItem : item));
+        else prevCart.items.splice(itemIndex, 1);
+      else prevCart.items.push(fastOrderItem);
+      const newCart = { items: prevCart.items, priceType: prevCart.priceType, ...getFastOrderCartProps(prevCart.items) };
+      queryClient.setQueryData([queryKeys.fastOrderCart], newCart);
+      return newCart;
+    },
+  });
+  return mutation;
+}
+
+export function useUpdateFastOrderCartPriceType() {
+  const queryClient = useQueryClient();
+  const mutation = useMutation<FastOrder_Cart, AxiosError<ApiError>, ProductPricingType>({
+    mutationFn: async (priceType) => {
+      let prevCart = queryClient.getQueryData<FastOrder_Cart>([queryKeys.fastOrderCart]) as FastOrder_Cart;
+      const newCart = { ...prevCart, priceType };
       queryClient.setQueryData([queryKeys.fastOrderCart], newCart);
       return newCart;
     },
@@ -111,7 +125,7 @@ export function useRemoveFromFastOrderCart() {
     mutationFn: async (fastOrderItemId) => {
       let fastOrderCart = queryClient.getQueryData<FastOrder_Cart>([queryKeys.fastOrderCart]);
       const items = fastOrderCart?.items.filter((item) => item.productId != fastOrderItemId) as FastOrder_CartItem[];
-      const newCart = { items, ...getFastOrderCartProps(items) };
+      const newCart = { items, priceType: fastOrderCart?.priceType || "merch", ...getFastOrderCartProps(items) };
       queryClient.setQueryData([queryKeys.fastOrderCart], newCart);
       return newCart;
     },
@@ -123,7 +137,7 @@ export function useClearFastOrderCart() {
   const queryClient = useQueryClient();
   const mutation = useMutation<void, AxiosError<ApiError>, void>({
     mutationFn: async () => {
-      queryClient.setQueryData([queryKeys.fastOrderCart], { items: [], ...getFastOrderCartProps([]) });
+      queryClient.setQueryData([queryKeys.fastOrderCart], { items: [], priceType: "merch", ...getFastOrderCartProps([]) });
     },
   });
   return mutation;
