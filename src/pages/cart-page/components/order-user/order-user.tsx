@@ -5,10 +5,10 @@ import { Button, Label } from "@/components/ui";
 import { useDebounce } from "@/hooks/misc";
 import { useGetAllClients } from "@/queries";
 import { UserPlus2Icon } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import type { Dispatch, SetStateAction } from "react";
 import type { FormFields } from "@/components/forms/guest-user-form/form-data";
-import { useTranslation } from "react-i18next";
 
 interface OrderUser_Props {
   setOrderUser: Dispatch<SetStateAction<{ customerId?: number; guestName?: string; guestPhone?: string } | undefined>>;
@@ -20,14 +20,16 @@ export default function OrderUser({ user, setOrderUser }: OrderUser_Props) {
   const [isOpen, setIsOpen] = useState(false);
   const [search, setSearch] = useState("");
   const debouncedSearch = useDebounce(search);
+
   const { data, isFetching, refetch } = useGetAllClients(
     {
       pageNumber: 1,
       pageSize: 5,
       filters: {
-        firstName: isNaN(+debouncedSearch[0]) ? debouncedSearch : undefined,
-        lastName: isNaN(+debouncedSearch[0]) ? debouncedSearch : undefined,
-        phoneNumber: isNaN(+debouncedSearch[0]) ? undefined : debouncedSearch,
+        // firstName: isNaN(+debouncedSearch[0]) ? debouncedSearch : undefined,
+        // lastName: isNaN(+debouncedSearch[0]) ? debouncedSearch : undefined,
+        name: debouncedSearch && isNaN(+debouncedSearch[0]) ? debouncedSearch : undefined,
+        phoneNumber: debouncedSearch && isNaN(+debouncedSearch[0]) ? undefined : debouncedSearch,
       },
     },
     true
@@ -57,6 +59,7 @@ export default function OrderUser({ user, setOrderUser }: OrderUser_Props) {
         <SelectInput
           id="user"
           name="user"
+          searchQuery={search}
           options={data?.items.map((item) => ({ label: `${item.firstName} ${item.lastName} | ${item.phoneNumber}`, value: item.id.toString() }))}
           onSearch={searchHandler}
           onChange={changeHandler}

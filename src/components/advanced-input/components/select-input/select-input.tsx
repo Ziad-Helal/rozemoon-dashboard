@@ -17,6 +17,7 @@ interface SelectInput_Props<TFieldValues extends FieldValues> {
   onChange?: (value: string) => void;
   onBlur?: FocusEventHandler<HTMLButtonElement>;
   onSearch?: (value: string) => void;
+  searchQuery?: string;
   triggerClassName?: string;
   triggerPlaceholder?: string;
   searchPlaceholder?: string;
@@ -35,6 +36,7 @@ export const SelectInput = forwardRef(
       onChange,
       onBlur,
       onSearch,
+      searchQuery,
       options,
       triggerClassName,
       triggerPlaceholder,
@@ -52,6 +54,8 @@ export const SelectInput = forwardRef(
 
     const triggerRef = useRef<HTMLButtonElement>(null);
     const [triggerWidth, setTriggerWidth] = useState(0);
+
+    console.log(options);
 
     useEffectAfterMount(() => {
       onChange?.(selectedValue);
@@ -88,8 +92,8 @@ export const SelectInput = forwardRef(
           </Button>
         </PopoverTrigger>
         <PopoverContent className="p-0 capitalize" align="start" ref={ref} style={{ width: `${triggerWidth}px` }}>
-          <Command>
-            <CommandInput placeholder={searchPlaceholder} onInput={(event) => onSearch?.(event.currentTarget.value)} />
+          <Command shouldFilter={false}>
+            <CommandInput value={searchQuery} placeholder={searchPlaceholder} onInput={(event) => onSearch?.(event.currentTarget.value)} />
             {isLoading ? (
               <LoadingSpinner className="my-5" loadingText={loadingPlaceholder || t("keyWords.loading")} />
             ) : (

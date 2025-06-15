@@ -39,5 +39,6 @@ export interface PaginationFilters {
   docVerifiedStatus?: UserStatus;
   firstName?: string;
   lastName?: string;
+  name?: string;
   phoneNumber?: string;
 }
