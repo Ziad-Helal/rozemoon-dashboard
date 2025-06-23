@@ -36,7 +36,7 @@ export default function OrderUser({ user, setOrderUser }: OrderUser_Props) {
   );
 
   function searchHandler(search: string) {
-    setSearch(search.trim());
+    setSearch(search);
   }
 
   function changeHandler(value: string) {

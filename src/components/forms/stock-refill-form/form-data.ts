@@ -11,7 +11,7 @@ const formSchema = z
       .number({ invalid_type_error: t("forms.errors.number") })
       .positive(t("forms.errors.positive"))
       .nullable(),
-    currency: z.enum(["SAR", "USD"], { invalid_type_error: t("forms.errors.selectOne") }),
+    // currency: z.enum(["SAR", "USD"], { invalid_type_error: t("forms.errors.selectOne") }),
   })
   .refine(({ providerId }) => providerId !== null, { message: t("forms.errors.required"), path: ["providerId"] });
 
@@ -28,7 +28,7 @@ export function useFormDataGetter() {
   ];
   const defaultValues: FormFields = {
     providerId: null,
-    currency: "SAR",
+    // currency: "SAR",
   };
 
   return { formSchema, inputFields, defaultValues, mutation };

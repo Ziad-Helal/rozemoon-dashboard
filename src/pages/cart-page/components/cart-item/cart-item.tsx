@@ -55,8 +55,14 @@ export default function CartItem({ product }: CartItem_Props) {
                 <span className="line-through">{formatNumber(i18n.language as Language, switchPrices(priceType, indiPrice, merchPrice, price), "decimal")}</span>{" "}
               </>
             ) : null}
-            {formatNumber(i18n.language as Language, newPrice ? switchPrices(priceType, newIndiPrice, newMerchPrice, newPrice) : purchasePrice, "currency", "SAR", "name")} /{" "}
-            {t(`keyWords.${productType.toLowerCase() as "stem" | "bunch"}`)}
+            {formatNumber(
+              i18n.language as Language,
+              newPrice ? switchPrices(priceType, newIndiPrice, newMerchPrice, newPrice) : purchasePrice,
+              "currency",
+              user?.currency!,
+              "name"
+            )}{" "}
+            / {t(`keyWords.${productType.toLowerCase() as "stem" | "bunch"}`)}
           </p>
           <p className="capitalize">
             {t("pages.cart.totalCost")}:{" "}
@@ -75,7 +81,7 @@ export default function CartItem({ product }: CartItem_Props) {
               i18n.language as Language,
               totalPrice ? switchPrices(priceType, totalIndiPrice, totalMerchPrice, totalPrice) : purchasePrice * cartQuantity,
               "currency",
-              "SAR",
+              user?.currency!,
               "name"
             )}
           </p>

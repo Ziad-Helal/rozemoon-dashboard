@@ -11,6 +11,7 @@ export interface UserStatusObj {
 export interface AuthenticatedUser extends SuccessfulAuth_Response {
   email: string;
   branchId?: number;
+  currency?: Currency;
 }
 
 export interface UserDto {

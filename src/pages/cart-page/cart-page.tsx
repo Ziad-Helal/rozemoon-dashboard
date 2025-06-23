@@ -79,12 +79,13 @@ export default function Cart_Page() {
                     i18n.language as Language,
                     switchPrices(fastOrderCart!.priceType, fastOrderCart!.originalIndiPrice, fastOrderCart!.originalMerchPrice, fastOrderCart!.originalPrice),
                     "currency",
-                    "SAR",
+                    user?.currency!,
                     "name"
                   )}
                 </p>
                 <p>
-                  <span className="font-medium">{t("pages.cart.discount")}:</span> {formatNumber(i18n.language as Language, fastOrderCart!.discount, "currency", "SAR", "name")}{" "}
+                  <span className="font-medium">{t("pages.cart.discount")}:</span>{" "}
+                  {formatNumber(i18n.language as Language, fastOrderCart!.discount, "currency", user?.currency!, "name")}{" "}
                   {cartDiscount ? <span className="text-muted-foreground">-{formatNumber(i18n.language as Language, cartDiscount, "percent")}</span> : null}
                 </p>
                 <p>
@@ -93,7 +94,7 @@ export default function Cart_Page() {
                     i18n.language as Language,
                     switchPrices(fastOrderCart!.priceType, fastOrderCart!.finalIndiPrice, fastOrderCart!.finalMerchPrice, fastOrderCart!.finalPrice),
                     "currency",
-                    "SAR",
+                    user?.currency!,
                     "name"
                   )}
                 </p>
@@ -101,7 +102,7 @@ export default function Cart_Page() {
             ) : (
               <p>
                 <span className="font-medium text-lg">{t("pages.cart.totalCost")}:</span>{" "}
-                {formatNumber(i18n.language as Language, stockRefillCart!.totalPrice, "currency", "SAR", "name")}
+                {formatNumber(i18n.language as Language, stockRefillCart!.totalPrice, "currency", user?.currency!, "name")}
               </p>
             )}
           </div>
@@ -109,7 +110,7 @@ export default function Cart_Page() {
             <Dialog
               title={t("pages.cart.modal.title") + (userRole == "Cashier" ? t("keyWords.fast order") : t("keyWords.stockRefillRequest"))}
               description={t("pages.cart.modal.description") + (userRole == "Cashier" ? t("keyWords.fast order") : t("keyWords.stockRefillRequest"))}
-              trigger={<Button disabled={!confirmedOrderUser}>{t("keyWords.continue")}</Button>}
+              trigger={<Button disabled={userRole == "Cashier" && !confirmedOrderUser}>{t("keyWords.continue")}</Button>}
               isOpen={isCreateOrderOpen}
               setIsOpen={setIsCreateOrderOpen}
             >

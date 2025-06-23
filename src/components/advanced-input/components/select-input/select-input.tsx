@@ -55,8 +55,6 @@ export const SelectInput = forwardRef(
     const triggerRef = useRef<HTMLButtonElement>(null);
     const [triggerWidth, setTriggerWidth] = useState(0);
 
-    console.log(options);
-
     useEffectAfterMount(() => {
       onChange?.(selectedValue);
     }, [selectedValue]);

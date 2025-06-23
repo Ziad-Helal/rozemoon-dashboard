@@ -1,4 +1,4 @@
-import type { OrderBase, OrderItemBase, Pagination, PaymentMethod, ProductPricingType, StockProduct } from "@/types/api-types";
+import type { Currency, OrderBase, OrderItemBase, Pagination, PaymentMethod, ProductPricingType, StockProduct } from "@/types/api-types";
 
 export type FastOrderStatus =
   | "NotPaied"
@@ -57,6 +57,7 @@ export interface FastOrder_Cart {
   finalPrice: number;
   finalIndiPrice: number;
   finalMerchPrice: number;
+  currency: Currency;
   items: FastOrder_CartItem[];
 }
 

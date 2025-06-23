@@ -8,20 +8,21 @@ export function getFastOrderCartProps(fastOrderItems: FastOrder_CartItem[]) {
     originalMerchPrice = 0,
     merchDiscount = 0;
 
-  fastOrderItems.forEach(({ price, indiPrice, merchPrice, cartQuantity, totalDiscount, totalIndiDiscount, totalMerchDiscount }) => {
-    originalPrice += price * cartQuantity;
+  fastOrderItems.forEach(({ totalPrice, totalIndiPrice, totalMerchPrice, totalDiscount, totalIndiDiscount, totalMerchDiscount }) => {
+    originalPrice += totalPrice;
     discount += totalDiscount;
-    originalIndiPrice += indiPrice * cartQuantity;
+    originalIndiPrice += totalIndiPrice;
     indiDiscount += totalIndiDiscount;
-    originalMerchPrice += merchPrice * cartQuantity;
+    originalMerchPrice += totalMerchPrice;
     merchDiscount += totalMerchDiscount;
   });
 
   const finalPrice = originalPrice - discount;
   const finalIndiPrice = originalIndiPrice - indiDiscount;
   const finalMerchPrice = originalMerchPrice - merchDiscount;
+  const currency = fastOrderItems[0]?.branch.currency;
 
-  return { originalPrice, discount, originalIndiPrice, indiDiscount, originalMerchPrice, merchDiscount, finalPrice, finalIndiPrice, finalMerchPrice };
+  return { originalPrice, discount, originalIndiPrice, indiDiscount, originalMerchPrice, merchDiscount, finalPrice, finalIndiPrice, finalMerchPrice, currency };
 }
 
 export function expandCartProduct(product: StockProduct, cartQuantity: number): FastOrder_CartItem {
@@ -36,6 +37,7 @@ export function expandCartProduct(product: StockProduct, cartQuantity: number): 
   const newMerchPrice = product.merchPrice - (product.merchPrice * product.discountPercentage) / 100;
   const totalMerchPrice = newMerchPrice * cartQuantity;
   const totalMerchDiscount = product.merchPrice * cartQuantity - totalMerchPrice;
+
   return { ...product, cartQuantity, newPrice, totalPrice, totalDiscount, newIndiPrice, totalIndiPrice, totalIndiDiscount, newMerchPrice, totalMerchPrice, totalMerchDiscount };
 }
 

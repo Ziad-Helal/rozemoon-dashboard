@@ -1,11 +1,16 @@
 import { Column, Filter } from "@/types/table-types";
-import Actions, { Actions_Props } from "./actions";
+import Actions, { type Actions_Props } from "./actions";
 import { useTranslation } from "react-i18next";
+import { useQuerySubscribe } from "@/hooks/misc";
+import { queryKeys } from "@/queries";
+import type { AuthenticatedUser } from "@/types/api-types";
 
 const searchableColumns = ["id", "name", "description", "categoryId", "colorId"];
 
 export default function useTable() {
   const { t } = useTranslation();
+  const { roles, currency } = useQuerySubscribe<AuthenticatedUser>([queryKeys.userAuth])!;
+  const userRole = roles[0];
 
   const columnsDefinition: Column<Actions_Props>[] = [
     {
@@ -30,10 +35,60 @@ export default function useTable() {
       enableSorting: false,
     },
     {
+      accessorKey: `merchPrice${currency}`,
+      label: t("dataTable.merchPrice"),
+      type: "price",
+      currency,
+      hidden: userRole == "Admin",
+    },
+    {
+      accessorKey: `indiPrice${currency}`,
+      label: t("dataTable.indiPrice"),
+      type: "price",
+      currency,
+      hidden: userRole == "Admin",
+    },
+    {
       accessorKey: "price",
-      label: t("dataTable.price"),
+      label: t("dataTable.appPrice"),
+      type: "price",
+      currency,
+      hidden: userRole == "Admin",
+    },
+    {
+      accessorKey: "indiPriceSAR",
+      label: t("dataTable.indiPriceSAR"),
       type: "price",
       currency: "SAR",
+      hidden: userRole != "Admin",
+    },
+    {
+      accessorKey: "indiPriceUSD",
+      label: t("dataTable.indiPriceUSD"),
+      type: "price",
+      currency: "USD",
+      hidden: userRole != "Admin",
+    },
+    {
+      accessorKey: "merchPriceSAR",
+      label: t("dataTable.merchPriceSAR"),
+      type: "price",
+      currency: "SAR",
+      hidden: userRole != "Admin",
+    },
+    {
+      accessorKey: "merchPriceUSD",
+      label: t("dataTable.merchPriceUSD"),
+      type: "price",
+      currency: "USD",
+      hidden: userRole != "Admin",
+    },
+    {
+      accessorKey: "price",
+      label: t("dataTable.SARPrice"),
+      type: "price",
+      currency: "SAR",
+      hidden: userRole != "Admin",
     },
     {
       accessorKey: "discountId",

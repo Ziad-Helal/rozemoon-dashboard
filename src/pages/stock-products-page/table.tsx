@@ -1,11 +1,16 @@
 import { Column, Filter } from "@/types/table-types";
 import Actions, { Actions_Props } from "./actions";
 import { useTranslation } from "react-i18next";
+import { useQuerySubscribe } from "@/hooks/misc";
+import { AuthenticatedUser } from "@/types/api-types";
+import { queryKeys } from "@/queries";
 
 const searchableColumns = ["id", "productId", "discountId", "categoryId", "colorId"];
 
 export default function useTable() {
   const { t } = useTranslation();
+  const { roles, currency } = useQuerySubscribe<AuthenticatedUser>([queryKeys.userAuth])!;
+  const userRole = roles[0];
 
   const columnsDefinition: Column<Actions_Props>[] = [
     {
@@ -42,10 +47,67 @@ export default function useTable() {
       enableSorting: false,
     },
     {
+      accessorKey: "merchPrice",
+      label: t("dataTable.merchPrice"),
+      type: "price",
+      currency,
+      hidden: userRole == "Admin",
+    },
+    {
+      accessorKey: "indiPrice",
+      label: t("dataTable.indiPrice"),
+      type: "price",
+      currency,
+      hidden: userRole == "Admin",
+    },
+    {
       accessorKey: "price",
-      label: t("dataTable.price"),
+      label: t("dataTable.appPrice"),
+      type: "price",
+      currency,
+      hidden: userRole == "Admin",
+    },
+    {
+      accessorKey: "merchPriceSAR",
+      label: t("dataTable.merchPriceSAR"),
       type: "price",
       currency: "SAR",
+      hidden: userRole != "Admin",
+    },
+    {
+      accessorKey: "merchPriceUSD",
+      label: t("dataTable.merchPriceUSD"),
+      type: "price",
+      currency: "USD",
+      hidden: userRole != "Admin",
+    },
+    {
+      accessorKey: "indiPriceSAR",
+      label: t("dataTable.indiPriceSAR"),
+      type: "price",
+      currency: "SAR",
+      hidden: userRole != "Admin",
+    },
+    {
+      accessorKey: "indiPriceUSD",
+      label: t("dataTable.indiPriceUSD"),
+      type: "price",
+      currency: "USD",
+      hidden: userRole != "Admin",
+    },
+    {
+      accessorKey: "price_SAR",
+      label: t("dataTable.SARPrice"),
+      type: "price",
+      currency: "SAR",
+      hidden: userRole != "Admin",
+    },
+    {
+      accessorKey: "price_USD",
+      label: t("dataTable.USDPrice"),
+      type: "price",
+      currency: "USD",
+      hidden: userRole != "Admin",
     },
     {
       accessorKey: "discountId",
@@ -97,12 +159,13 @@ export default function useTable() {
     { accessorKey: "branch.address", label: t("dataTable.address"), enableSorting: false },
     { accessorKey: "branch.phoneNumber", label: t("dataTable.phone"), enableSorting: false },
     { accessorKey: "images", label: "images", hidden: true },
+    { accessorKey: "branch", label: "store", hidden: true },
     {
       accessorKey: "actions",
       label: t("dataTable.actions"),
       type: "actions",
       actions: Actions,
-      actionsProps: ["id", "productId", "quantity", "name", "productType", "price", "discountPercentage", "images"],
+      actionsProps: ["id", "productId", "quantity", "name", "productType", "price", "indiPrice", "merchPrice", "discountPercentage", "images", "branch"],
     },
   ];
 

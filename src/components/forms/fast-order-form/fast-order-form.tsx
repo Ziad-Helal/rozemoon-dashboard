@@ -18,6 +18,7 @@ interface FastOrder_Form_Props {
 export default function FastOrder_Form({ products, user, onSuccess }: FastOrder_Form_Props) {
   const { t } = useTranslation();
   const priceType = useQuerySubscribe<FastOrder_Cart>([queryKeys.fastOrderCart])!.priceType;
+
   const {
     mutation: { mutateAsync: submit, isPending: isSubmitting },
     ...data

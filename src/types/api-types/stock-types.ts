@@ -54,13 +54,12 @@ export interface Refill_CartItem {
   name: string;
   images: Image[];
   purchasePrice: number;
-  quantity: number;
   cartQuantity: number;
+  quantity?: number;
 }
 
 export interface CreateStockRefill_Request {
   providerId: number;
-  currency: Currency;
   items: {
     productId: number;
     quantity: number;
