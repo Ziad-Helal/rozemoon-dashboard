@@ -30,6 +30,30 @@ export default function useTable() {
       enableSorting: false,
     },
     {
+      accessorKey: "indiPriceSAR",
+      label: t("dataTable.indiPriceSAR"),
+      type: "price",
+      currency: "SAR",
+    },
+    {
+      accessorKey: "indiPriceUSD",
+      label: t("dataTable.indiPriceUSD"),
+      type: "price",
+      currency: "USD",
+    },
+    {
+      accessorKey: "merchPriceSAR",
+      label: t("dataTable.merchPriceSAR"),
+      type: "price",
+      currency: "SAR",
+    },
+    {
+      accessorKey: "merchPriceUSD",
+      label: t("dataTable.merchPriceUSD"),
+      type: "price",
+      currency: "USD",
+    },
+    {
       accessorKey: "price_SAR",
       label: t("dataTable.SARPrice"),
       type: "price",

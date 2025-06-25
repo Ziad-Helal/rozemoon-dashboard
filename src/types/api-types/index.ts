@@ -21,6 +21,8 @@ export * from "./localization-types";
 export * from "./issues-types";
 export * from "./invoice-types";
 export * from "./return-requests-types";
+export * from "./return-invoices-types";
 export * from "./settings-types";
 export * from "./profile-types";
 export * from "./coupons-types";
+export * from "./damage-requests";

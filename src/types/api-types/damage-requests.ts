@@ -4,16 +4,18 @@ import type { Image, Pagination, ProductType } from "@/types/api-types";
 export type DamageInvoiceStatus = "pending" | "approved" | "denied";
 
 interface DamageCore {
+  orderId?: number;
+  bookingId?: number;
   reason?: string;
   damagedImages?: Image[];
 }
 
-export interface DamagedItem extends DamageCore {
+export interface DamagedItem extends Omit<DamageCore, "orderId" | "bookingId"> {
   productId: number;
   quantity: number;
 }
 
-export interface DamagedProduct extends DamagedItem {
+export interface DamagedProduct extends Omit<DamagedItem, "reason"> {
   id: number;
   requestId: number;
   branchId: number;
@@ -37,7 +39,6 @@ export interface DamageInvoice extends DamageCore {
   managerStatus: DamageInvoiceStatus;
   adminStatus: DamageInvoiceStatus;
   CreatedAt: Date;
-  orderId?: number;
   requestedBy: number;
   ApprovedBy?: number;
   managerStatusUpdatedAt?: Date;
@@ -46,7 +47,6 @@ export interface DamageInvoice extends DamageCore {
 
 export interface CreateDamageInvoice extends DamageCore {
   items: DamagedItem[];
-  orderId?: number;
 }
 
 export interface UpdateDamangeInvoiceStatus {

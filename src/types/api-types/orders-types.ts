@@ -14,6 +14,8 @@ export interface OrderBase {
   customerDto?: UserDto;
   staffId?: number;
   staffDto?: UserDto;
+  returnRequests?: number[];
+  damagedRequests?: number[];
 }
 
 export interface OrderItemBase {
