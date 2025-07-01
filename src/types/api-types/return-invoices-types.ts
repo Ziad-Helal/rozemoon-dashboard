@@ -2,6 +2,7 @@ import type { Language } from "@/localization";
 import type { Image, Pagination, ProductType } from "@/types/api-types";
 
 export type ReturnInvoiceStatus = "pending" | "approved" | "denied";
+export type OrderType = "order" | "booking";
 
 interface ReturnCore {
   orderId?: number;
@@ -46,8 +47,10 @@ export interface ReturnInvoice extends ReturnCore {
   adminStatusUpdatedAt?: Date;
 }
 
-export interface CreateReturnInvoice extends ReturnCore {
-  items: ReturnedItem[];
+export interface CreateReturnInvoice extends Omit<ReturnCore, "returnImages"> {
+  orderType: OrderType;
+  items: CreateReturnInvoiceItem[];
+  returnImages?: File[];
 }
 
 export interface UpdateReturnInvoiceStatus {
@@ -55,10 +58,22 @@ export interface UpdateReturnInvoiceStatus {
   newStatus: ReturnInvoiceStatus;
 }
 
-export interface GetReturnInvoice_Response extends Pagination {
+export interface GetReturnInvoices_Response extends Pagination {
   items: ReturnInvoice[];
 }
 
 export interface GetReturnedProducts_Response extends Pagination {
   items: ReturnedProduct[];
+}
+
+export interface GetReturnInvoice_Request {
+  requestId: number;
+}
+
+export interface GetReturnInvoice_Response extends ReturnInvoice {
+  returnItems: ReturnedProduct[];
+}
+
+interface CreateReturnInvoiceItem extends Omit<ReturnedItem, "returnImages"> {
+  returnImages?: File[];
 }

@@ -13,6 +13,8 @@ export type InputField<TFieldID> = {
   placeholder?: string;
   autoFocus?: boolean;
   direction?: "ltr" | "rtl";
+  initialValue?: string;
+  disabled?: boolean;
 
   // Textarea
   rows?: number;

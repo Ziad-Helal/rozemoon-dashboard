@@ -1,8 +1,8 @@
 import { FormControl, FormField, FormItem, FormLabel, FormMessage, Input, Textarea } from "@/components/ui";
-import { InputField } from "@/types/form-types";
-import { FieldValues, UseFormReturn } from "react-hook-form";
 import { DateInput, FileInput, PasswordInput, QuantityInput, RangeDateInput, SearchInput, SelectInput, SliderInput, SwitchInput } from "./components";
 import { useTranslation } from "react-i18next";
+import type { InputField } from "@/types/form-types";
+import type { FieldValues, UseFormReturn } from "react-hook-form";
 
 interface AdvancedInput_Props<TFieldValues extends FieldValues> {
   form: UseFormReturn<TFieldValues>;
@@ -13,15 +13,14 @@ interface AdvancedInput_Props<TFieldValues extends FieldValues> {
 export default function AdvancedInput<TFieldValues extends FieldValues>({ form, inputField, isSubmitting }: AdvancedInput_Props<TFieldValues>) {
   const { i18n } = useTranslation();
   const dir = i18n.dir();
-  const { control } = form;
   const { id, label, type, direction, containerClassName } = inputField;
 
   return (
     <FormField
       name={id}
-      control={control}
+      control={form.control}
       render={({ field }) => {
-        const inputProps = { ...field, ...inputField, disabled: field.disabled || isSubmitting };
+        const inputProps = { ...field, ...inputField, disabled: field.disabled || isSubmitting || inputField.disabled };
         delete inputProps.containerClassName;
         return (
           <FormItem className={containerClassName} dir={direction || dir}>

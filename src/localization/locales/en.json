@@ -192,6 +192,7 @@
     "cashierEmail": "cashier email",
     "phone": "phone",
     "address": "address",
+    "creationRef": "account creation",
     "notes": "notes",
     "adminNote": "admin notes",
     "reason": "reason",
@@ -483,6 +484,11 @@
       "Denied": "rejected",
       "Under_review": "pending",
       "Denied_forever": "banned"
+    },
+    "clientCreationRef": {
+      "store": "store",
+      "web": "website",
+      "mobile": "mobile app"
     }
   },
   "hints": {
@@ -533,7 +539,8 @@
       "updateSetting": "The setting is updated successfully.",
       "createCoupon": "The coupon is created successfully.",
       "updateCoupon": "The coupon is updated successfully.",
-      "toggleCouponActiveness": "The coupon activeness is set successfully."
+      "toggleCouponActiveness": "The coupon activeness is set successfully.",
+      "updateReturnInvoice": "The return invoice is upddated successfully."
     },
     "bad": {
       "selectUser": "Select a user first"
@@ -573,6 +580,9 @@
     },
     "coupons": {
       "heading": "create a coupon"
+    },
+    "returnInvoice": {
+      "heading": "create a return invoice"
     },
     "labels": {
       "providerId": "provider id",
@@ -626,6 +636,7 @@
       "amount": "amount",
       "value": "value",
       "currency": "currency",
+      "country": "country",
       "couponString": "coupon",
       "maxSAR": "maximum discount in SAR",
       "maxUSD": "maximum discount in USD",

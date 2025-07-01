@@ -18,7 +18,7 @@ export default function Store_Form({ store, onSuccess }: Store_Form_Props) {
   const { form, renderedFields } = useFormData({ ...data, isSubmitting });
 
   function onSubmit(values: FormFields) {
-    return submit({ ...values, currency: values.currency!, id: store?.id || 0 }).then((response) => {
+    return submit({ ...values, currency: values.currency!, countryCode: values.countryCode!, id: store?.id || 0 }).then((response) => {
       onSuccess?.();
       return response;
     });

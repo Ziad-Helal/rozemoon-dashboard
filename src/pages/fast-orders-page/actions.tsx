@@ -1,9 +1,14 @@
+import { ToolTip } from "@/components";
 import { UpdateFastOrderStatus_Form } from "@/components/forms";
 import { DownloadDocuments, Expand_FastOrder, UpdateFastOrder_Status } from "@/components/table-actions";
+import { Button } from "@/components/ui";
 import { useQuerySubscribe } from "@/hooks/misc";
 import { queryKeys, useGetFastOrderInvoice } from "@/queries";
+import { routes } from "@/routes";
 import { AuthenticatedUser, FastOrder } from "@/types/api-types";
+import { ListEndIcon } from "lucide-react";
 import { useEffect, useState } from "react";
+import { Link } from "react-router";
 
 export interface Actions_Props extends FastOrder {}
 
@@ -37,6 +42,18 @@ export default function Actions(fastOrder: Actions_Props) {
         <UpdateFastOrder_Status id={id}>
           <UpdateFastOrderStatus_Form orderId={id} status={status} />
         </UpdateFastOrder_Status>
+      )}
+      {user?.roles[0] == "Cashier" && (
+        <Link to={`${routes.createReturnInvoice}?id=${fastOrder.id}`}>
+          <ToolTip
+            content="create return invoice"
+            trigger={
+              <Button size="icon" variant="outline" icon={ListEndIcon}>
+                return
+              </Button>
+            }
+          />
+        </Link>
       )}
       {/* {user?.roles[0] == "Manager" && (status == "Charged" || status == "Delivering" || status == "Delivered" || status == "DeliveredConfirmed") && (
         <CashedOnDelivery item="fast order" id={id} onConfirm={() => setAsCODed({ orderId: id })} isLoading={isSettingAsCODed} disabled={isGettingInvoice} />

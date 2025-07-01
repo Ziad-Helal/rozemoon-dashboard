@@ -23,6 +23,7 @@ export const routes = {
   fastOrders: "/orders/fast",
   scheduledOrders: "/orders/scheduled",
   returnRequests: "/orders/return-requests",
+  createReturnInvoice: "/orders/fast/return",
   ordersIssues: "/orders/issues",
   stores: "/stores",
   createStore: "/stores/create",

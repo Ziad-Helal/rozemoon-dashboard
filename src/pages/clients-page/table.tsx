@@ -39,6 +39,12 @@ export default function useTable() {
       enableSorting: false,
     },
     {
+      accessorKey: "creationRef",
+      label: t("dataTable.creationRef"),
+      typeOrStatus: "clientCreationRef",
+      enableSorting: false,
+    },
+    {
       accessorKey: "docVerifiedStatus",
       label: t("dataTable.status"),
       typeOrStatus: "userStatus",

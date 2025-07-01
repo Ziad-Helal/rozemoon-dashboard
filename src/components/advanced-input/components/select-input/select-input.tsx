@@ -90,7 +90,7 @@ export const SelectInput = forwardRef(
           </Button>
         </PopoverTrigger>
         <PopoverContent className="p-0 capitalize" align="start" ref={ref} style={{ width: `${triggerWidth}px` }}>
-          <Command shouldFilter={false}>
+          <Command shouldFilter={!searchQuery}>
             <CommandInput value={searchQuery} placeholder={searchPlaceholder} onInput={(event) => onSearch?.(event.currentTarget.value)} />
             {isLoading ? (
               <LoadingSpinner className="my-5" loadingText={loadingPlaceholder || t("keyWords.loading")} />

@@ -12,7 +12,8 @@ export type typeOrStatusType =
   | "stockRefillRequestStatus"
   | "paymentMethods"
   | "currencies"
-  | "userStatus";
+  | "userStatus"
+  | "clientCreationRef";
 
 export interface Column<ActionsProps> {
   accessorKey: string;

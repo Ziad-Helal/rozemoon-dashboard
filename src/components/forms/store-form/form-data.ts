@@ -1,3 +1,4 @@
+import { countries, Country } from "@/lib/constants";
 import { useCreateStore, useUpdateStore } from "@/queries";
 import { InputField } from "@/types/form-types";
 import { t } from "i18next";
@@ -138,6 +139,7 @@ const formSchema = z
       .min(10, t("forms.errors.stringMin")),
     phoneNumber: z.string({ invalid_type_error: t("forms.errors.string") }).regex(/^[0-9]{3,11}$/, t("forms.errors.phone")),
     currency: z.enum(["SAR", "USD"], { invalid_type_error: t("forms.errors.selectOne") }).nullable(),
+    countryCode: z.enum(countries as [Country, ...Country[]], { invalid_type_error: t("forms.errors.selectOne") }).nullable(),
     isHidden: z.boolean(),
   })
   .refine(({ currency }) => currency != null, { message: t("forms.errors.required"), path: ["currency"] });
@@ -188,7 +190,14 @@ export function useFormDataGetter(store?: FormFields) {
         { label: t("types&statuses.currencies.SAR"), value: "SAR" },
         { label: t("types&statuses.currencies.USD"), value: "USD" },
       ],
-      className: "lg:col-span-2",
+    },
+    {
+      id: "countryCode",
+      label: t("forms.labels.country"),
+      type: "select",
+      triggerPlaceholder: t("forms.placeholders.selectOne"),
+      options: countries.map((code) => ({ label: t(`countries.${code}`), value: code })),
+      containerClassName: "lg:col-span-2",
     },
     { id: "isHidden", label: t("forms.labels.hide"), type: "switch", containerClassName: "col-span-full" },
   ];
@@ -227,6 +236,7 @@ export function useFormDataGetter(store?: FormFields) {
     address_am: "",
     phoneNumber: "",
     currency: null,
+    countryCode: null,
     isHidden: true,
   };
   return { formSchema, inputFields, defaultValues, mutation };

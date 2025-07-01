@@ -35,7 +35,7 @@ export default function Profile_Page() {
               <span className="capitalize">{t("pages.profile.phoneNumber")}:</span> {data!.phoneNumber}
             </p>
           )}
-          {data!.unsatisfiedUsersCount && (
+          {data!.unsatisfiedUsersCount != undefined && (
             <p>
               <span className="capitalize">{t("pages.profile.activeReturnedOrders")}:</span> {formatNumber(i18n.language as Language, data!.unsatisfiedUsersCount, "decimal")}
             </p>

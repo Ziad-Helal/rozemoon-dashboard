@@ -21,6 +21,7 @@ export interface Pagination {
   status?: FastOrderStatus | ScheduledOrderStatus | IssueStatus;
   payment_Method?: PaymentMethod;
   orderId?: number;
+  bookingId?: number;
   uyserId?: number;
   orderOrBooking?: string;
   bookingRequestId?: number;

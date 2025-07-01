@@ -192,6 +192,7 @@
     "cashierEmail": "بريد الصراف",
     "phone": "رقم الجوال",
     "address": "العنوان",
+    "creationRef": "إنشاء الحساب",
     "notes": "ملاحظات",
     "adminNote": "ملاحظات المسؤول",
     "reason": "السبب",
@@ -483,6 +484,11 @@
       "Denied": "مرفوض",
       "Under_review": "قيد الانتظار",
       "Denied_forever": "محظور"
+    },
+    "clientCreationRef": {
+      "store": "المتجر",
+      "web": "الموقع الإلكتروني",
+      "mobile": "تطبيق المحمول"
     }
   },
   "hints": {
@@ -533,7 +539,8 @@
       "updateSetting": "تم تحديث المستخدم بنجاح.",
       "createCoupon": "تم إنشاء قسيمة الخصم بنجاح.",
       "updateCoupon": "تم تحديث قسيمة الخصم بنجاح.",
-      "toggleCouponActiveness": "تم تغيير نشاط قسيمة الخصم بنجاح."
+      "toggleCouponActiveness": "تم تغيير نشاط قسيمة الخصم بنجاح.",
+      "updateReturnInvoice": "تم تحديث فاتورة المرتجعات بنجاح."
     },
     "bad": {
       "selectUser": "حدد المستخدم اولا"
@@ -573,6 +580,9 @@
     },
     "coupons": {
       "heading": "إنشاء قسيمة خصم"
+    },
+    "returnInvoice": {
+      "heading": "إنشاء فاتورة مرتجعات"
     },
     "labels": {
       "providerId": "معرف المورد",
@@ -626,6 +636,7 @@
       "amount": "المبلغ",
       "value": "القيمة",
       "currency": "العملة",
+      "country": "الدولة",
       "couponString": "قسيمة الخصم",
       "maxSAR": "أعلى قيمة للخصم بالريال السعودي",
       "maxUSD": "أعلى قيمة للخصم بالدولار الأمريكي",

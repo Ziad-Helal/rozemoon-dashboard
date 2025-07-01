@@ -8,24 +8,24 @@ import { protectedRoutes } from "./protected-routes";
 import { useEffectAfterMount, useQuerySubscribe } from "@/hooks/misc";
 
 export function useRoutesGuard(isPendingAuthentication: boolean) {
-	const navigate = useNavigate();
-	const { pathname } = useLocation();
-	const [firstLoad, setFirstLoad] = useState(true);
-	const user = useQuerySubscribe<AuthenticatedUser>([queryKeys.userAuth]);
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+  const [firstLoad, setFirstLoad] = useState(true);
+  const user = useQuerySubscribe<AuthenticatedUser>([queryKeys.userAuth]);
 
-	useEffectAfterMount(() => {
-		isPendingAuthentication || routesGuard();
-	}, [pathname, user]);
+  useEffectAfterMount(() => {
+    isPendingAuthentication || routesGuard();
+  }, [pathname, user]);
 
-	function routesGuard() {
-		if (user) {
-			if (!protectedRoutes[user.roles[0]].includes(pathname)) navigate(routes.home);
-		} else if (!protectedRoutes.Customer.includes(pathname)) {
-			navigate(routes.signIn);
-			firstLoad && badHint("You are not signed in! Sign in first.");
-		}
+  function routesGuard() {
+    if (user) {
+      if (!protectedRoutes[user.roles[0]].includes(pathname)) navigate(routes.home);
+    } else if (!protectedRoutes.Customer.includes(pathname)) {
+      navigate(routes.signIn);
+      firstLoad && badHint("You are not signed in! Sign in first.");
+    }
 
-		scrollTo({ top: 0, behavior: "smooth" });
-		setFirstLoad(false);
-	}
+    scrollTo({ top: 0, behavior: "smooth" });
+    setFirstLoad(false);
+  }
 }

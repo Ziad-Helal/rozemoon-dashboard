@@ -54,5 +54,6 @@ export { default as CreateSetting_Page } from "./create-setting-page";
 export { default as Coupons_Page } from "./coupons-page";
 export { default as CreateCoupon_Page } from "./create-coupon-page";
 export { default as AllCoupons_Page } from "./all-coupons-page";
+export { default as CreateReturnInvoice_Page } from "./create-return-invoice-page";
 export { default as SignIn_Page } from "./sign-in-page";
 export { default as NotFound_Page } from "./not-found-page";

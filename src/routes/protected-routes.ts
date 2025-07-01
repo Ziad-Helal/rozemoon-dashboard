@@ -135,6 +135,7 @@ export const protectedRoutes = {
     routes.discounts,
     routes.allDiscounts,
     routes.cart,
+    routes.createReturnInvoice,
   ],
   Customer: [routes.signIn],
 };

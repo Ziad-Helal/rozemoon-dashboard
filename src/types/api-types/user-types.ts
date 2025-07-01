@@ -1,7 +1,9 @@
+import { Country } from "@/lib/constants";
 import { Currency, Pagination, SuccessfulAuth_Response } from "@/types/api-types";
 
 export type UserType = "Admin" | "Manager" | "StoreKeeper" | "Cashier" | "Customer";
 export type UserStatus = "verified" | "denied" | "under_review" | "denied_forever";
+export type ClientCreationRef = "store" | "web" | "mobile";
 
 export interface UserStatusObj {
   docVerified: UserStatus;
@@ -43,11 +45,12 @@ export interface Client extends UserDto {
   updatedAt: Date;
   wallet: number;
   currency: Currency;
-  countryCode: string;
+  countryCode: Country;
   isDeleted: false;
   confirmedByAdminId: number;
   docVerifiedStatus: UserStatus;
   status: UserStatusObj;
+  creationRef: ClientCreationRef;
 }
 
 export interface Admin extends Omit<UserDto, "userType" | "docsVerified"> {

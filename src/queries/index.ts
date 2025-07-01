@@ -22,6 +22,7 @@ export * from "./users-queries";
 export * from "./issues-queries";
 export * from "./invoice-queries";
 export * from "./return-requests-queries";
+export * from "./return-invoices-queries";
 export * from "./settings-queries";
 export * from "./profile-queries";
 export * from "./orders-reviews-queries";

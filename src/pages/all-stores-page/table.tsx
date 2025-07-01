@@ -29,6 +29,12 @@ export default function useTable() {
       label: t("dataTable.phone"),
       enableSorting: false,
     },
+    // {
+    //   accessorKey: "countryCode",
+    //   label: t("dataTable.country"),
+    //   enableSorting: false,
+    //   type: "country",
+    // },
     {
       accessorKey: "currency",
       label: t("dataTable.currency"),

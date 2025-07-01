@@ -1,3 +1,4 @@
+import { Country } from "@/lib/constants";
 import { Address_Localization, Currency, Name_Localization, Pagination, UserDto } from "@/types/api-types";
 
 export interface StoreBase {
@@ -9,6 +10,7 @@ export interface StoreBase {
 }
 
 export interface Store extends StoreBase {
+  countryCode: Country;
   currencyString: string;
   isHidden: boolean;
   isDeleted: boolean;
@@ -24,6 +26,7 @@ export interface GetAllStores_Response extends Pagination {
 export interface CreateStore_Request extends Name_Localization, Address_Localization {
   phoneNumber: string;
   currency: Currency;
+  countryCode: Country;
   isHidden: boolean;
 }
 

@@ -45,6 +45,12 @@ export default function useTable() {
       enableSorting: false,
     },
     {
+      accessorKey: "creationRef",
+      label: t("dataTable.creationRef"),
+      typeOrStatus: "clientCreationRef",
+      enableSorting: false,
+    },
+    {
       accessorKey: "isConfirmedEmail",
       label: t("dataTable.verifiedEmail"),
       type: "boolean",
