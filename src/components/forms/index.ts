@@ -29,3 +29,4 @@ export { default as UpdateUserStatus_Form } from "./update-user-status-form";
 export { default as Coupon_Form } from "./coupon-form";
 export { default as GuestUser_Form } from "./guest-user-form";
 export { default as ReturnInvoice_Form } from "./return-invoice-form";
+export { default as ReturnInvoiceProduct_Form } from "./return-invoice-product-form";

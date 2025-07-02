@@ -1,4 +1,4 @@
-import { ReactNode, useRef } from "react";
+import { ReactNode, useEffect } from "react";
 import { FieldValues, Path, UseFormReturn } from "react-hook-form";
 import { Form } from "./form";
 import { Button } from "./button";
@@ -6,7 +6,6 @@ import { cn } from "@/lib/utils";
 import { AxiosError } from "axios";
 import { ApiError } from "@/types/api-types";
 import { t } from "i18next";
-import { useEffectAfterMount } from "@/hooks/misc";
 
 interface AdvancedForm_Props<TFieldValues extends FieldValues, TResponse> {
   form: UseFormReturn<TFieldValues>;
@@ -41,8 +40,6 @@ export function AdvancedForm<TFieldValues extends FieldValues, TResponse>({
   actionsContainerClassName,
   fieldsContainerClassName,
 }: AdvancedForm_Props<TFieldValues, TResponse>) {
-  const submitRef = useRef<HTMLButtonElement>(null);
-
   function formResetHandler() {
     // Clear Files
     const fileFields = document.querySelectorAll<HTMLInputElement>("input[type='file']");
@@ -58,11 +55,17 @@ export function AdvancedForm<TFieldValues extends FieldValues, TResponse>({
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
-  useEffectAfterMount(() => {
-    if (submitOnChange) submitRef.current?.click();
-  }, [form.watch()]);
+  // Submit the form on every input change
+  useEffect(() => {
+    if (!submitOnChange) return;
+    const subscription = form.watch(() => {
+      form.handleSubmit(submitHandler)();
+    });
+    return () => subscription.unsubscribe();
+  }, [form.watch(), submitOnChange]);
 
-  async function submitHandler(values: TFieldValues) {
+  // Submit the form synchronously or asynchrounsly
+  function submitHandler(values: TFieldValues) {
     onSubmit?.(values)
       .then(submitOnChange ? undefined : formResetHandler)
       .catch((error: AxiosError<ApiError, TFieldValues>) => {
@@ -82,7 +85,7 @@ export function AdvancedForm<TFieldValues extends FieldValues, TResponse>({
       <form className={className} onSubmit={form.handleSubmit(submitHandler)}>
         <div className={cn("space-y-3", fieldsContainerClassName)}>{inputFields}</div>
         <div className={cn("mt-6 flex items-center gap-3 flex-wrap", actionsContainerClassName)}>
-          <Button type="submit" size="lg" className={submitButtonClassName} isLoading={isSubmitting} ref={submitRef}>
+          <Button type="submit" size="lg" className={submitButtonClassName} isLoading={isSubmitting}>
             {submittingPhrase ? submittingPhrase : t("forms.submit")}
           </Button>
           {resetFormButton && (
@@ -95,5 +98,3 @@ export function AdvancedForm<TFieldValues extends FieldValues, TResponse>({
     </Form>
   );
 }
-
-// onChange={submitOnChange ? form.handleSubmit(submitHandler) : undefined}

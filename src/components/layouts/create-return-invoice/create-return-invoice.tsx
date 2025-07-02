@@ -4,8 +4,7 @@ import { queryKeys } from "@/queries";
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import type { mergeTypes } from "zod";
-import type { CreateReturnInvoice as CreateReturnInvoice_Request, FastOrder, Pagination, ReturnedProduct, ScheduledOrder } from "@/types/api-types";
-import type { FormFields } from "@/components/forms/return-invoice-form/form-data";
+import type { CreateReturnInvoice as CreateReturnInvoice_Request, CreateReturnInvoiceItem, FastOrder, Pagination, ScheduledOrder } from "@/types/api-types";
 
 interface CreateReturnInvoice_Props {
   orderId: number;
@@ -14,24 +13,26 @@ interface CreateReturnInvoice_Props {
 
 export default function CreateReturnInvoice({ orderId, isScheduledOrder }: CreateReturnInvoice_Props) {
   const queryClient = useQueryClient();
-  const orderItems = queryClient
+  const order = queryClient
     .getQueryData<{ items: mergeTypes<FastOrder, ScheduledOrder>[]; pagination: Pagination }>([queryKeys[isScheduledOrder ? "storeScheduledOrders" : "myFastOrders"]])!
-    .items.find(({ id }) => id == orderId)![isScheduledOrder ? "bookingItems" : "orderItems"];
+    .items.find(({ id }) => id == orderId)!;
   const [invoiceData, setInvoiceData] = useState<Omit<CreateReturnInvoice_Request, "items">>({ orderType: isScheduledOrder ? "booking" : "order" });
-  const [invoiceItems, setInvoiceItems] = useState<ReturnedProduct[]>([]);
-
-  function sdfsf(values: FormFields) {
-    console.log(values.returnImages);
-
-    setInvoiceData((prevData) => ({ ...prevData, ...values, orderId: isScheduledOrder ? undefined : orderId, bookingId: isScheduledOrder ? orderId : undefined }));
-  }
+  const [invoiceItems, setInvoiceItems] = useState<CreateReturnInvoiceItem[]>([]);
 
   return (
-    <section className="space-y-3">
-      <ReturnInvoice_Form orderId={(isScheduledOrder ? "S" : "") + orderId} getValues={sdfsf} isSubmitting={false} />
-      {orderItems.map((item) => (
-        <ReturnItem key={item.id} item={item} setInvoiceItems={setInvoiceItems} />
-      ))}
+    <section>
+      <ReturnInvoice_Form
+        orderId={(isScheduledOrder ? "S" : "") + orderId}
+        getValues={(values) =>
+          setInvoiceData((prevData) => ({ ...prevData, ...values, orderId: isScheduledOrder ? undefined : orderId, bookingId: isScheduledOrder ? orderId : undefined }))
+        }
+        isSubmitting={false}
+      />
+      <div className="bg-secondary/25 p-2 mt-3 space-y-3 rounded-xl">
+        {order[isScheduledOrder ? "bookingItems" : "orderItems"].map((item) => (
+          <ReturnItem key={item.id} item={item} currency={order.currency} setInvoiceItems={setInvoiceItems} />
+        ))}
+      </div>
     </section>
   );
 }

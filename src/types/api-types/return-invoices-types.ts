@@ -74,6 +74,6 @@ export interface GetReturnInvoice_Response extends ReturnInvoice {
   returnItems: ReturnedProduct[];
 }
 
-interface CreateReturnInvoiceItem extends Omit<ReturnedItem, "returnImages"> {
+export interface CreateReturnInvoiceItem extends Omit<ReturnedItem, "returnImages"> {
   returnImages?: File[];
 }

@@ -2,14 +2,15 @@ import { FormFields, useFormDataGetter } from "./form-data";
 import { useFormData } from "@/hooks/form";
 import { AdvancedForm } from "@/components/ui";
 
-interface ReturnInvoice_Form_Props {
-  orderId: string;
+interface ReturnInvoiceProduct_Form_Props {
+  productId: number;
+  maxQuantity: number;
   isSubmitting: boolean;
   getValues: (values: FormFields) => void;
 }
 
-export default function ReturnInvoice_Form({ orderId, isSubmitting, getValues }: ReturnInvoice_Form_Props) {
-  const data = useFormDataGetter(orderId);
+export default function ReturnInvoiceProduct_Form({ productId, maxQuantity, isSubmitting, getValues }: ReturnInvoiceProduct_Form_Props) {
+  const data = useFormDataGetter(productId, maxQuantity);
   const { form, renderedFields } = useFormData({ ...data, isSubmitting });
 
   return <AdvancedForm form={form} onSubmitSync={getValues} inputFields={renderedFields} actionsContainerClassName="hidden" isSubmitting={isSubmitting} submitOnChange />;

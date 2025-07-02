@@ -9,7 +9,8 @@ import { z } from "zod";
 export type FormFields = z.infer<typeof formSchema>;
 
 const formSchema = z.object({
-  orderId: z.string(),
+  productId: z.number(),
+  quantity: z.number().min(0),
   reason: z.string().optional(),
   returnImages: z
     .array(z.instanceof(File))
@@ -18,19 +19,23 @@ const formSchema = z.object({
     .optional(),
 });
 
-export function useFormDataGetter(orderId: string) {
+export function useFormDataGetter(productId: number, maxQuantity: number) {
   const { t } = useTranslation();
   const mutation = useCreateReturnInvoice();
 
+  const refinedSchema = formSchema.refine(({ quantity }) => quantity <= maxQuantity, { message: t("forms.errors.max"), path: ["quantity"] });
+
   const defaultValues: FormFields = {
-    orderId,
+    productId,
+    quantity: 0,
   };
 
   const inputFields: InputField<FormFields>[] = [
-    { id: "orderId", label: "order id", type: "text", disabled: true },
-    { id: "reason", label: "return reason", type: "textarea", autoFocus: true },
+    { id: "productId", label: "product id", type: "text", containerClassName: "hidden", disabled: true },
+    { id: "quantity", label: "quantity", type: "quantity" },
+    { id: "reason", label: "return reason", type: "textarea" },
     { id: "returnImages", label: "photos", type: "file", maxFilesCount: 2, maxFileSize: maxFileUploadSize },
   ];
 
-  return { formSchema, inputFields, defaultValues, mutation };
+  return { formSchema: refinedSchema, inputFields, defaultValues, mutation };
 }
