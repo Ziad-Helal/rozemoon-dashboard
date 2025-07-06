@@ -17,7 +17,7 @@ export default function CreateReturnInvoice_Page() {
       {order ? (
         <CreateReturnInvoice orderId={orderId} isScheduledOrder={pathname.split("/").includes("scheduled")} />
       ) : (
-        <p className="text-center text-muted-foreground">This invoice is not assossiated with an order!</p>
+        <p className="text-center text-muted-foreground">{t("pages.returnInvoice.wrongSource")}</p>
       )}
     </Form_Page>
   );

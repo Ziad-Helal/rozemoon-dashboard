@@ -1,14 +1,14 @@
-import type { Language } from "@/localization";
-import type { Image, Pagination, ProductType } from "@/types/api-types";
+// import type { Language } from "@/localization";
+import type { Pagination, ProductType } from "@/types/api-types";
 
-export type ReturnInvoiceStatus = "pending" | "approved" | "denied";
+export type ReturnInvoiceStatus = "Pending" | "Approved" | "Denied";
 export type OrderType = "order" | "booking";
 
 interface ReturnCore {
   orderId?: number;
   bookingId?: number;
   reason?: string;
-  returnImages?: Image[];
+  returnImages?: string[];
 }
 
 export interface ReturnedItem extends Omit<ReturnCore, "orderId" | "bookingId"> {
@@ -16,12 +16,13 @@ export interface ReturnedItem extends Omit<ReturnCore, "orderId" | "bookingId"> 
   quantity: number;
 }
 
-export interface ReturnedProduct extends Omit<ReturnedItem, "resaon"> {
+export interface ReturnedProduct extends Omit<ReturnedItem, "reason"> {
   id: number;
   requestId: number;
   branchId: number;
   productType: ProductType;
-  productName: { [Key in Language]: string };
+  productName: string;
+  // productName: { [Key in Language]: string };
   createdAt: Date;
   price?: number;
   standardPriceSAR?: number;
@@ -40,9 +41,9 @@ export interface ReturnInvoice extends ReturnCore {
   branchId: number;
   managerStatus: ReturnInvoiceStatus;
   adminStatus: ReturnInvoiceStatus;
-  CreatedAt: Date;
+  createdAt: Date;
   requestedBy: number;
-  ApprovedBy?: number;
+  approvedBy?: number;
   managerStatusUpdatedAt?: Date;
   adminStatusUpdatedAt?: Date;
 }
@@ -74,6 +75,7 @@ export interface GetReturnInvoice_Response extends ReturnInvoice {
   returnItems: ReturnedProduct[];
 }
 
-export interface CreateReturnInvoiceItem extends Omit<ReturnedItem, "returnImages"> {
+export interface CreateReturnInvoiceItem extends Omit<ReturnedItem, "reason" | "returnImages"> {
+  returnReason?: string;
   returnImages?: File[];
 }

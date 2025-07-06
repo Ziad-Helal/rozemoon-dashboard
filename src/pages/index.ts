@@ -22,6 +22,7 @@ export { default as Orders_Page } from "./orders-page";
 export { default as FastOrders_Page } from "./fast-orders-page";
 export { default as ScheduledOrders_Page } from "./scheduled-orders-page";
 export { default as ReturnRequests_Page } from "./return-requests-page";
+export { default as ReturnInvoices_Page } from "./return-invoices-page";
 export { default as OrdersIssues_Page } from "./orders-issues-page";
 export { default as Stores_Page } from "./stores-page";
 export { default as CreateStore_Page } from "./create-store-page";

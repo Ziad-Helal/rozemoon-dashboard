@@ -8,11 +8,13 @@ import { routes } from "@/routes";
 import { AuthenticatedUser, FastOrder } from "@/types/api-types";
 import { ListEndIcon } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
 
 export interface Actions_Props extends FastOrder {}
 
 export default function Actions(fastOrder: Actions_Props) {
+  const { t } = useTranslation();
   const { id, status } = fastOrder;
   const [documents, setDocuments] = useState<string[]>([]);
   const { refetch: getInvoice, isFetching: isGettingInvoice } = useGetFastOrderInvoice({ id });
@@ -46,10 +48,10 @@ export default function Actions(fastOrder: Actions_Props) {
       {user?.roles[0] == "Cashier" && (
         <Link to={`${routes.createReturnInvoice}?id=${fastOrder.id}`}>
           <ToolTip
-            content="create return invoice"
+            content={t("tableActions.createReturnInvoice.tooltip")}
             trigger={
               <Button size="icon" variant="outline" icon={ListEndIcon}>
-                return
+                {t("tableActions.createReturnInvoice.tooltip")}
               </Button>
             }
           />

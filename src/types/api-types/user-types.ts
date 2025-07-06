@@ -116,3 +116,11 @@ export interface UpdateUserWallet_Request {
   amount: number;
   notes: string;
 }
+
+export interface CreateGuestUser_Request {
+  customerId: number;
+  guestName: string;
+  guestPhoneCode: string;
+  guestPhoneNumber: string;
+  guestCountry?: string;
+}

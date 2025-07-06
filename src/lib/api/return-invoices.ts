@@ -11,11 +11,11 @@ import type {
 } from "@/types/api-types";
 
 const endpoints = {
-  createInvoice: "",
-  updateInvoiceStatus: "",
-  getInvoice: "",
-  getInvoices: "",
-  getInvoiceProducts: "",
+  createInvoice: import.meta.env.VITE_API_END_POINT_CREATE_RETURN_INVOICE as string,
+  updateInvoiceStatus: import.meta.env.VITE_API_END_POINT_UPDATE_RETURN_INVOICE_STATUS as string,
+  getInvoice: import.meta.env.VITE_API_END_POINT_GET_RETURN_INVOICE as string,
+  getInvoices: import.meta.env.VITE_API_END_POINT_GET_RETURN_INVOICES as string,
+  getInvoiceProducts: import.meta.env.VITE_API_END_POINT_GET_RETURNED_PRODUCTS as string,
 };
 
 export function createReturnInvoice(requestBody: CreateReturnInvoice) {
@@ -26,17 +26,18 @@ export function createReturnInvoice(requestBody: CreateReturnInvoice) {
         requestBody.returnImages?.forEach((image) => formData.append("returnImages", image));
         break;
       case "items":
-        formData.append(key, requestBody.items as unknown as string | Blob);
-        requestBody.items.forEach(({ productId, returnImages }) => {
-          returnImages?.forEach((image) => formData.append("itemsJson.returnImages_" + productId, image));
+        requestBody.items.forEach((item) => {
+          item.returnImages?.forEach((image) => formData.append("itemImages_" + item.productId, image));
+          delete item.returnImages;
         });
+        formData.append("itemsJson", JSON.stringify(requestBody.items));
         break;
       default:
         if (requestBody[key as keyof CreateReturnInvoice]) formData.append(key, requestBody[key as keyof CreateReturnInvoice] as string | Blob);
     }
   }
 
-  return postRequest<FormData, number, ApiError>(endpoints.createInvoice, formData);
+  return postRequest<FormData, number, ApiError>(endpoints.createInvoice, formData, { headers: { "Content-Type": "multipart/form-data" } });
 }
 
 export function updateReturnInvoiceStatus(requestBody: UpdateReturnInvoiceStatus) {
@@ -44,7 +45,7 @@ export function updateReturnInvoiceStatus(requestBody: UpdateReturnInvoiceStatus
 }
 
 export function getReturnInvoice(requestBody: GetReturnInvoice_Request) {
-  return getRequest<GetReturnInvoice_Response, ApiError>(endpoints.getInvoice, { params: requestBody });
+  return getRequest<GetReturnInvoice_Response, ApiError>(endpoints.getInvoice + requestBody.requestId, { params: requestBody });
 }
 
 export function getReturnInvoices(requestBody: Pagination) {

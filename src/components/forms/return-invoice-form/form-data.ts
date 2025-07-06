@@ -27,9 +27,9 @@ export function useFormDataGetter(orderId: string) {
   };
 
   const inputFields: InputField<FormFields>[] = [
-    { id: "orderId", label: "order id", type: "text", disabled: true },
-    { id: "reason", label: "return reason", type: "textarea", autoFocus: true },
-    { id: "returnImages", label: "photos", type: "file", maxFilesCount: 2, maxFileSize: maxFileUploadSize },
+    { id: "orderId", label: t("forms.labels.productId"), type: "text", disabled: true },
+    { id: "reason", label: t("forms.labels.reason"), type: "textarea", autoFocus: true },
+    { id: "returnImages", label: t("forms.labels.uploadImages"), type: "file", accept: { ".jpeg": [], ".png": [] }, maxFilesCount: 2, maxFileSize: maxFileUploadSize },
   ];
 
   return { formSchema, inputFields, defaultValues, mutation };

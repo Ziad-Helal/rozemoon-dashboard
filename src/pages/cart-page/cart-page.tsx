@@ -10,12 +10,12 @@ import { useEffect, useState } from "react";
 import { AlertDialog, Dialog } from "@/components";
 import { FastOrder_Form, StockRefill_Form } from "@/components/forms";
 import { cn, switchPrices } from "@/lib/utils";
-import type { AuthenticatedUser, Client, FastOrder_Cart, Pagination, Refill_Cart } from "@/types/api-types";
+import type { AuthenticatedUser, Client, CreateGuestUser_Request, FastOrder_Cart, Pagination, Refill_Cart } from "@/types/api-types";
 
 export default function Cart_Page() {
   const { i18n, t } = useTranslation();
   const [isCreateOrderOpen, setIsCreateOrderOpen] = useState(false);
-  const [orderUser, setOrderUser] = useState<{ customerId?: number; guestName?: string; guestPhone?: string }>();
+  const [orderUser, setOrderUser] = useState<Partial<CreateGuestUser_Request>>();
   const [confirmedOrderUser, setConfirmedOrderUser] = useState<{ guestName: string; guestPhone: string }>();
   const orderUsers = useQuerySubscribe<{ items: Client[]; pagination: Pagination }>([queryKeys.orderUsers])?.items;
   const user = useQuerySubscribe<AuthenticatedUser>([queryKeys.userAuth]);
@@ -40,7 +40,7 @@ export default function Cart_Page() {
           ? choosenUser
             ? { guestName: choosenUser.firstName + " " + choosenUser.lastName, guestPhone: choosenUser.phoneNumber }
             : undefined
-          : { guestName: orderUser.guestName!, guestPhone: orderUser.guestPhone! }
+          : { guestName: orderUser.guestName!, guestPhone: orderUser.guestPhoneCode + " " + orderUser.guestPhoneNumber! }
         : undefined
     );
   }, [orderUser, orderUsers]);
@@ -66,7 +66,10 @@ export default function Cart_Page() {
           <Separator className="!my-6" />
           {userRole == "Cashier" ? (
             <>
-              <OrderUser setOrderUser={setOrderUser} user={confirmedOrderUser} />
+              <OrderUser
+                setOrderUser={setOrderUser}
+                user={{ ...orderUser, guestName: orderUser?.guestName || "", guestPhoneCode: orderUser?.guestPhoneCode || "", guestPhoneNumber: orderUser?.guestPhoneNumber || "" }}
+              />
               {confirmedOrderUser ? <Choosen_User user={confirmedOrderUser} /> : null}
             </>
           ) : null}

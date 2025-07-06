@@ -9,6 +9,7 @@ export type typeOrStatusType =
   | "scheduledOrderStatus"
   | "orderIssueStatus"
   | "orderRreturnRequestStatus"
+  | "orderRreturnInvoiceStatus"
   | "stockRefillRequestStatus"
   | "paymentMethods"
   | "currencies"

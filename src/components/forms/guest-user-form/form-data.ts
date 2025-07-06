@@ -10,7 +10,11 @@ const formSchema = z.object({
     .string({ invalid_type_error: t("forms.errors.string") })
     .trim()
     .min(1, t("forms.errors.stringMin")),
-  guestPhone: z
+  guestPhoneCode: z
+    .string({ invalid_type_error: t("forms.errors.string") })
+    .trim()
+    .min(1, t("forms.errors.stringMin")),
+  guestPhoneNumber: z
     .string({ invalid_type_error: t("forms.errors.string") })
     .trim()
     .min(1, t("forms.errors.stringMin")),
@@ -21,12 +25,14 @@ export function useFormDataGetter(initialData?: FormFields) {
 
   const defaultValues: FormFields = initialData || {
     guestName: "",
-    guestPhone: "",
+    guestPhoneCode: "",
+    guestPhoneNumber: "",
   };
 
   const inputFields: InputField<FormFields>[] = [
     { id: "guestName", label: t("forms.labels.name.default"), type: "text", autoFocus: true },
-    { id: "guestPhone", label: t("forms.labels.phone"), type: "tel" },
+    { id: "guestPhoneCode", label: t("forms.labels.phoneCode"), type: "tel" },
+    { id: "guestPhoneNumber", label: t("forms.labels.phone"), type: "tel" },
   ];
 
   return { formSchema, inputFields, defaultValues };

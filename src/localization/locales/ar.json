@@ -34,6 +34,7 @@
       "fast orders": "الطلبيات السريعة",
       "scheduled orders": "الطلبيات الآجلة",
       "return requests": "طلبات المرتجعات",
+      "return invoices": "فواتير المرتجعات",
       "issues": "المشاكل",
       "stores": "المتاجر",
       "all stores": "كل المتاجر",
@@ -67,6 +68,9 @@
       "uploadedProducts": "السلع المرفوعة",
       "uploadInBulk": "ارفع العديد من السلع",
       "downloadTemplate": "تحميل القالب"
+    },
+    "returnInvoice": {
+      "wrongSource": "هذه الفاتورة ليست مقترنة بطلبية!"
     },
     "cart": {
       "heading": {
@@ -135,6 +139,7 @@
     "productsReviews": "تقييمات السلع",
     "ordersReviews": "تقييمات الطلبيات",
     "returnRequests": "طلبات الارجاع",
+    "returnInvoices": "فواتير المرتجعات",
     "ordersIssues": "مشاكل الطلبيات",
     "fastOrders": "طلبيات سريعة",
     "scheduledOrders": "طلبيات آجلة",
@@ -252,7 +257,9 @@
     "allowedCountries": "الدول المسموحة",
     "isForFastOrder": "للطلبيات السريعة",
     "isForScheduledOrder": "للطلبيات الآجلة",
-    "exprationDate": "تاريخ الانتهاء"
+    "exprationDate": "تاريخ الانتهاء",
+    "orderType": "نوع الطلبية",
+    "approvedBy": "معرف القابل"
   },
   "tableActions": {
     "alertTitle": "هل أنت متأكد؟",
@@ -388,7 +395,8 @@
         "order": "تفاصيل الطلبية",
         "issue": "تفاصيل المشكلة",
         "notification": "تفاصيل الإشعار",
-        "productImages": "عرض صور السلعة"
+        "productImages": "عرض صور السلعة",
+        "returnInvoice": "تفاصيل فاتورة المرتجعات"
       },
       "total": "الإجمالي"
     },
@@ -404,6 +412,9 @@
       "tooltip": "تغيير الحالة",
       "title": "تغيير حالة المستخدم",
       "description": "تغيير حالة المستخدم بمعرف "
+    },
+    "createReturnInvoice": {
+      "tooltip": "إنشاء فاتورة مرتجعات"
     }
   },
   "types&statuses": {
@@ -460,6 +471,11 @@
       "Approved": "مقبول",
       "Rejected": "مرفوض"
     },
+    "orderRreturnInvoiceStatus": {
+      "Pending": "قيد الانتظار",
+      "Approved": "مقبول",
+      "Denied": "مرفوض"
+    },
     "stockRefillRequestStatus": {
       "Pending": "قيد الانتظار",
       "Approved": "مقبول",
@@ -489,6 +505,10 @@
       "store": "المتجر",
       "web": "الموقع الإلكتروني",
       "mobile": "تطبيق المحمول"
+    },
+    "returnInvoiceOrderType": {
+      "Order": "طلبية سريعة",
+      "Booking": "طلبية آجلة"
     }
   },
   "hints": {
@@ -540,7 +560,8 @@
       "createCoupon": "تم إنشاء قسيمة الخصم بنجاح.",
       "updateCoupon": "تم تحديث قسيمة الخصم بنجاح.",
       "toggleCouponActiveness": "تم تغيير نشاط قسيمة الخصم بنجاح.",
-      "updateReturnInvoice": "تم تحديث فاتورة المرتجعات بنجاح."
+      "updateReturnInvoice": "تم تحديث فاتورة المرتجعات بنجاح.",
+      "invoiceWithNoProdcts": "لم تقم بإرفاق أي سلع."
     },
     "bad": {
       "selectUser": "حدد المستخدم اولا"
@@ -585,6 +606,7 @@
       "heading": "إنشاء فاتورة مرتجعات"
     },
     "labels": {
+      "productId": "معرف السلعة",
       "providerId": "معرف المورد",
       "storeId": "معرف المتجر",
       "settingId": "معرف الإعداد",
@@ -628,6 +650,7 @@
       "lastName": "الاسم الأخير",
       "userRole": "دور المستخدم",
       "phone": "رقم الهاتف",
+      "phoneCode": "مفتاح هاتف الدولة",
       "email": "البريد الإلكتروني",
       "password": "كلمة المرور",
       "currentPassword": "كلمة المرور الحالية",
@@ -1167,6 +1190,7 @@
     "pay": "ادفع",
     "coupon": "قسيمة الخصم",
     "setting": "الإعداد",
-    "empty": "فارغ"
+    "empty": "فارغ",
+    "return invoice": "فاتورة مرتجعات"
   }
 }

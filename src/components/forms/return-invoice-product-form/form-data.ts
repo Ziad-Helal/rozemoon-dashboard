@@ -11,7 +11,7 @@ export type FormFields = z.infer<typeof formSchema>;
 const formSchema = z.object({
   productId: z.number(),
   quantity: z.number().min(0),
-  reason: z.string().optional(),
+  returnReason: z.string().optional(),
   returnImages: z
     .array(z.instanceof(File))
     .max(2)
@@ -31,10 +31,10 @@ export function useFormDataGetter(productId: number, maxQuantity: number) {
   };
 
   const inputFields: InputField<FormFields>[] = [
-    { id: "productId", label: "product id", type: "text", containerClassName: "hidden", disabled: true },
-    { id: "quantity", label: "quantity", type: "quantity" },
-    { id: "reason", label: "return reason", type: "textarea" },
-    { id: "returnImages", label: "photos", type: "file", maxFilesCount: 2, maxFileSize: maxFileUploadSize },
+    { id: "productId", label: t("forms.labels.productId"), type: "text", containerClassName: "hidden", disabled: true },
+    { id: "quantity", label: t("forms.labels.quantity"), type: "quantity" },
+    { id: "returnReason", label: t("forms.labels.reason"), type: "textarea" },
+    { id: "returnImages", label: t("forms.labels.uploadImages"), type: "file", accept: { ".jpeg": [], ".png": [] }, maxFilesCount: 2, maxFileSize: maxFileUploadSize },
   ];
 
   return { formSchema: refinedSchema, inputFields, defaultValues, mutation };

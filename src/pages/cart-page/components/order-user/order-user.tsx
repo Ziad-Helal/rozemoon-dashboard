@@ -9,10 +9,11 @@ import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import type { Dispatch, SetStateAction } from "react";
 import type { FormFields } from "@/components/forms/guest-user-form/form-data";
+import type { CreateGuestUser_Request } from "@/types/api-types";
 
 interface OrderUser_Props {
-  setOrderUser: Dispatch<SetStateAction<{ customerId?: number; guestName?: string; guestPhone?: string } | undefined>>;
-  user?: { guestName: string; guestPhone: string };
+  setOrderUser: Dispatch<SetStateAction<Partial<CreateGuestUser_Request> | undefined>>;
+  user?: Omit<CreateGuestUser_Request, "customerId">;
 }
 
 export default function OrderUser({ user, setOrderUser }: OrderUser_Props) {
@@ -40,11 +41,11 @@ export default function OrderUser({ user, setOrderUser }: OrderUser_Props) {
   }
 
   function changeHandler(value: string) {
-    setOrderUser(value ? { customerId: +value, guestName: undefined, guestPhone: undefined } : undefined);
+    setOrderUser(value ? { customerId: +value, guestName: undefined, guestPhoneCode: undefined, guestPhoneNumber: undefined } : undefined);
   }
 
   function addNewUserHandler(values: FormFields) {
-    setOrderUser({ customerId: undefined, guestName: values.guestName, guestPhone: values.guestPhone });
+    setOrderUser({ customerId: undefined, ...values, guestPhoneNumber: values.guestPhoneNumber.slice(1) });
     setIsOpen(false);
   }
 

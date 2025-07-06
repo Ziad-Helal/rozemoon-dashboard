@@ -14,6 +14,7 @@ export { default as CancelScheduledOrder } from "./cancel-scheduled-order";
 export { default as CashedOnDelivery } from "./cashed-on-delivery";
 export { default as AuthenticateStockRefillRequest } from "./authenticate-stock-refill-request";
 export { default as ExpandStockRefillRequest } from "./expand-stock-refill-request";
+export { default as ExpandReturnInvoice } from "./expand-return-invoice";
 export { default as UpdateFastOrder_Status } from "./update-fast-order-status";
 export { default as ApplyDiscountToProduct } from "./apply-discount-to-product";
 export { default as ChangeDiscountOfProduct } from "./change-discount-of-product";

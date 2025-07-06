@@ -46,7 +46,8 @@ export const navigationRoutes: {
     items: [
       { title: "fast orders", url: routes.fastOrders },
       { title: "scheduled orders", url: routes.scheduledOrders },
-      { title: "return requests", url: routes.returnRequests },
+      // { title: "return requests", url: routes.returnRequests },
+      { title: "return invoices", url: routes.returnInvoices },
       { title: "issues", url: routes.ordersIssues },
     ],
   },

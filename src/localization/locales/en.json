@@ -34,6 +34,7 @@
       "fast orders": "fast orders",
       "scheduled orders": "scheduled orders",
       "return requests": "return requests",
+      "return invoices": "return invoices",
       "issues": "issues",
       "stores": "stores",
       "all stores": "all stores",
@@ -67,6 +68,9 @@
       "uploadedProducts": "uploaded products",
       "uploadInBulk": "upload products in bulk",
       "downloadTemplate": "download template"
+    },
+    "returnInvoice": {
+      "wrongSource": "This invoice is not assossiated with an order!"
     },
     "cart": {
       "heading": {
@@ -135,6 +139,7 @@
     "productsReviews": "products reviews",
     "ordersReviews": "orders reviews",
     "returnRequests": "return requests",
+    "returnInvoices": "return invoices",
     "ordersIssues": "orders issues",
     "fastOrders": "fast orders",
     "scheduledOrders": "scheduled orders",
@@ -252,7 +257,9 @@
     "allowedCountries": "allowed countries",
     "isForFastOrder": "can use in fast order",
     "isForScheduledOrder": "can use in scheduled order",
-    "exprationDate": "expration date"
+    "exprationDate": "expration date",
+    "orderType": "order type",
+    "approvedBy": "approver id"
   },
   "tableActions": {
     "alertTitle": "Are you absolutely sure?",
@@ -388,7 +395,8 @@
         "order": "expand order",
         "issue": "expand issue",
         "notification": "read notification",
-        "productImages": "see product images"
+        "productImages": "see product images",
+        "returnInvoice": "return invoice details"
       },
       "total": "total"
     },
@@ -404,6 +412,9 @@
       "tooltip": "change status",
       "title": "update the user status",
       "description": "Update the status of the user #"
+    },
+    "createReturnInvoice": {
+      "tooltip": "create return invoice"
     }
   },
   "types&statuses": {
@@ -460,6 +471,11 @@
       "Approved": "approved",
       "Rejected": "rejected"
     },
+    "orderRreturnInvoiceStatus": {
+      "Pending": "pending",
+      "Approved": "approved",
+      "Denied": "denied"
+    },
     "stockRefillRequestStatus": {
       "Pending": "pending",
       "Approved": "approved",
@@ -489,6 +505,10 @@
       "store": "store",
       "web": "website",
       "mobile": "mobile app"
+    },
+    "returnInvoiceOrderType": {
+      "Order": "fast order",
+      "Booking": "scheduled order"
     }
   },
   "hints": {
@@ -540,7 +560,8 @@
       "createCoupon": "The coupon is created successfully.",
       "updateCoupon": "The coupon is updated successfully.",
       "toggleCouponActiveness": "The coupon activeness is set successfully.",
-      "updateReturnInvoice": "The return invoice is upddated successfully."
+      "updateReturnInvoice": "The return invoice is upddated successfully.",
+      "invoiceWithNoProdcts": "You did not include any products."
     },
     "bad": {
       "selectUser": "Select a user first"
@@ -585,6 +606,7 @@
       "heading": "create a return invoice"
     },
     "labels": {
+      "productId": "product id",
       "providerId": "provider id",
       "storeId": "store id",
       "settingId": "setting id",
@@ -628,6 +650,7 @@
       "lastName": "last name",
       "userRole": "user role",
       "phone": "phone number",
+      "phoneCode": "country phone key",
       "email": "email",
       "password": "password",
       "currentPassword": "current password",
@@ -1167,6 +1190,7 @@
     "pay": "pay",
     "coupon": "coupon",
     "setting": "setting",
-    "empty": "empty"
+    "empty": "empty",
+    "return invoice": "return invoice"
   }
 }

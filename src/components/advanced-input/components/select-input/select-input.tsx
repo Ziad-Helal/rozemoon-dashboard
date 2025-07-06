@@ -92,29 +92,31 @@ export const SelectInput = forwardRef(
         <PopoverContent className="p-0 capitalize" align="start" ref={ref} style={{ width: `${triggerWidth}px` }}>
           <Command shouldFilter={!searchQuery}>
             <CommandInput value={searchQuery} placeholder={searchPlaceholder} onInput={(event) => onSearch?.(event.currentTarget.value)} />
-            {isLoading ? (
-              <LoadingSpinner className="my-5" loadingText={loadingPlaceholder || t("keyWords.loading")} />
-            ) : (
-              <CommandList>
-                <CommandEmpty>{emptyPlaceholder || t("keyWords.empty")}</CommandEmpty>
-                <CommandGroup>
-                  {options?.map(({ label, value, disabled }) => (
-                    <CommandItem
-                      key={value}
-                      value={value}
-                      onSelect={(currentValue) => {
-                        setSelectedValue(currentValue === selectedValue ? "" : currentValue);
-                        setIsOpen(false);
-                      }}
-                      disabled={disabled}
-                    >
-                      <CheckIcon className={cn("size-4", selectedValue === value ? "opacity-100" : "opacity-0")} />
-                      {tryFormattingNumber(i18n.language as Language, label)}
-                    </CommandItem>
-                  ))}
-                </CommandGroup>
-              </CommandList>
-            )}
+            <CommandList>
+              {isLoading ? (
+                <LoadingSpinner className="my-5" loadingText={loadingPlaceholder || t("keyWords.loading")} />
+              ) : (
+                <>
+                  <CommandEmpty>{emptyPlaceholder || t("keyWords.empty")}</CommandEmpty>
+                  <CommandGroup>
+                    {options?.map(({ label, value, disabled }) => (
+                      <CommandItem
+                        key={value}
+                        value={value}
+                        onSelect={(currentValue) => {
+                          setSelectedValue(currentValue === selectedValue ? "" : currentValue);
+                          setIsOpen(false);
+                        }}
+                        disabled={disabled}
+                      >
+                        <CheckIcon className={cn("size-4", selectedValue === value ? "opacity-100" : "opacity-0")} />
+                        {tryFormattingNumber(i18n.language as Language, label)}
+                      </CommandItem>
+                    ))}
+                  </CommandGroup>
+                </>
+              )}
+            </CommandList>
           </Command>
         </PopoverContent>
       </Popover>

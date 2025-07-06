@@ -50,6 +50,7 @@ const ScheduledOrders_Page = lazy(() => import("@/pages/scheduled-orders-page"))
 const ReturnRequests_Page = lazy(() => import("@/pages/return-requests-page"));
 const OrdersIssues_Page = lazy(() => import("@/pages/orders-issues-page"));
 const CreateReturnInvoice_Page = lazy(() => import("@/pages/create-return-invoice-page"));
+const ReturnInvoices_Page = lazy(() => import("@/pages/return-invoices-page"));
 
 // Stores
 const Stores_Page = lazy(() => import("@/pages/stores-page"));
@@ -164,6 +165,7 @@ export const pageRoutes = createBrowserRouter([
           { path: routes.fastOrders, element: <FastOrders_Page /> },
           { path: routes.scheduledOrders, element: <ScheduledOrders_Page /> },
           { path: routes.returnRequests, element: <ReturnRequests_Page /> },
+          { path: routes.returnInvoices, element: <ReturnInvoices_Page /> },
           { path: routes.ordersIssues, element: <OrdersIssues_Page /> },
           { path: routes.createReturnInvoice, element: <CreateReturnInvoice_Page /> },
 

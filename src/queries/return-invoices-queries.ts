@@ -48,9 +48,10 @@ export function useGetReturnInvoices(pagination: Pagination) {
 }
 
 export function useGetReturnInvoice(requestBody: GetReturnInvoice_Request) {
-  const query = useQuery<GetReturnInvoice_Response, AxiosError<ApiError, GetReturnInvoice_Request>, GetReturnInvoice_Request>({
+  const query = useQuery<GetReturnInvoice_Response, AxiosError<ApiError, GetReturnInvoice_Request>, GetReturnInvoice_Response>({
     queryKey: [queryKeys.returnInvoice],
     queryFn: () => getReturnInvoice(requestBody),
+    enabled: false,
   });
 
   useEffect(() => {

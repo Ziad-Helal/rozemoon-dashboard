@@ -31,7 +31,7 @@ export default function Expand_FastOrder({ fastOrder }: Expand_FastOrder_Props) 
     >
       <div className="space-y-2">
         {orderItems.map((item) => (
-          <FastOrderItem_Card key={item.id} orderId={id} item={item} currency={currency} />
+          <FastOrderItem_Card key={item.id} item={item} currency={currency} />
         ))}
       </div>
       <p className="capitalize lg:text-center">

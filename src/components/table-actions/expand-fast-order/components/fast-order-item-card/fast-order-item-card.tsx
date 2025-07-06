@@ -1,24 +1,24 @@
-import { ProductReturn_Form } from "@/components/forms";
+// import { ProductReturn_Form } from "@/components/forms";
+// import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui";
+// import { useQuerySubscribe } from "@/hooks/misc";
+// import { queryKeys } from "@/queries";
 import { Image } from "@/components/misc";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui";
-import { useQuerySubscribe } from "@/hooks/misc";
 import { cn } from "@/lib/utils";
 import { formatCounts, formatNumber, handleDirectionChange, Language } from "@/localization";
-import { queryKeys } from "@/queries";
-import { AuthenticatedUser, Currency, FastOrderItem } from "@/types/api-types";
 import { useTranslation } from "react-i18next";
+import type { Currency, FastOrderItem } from "@/types/api-types";
 
 const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
 interface FastOrderItem_Card_Props {
-  orderId: number;
+  // orderId: number;
   item: FastOrderItem;
   currency: Currency;
 }
 
-export default function FastOrderItem_Card({ orderId, item, currency }: FastOrderItem_Card_Props) {
+export default function FastOrderItem_Card({ item, currency }: FastOrderItem_Card_Props) {
+  // const user = useQuerySubscribe<AuthenticatedUser>([queryKeys.userAuth]);
   const { i18n, t } = useTranslation();
-  const user = useQuerySubscribe<AuthenticatedUser>([queryKeys.userAuth]);
   const { productId, productName, productImages, discountPercentage, quantity, price, productType } = item;
   const newPrice = price - (price * (discountPercentage || 0)) / 100;
   const totalPrice = newPrice * quantity;
@@ -63,7 +63,7 @@ export default function FastOrderItem_Card({ orderId, item, currency }: FastOrde
           </p>
         </div>
       </div>
-      {user?.roles[0] == "Cashier" && (
+      {/* {user?.roles[0] == "Cashier" && (
         <Accordion type="single" collapsible>
           <AccordionItem value="return" className="border-none">
             <AccordionTrigger className="py-0 flex-row-reverse justify-start gap-1 w-fit">Return</AccordionTrigger>
@@ -72,7 +72,7 @@ export default function FastOrderItem_Card({ orderId, item, currency }: FastOrde
             </AccordionContent>
           </AccordionItem>
         </Accordion>
-      )}
+      )} */}
     </div>
   );
 }
