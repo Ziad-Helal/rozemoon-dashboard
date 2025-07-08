@@ -29,6 +29,7 @@ export default function FastOrders_Page() {
         changePagination={setPagination}
         searchableColumns={searchableColumns}
         filters={filters}
+        defaultFilters={[]}
         defaultSorting={defaultSorting}
         isLoading={isLoading}
       />

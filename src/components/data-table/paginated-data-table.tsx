@@ -38,6 +38,7 @@ export default function PaginatedDataTable<TData, TActions>({
       currentFilters.forEach(({ id, value }) => {
         filters[id as keyof PaginationFilters] = typeof value == "boolean" ? `${value}` : (value as any);
       });
+      console.log(currentFilters, filters);
       changePagination({ ...paginationData, filters });
     } else changePagination({ ...paginationData, filters: {} });
   }, [filtersState]);

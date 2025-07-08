@@ -141,6 +141,14 @@ export default function useTable() {
       enableSorting: false,
     },
     {
+      accessorKey: "returnRequests",
+      label: "return invoices",
+    },
+    {
+      accessorKey: "damageRequests",
+      label: "return invoices",
+    },
+    {
       accessorKey: "deliveryAddress",
       label: "full address",
       hidden: true,
