@@ -121,12 +121,18 @@ export default function Cart_Page() {
                 <FastOrder_Form
                   products={fastOrderCart!.items.map(({ productId, cartQuantity }) => ({ productId, quantity: cartQuantity }))}
                   user={orderUser!}
-                  onSuccess={() => setIsCreateOrderOpen(false)}
+                  onSuccess={() => {
+                    clearFastOrderCart();
+                    setIsCreateOrderOpen(false);
+                  }}
                 />
               ) : (
                 <StockRefill_Form
                   products={stockRefillCart!.items.map(({ productId, cartQuantity, purchasePrice }) => ({ productId, quantity: cartQuantity, price: purchasePrice }))}
-                  onSuccess={() => setIsCreateOrderOpen(false)}
+                  onSuccess={() => {
+                    clearRefillCart();
+                    setIsCreateOrderOpen(false);
+                  }}
                 />
               )}
             </Dialog>

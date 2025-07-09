@@ -14,7 +14,6 @@ export default function useDataGetter<TData, TError>({ defaultPagination, query,
   const { i18n } = useTranslation();
   const [pagination, setPagination] = useState<Pagination>(defaultPagination);
   const { data, isFetching, refetch } = query(pagination);
-  console.log(pagination.filters);
 
   useEffect(() => {
     refetch();

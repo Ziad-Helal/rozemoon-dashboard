@@ -41,7 +41,10 @@ export default function useAxios() {
             logOut(queryClient, navigate);
             return Promise.reject(refreshError);
           }
-        } else if (error.response?.status === 403) badHint("You are not authorized.");
+        } else if (error.response?.status === 403) {
+          badHint("You are not authorized.");
+          logOut(queryClient, navigate);
+        }
         return Promise.reject(error);
       }
     );

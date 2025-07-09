@@ -8,9 +8,12 @@ import { z } from "zod";
 export type FormFields = z.infer<typeof formSchema>;
 
 const formSchema = z.object({
-  status: z.enum(["Pending", "Delivering", "Delivered", "Returned", "PartiallyReturned", "HasIssue", "NotPaied", "Charged", "Cancelled", "DeliveredConfirmed", "IssueReported"], {
-    invalid_type_error: t("forms.errors.selectOne"),
-  }),
+  status: z.enum(
+    ["Pending", "Delivering", "Delivered", "pickedUp", "Returned", "PartiallyReturned", "HasIssue", "NotPaied", "Charged", "Cancelled", "DeliveredConfirmed", "IssueReported"],
+    {
+      invalid_type_error: t("forms.errors.selectOne"),
+    }
+  ),
 });
 
 export function useFormDataGetter(status: FastOrderStatus) {
@@ -25,6 +28,7 @@ export function useFormDataGetter(status: FastOrderStatus) {
         { label: t("types&statuses.fastOrderStatus.Pending"), value: "Pending", disabled: true },
         { label: t("types&statuses.fastOrderStatus.Delivering"), value: "Delivering" },
         { label: t("types&statuses.fastOrderStatus.Delivered"), value: "Delivered" },
+        { label: t("types&statuses.fastOrderStatus.pickedUp"), value: "pickedUp" },
         { label: t("types&statuses.fastOrderStatus.DeliveredConfirmed"), value: "DeliveredConfirmed", disabled: true },
         { label: t("types&statuses.fastOrderStatus.Returned"), value: "Returned", disabled: true },
         { label: t("types&statuses.fastOrderStatus.PartiallyReturned"), value: "PartiallyReturned", disabled: true },
