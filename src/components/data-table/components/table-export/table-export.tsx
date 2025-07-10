@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui";
-import { formatDate, formatNumber, Language } from "@/localization";
-import { Currency } from "@/types/api-types";
-import { Column, ColumnType } from "@/types/table-types";
+import { formatDate, formatNumber, type Language } from "@/localization";
+import type { Currency } from "@/types/api-types";
+import type { Column, ColumnType } from "@/types/table-types";
 import { Row } from "@tanstack/react-table";
 import { DownloadIcon } from "lucide-react";
 import { useState } from "react";
