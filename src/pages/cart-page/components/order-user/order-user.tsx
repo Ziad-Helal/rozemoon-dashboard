@@ -45,7 +45,7 @@ export default function OrderUser({ user, setOrderUser }: OrderUser_Props) {
   }
 
   function addNewUserHandler(values: FormFields) {
-    setOrderUser({ customerId: undefined, ...values, guestPhoneNumber: values.guestPhoneNumber.slice(1) });
+    setOrderUser({ customerId: undefined, ...values, guestPhoneNumber: values.guestPhoneNumber[0] == "0" ? values.guestPhoneNumber.slice(1) : values.guestPhoneNumber });
     setIsOpen(false);
   }
 
