@@ -71,6 +71,7 @@ export function useInitializeRefillCart() {
   const query = useQuery<Refill_Cart, AxiosError<ApiError>, Refill_Cart>({
     queryKey: [queryKeys.refillCart],
     queryFn: () => ({ items: [], ...getRefillCartProps([]) }),
+    enabled: false,
   });
   return query;
 }

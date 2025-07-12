@@ -83,7 +83,11 @@ export function useCreateFastOrder() {
 export function useInitializeFastOrderCart() {
   const query = useQuery<FastOrder_Cart, AxiosError<ApiError>, FastOrder_Cart>({
     queryKey: [queryKeys.fastOrderCart],
-    queryFn: () => ({ items: [], priceType: "merch", ...getFastOrderCartProps([]) }),
+    queryFn: () => {
+      console.log("init with merch");
+      return { items: [], priceType: "merch", ...getFastOrderCartProps([]) };
+    },
+    enabled: false,
   });
   return query;
 }
@@ -99,6 +103,7 @@ export function useUpdateFastOrderCart() {
         else prevCart.items.splice(itemIndex, 1);
       else prevCart.items.push(fastOrderItem);
       const newCart = { items: prevCart.items, priceType: prevCart.priceType, ...getFastOrderCartProps(prevCart.items) };
+      console.log("update cart with", newCart.priceType);
       queryClient.setQueryData([queryKeys.fastOrderCart], newCart);
       return newCart;
     },
@@ -112,6 +117,7 @@ export function useUpdateFastOrderCartPriceType() {
     mutationFn: async (priceType) => {
       let prevCart = queryClient.getQueryData<FastOrder_Cart>([queryKeys.fastOrderCart]) as FastOrder_Cart;
       const newCart = { ...prevCart, priceType };
+      console.log("update type with", newCart.priceType);
       queryClient.setQueryData([queryKeys.fastOrderCart], newCart);
       return newCart;
     },
@@ -126,6 +132,7 @@ export function useRemoveFromFastOrderCart() {
       let fastOrderCart = queryClient.getQueryData<FastOrder_Cart>([queryKeys.fastOrderCart]);
       const items = fastOrderCart?.items.filter((item) => item.productId != fastOrderItemId) as FastOrder_CartItem[];
       const newCart = { items, priceType: fastOrderCart?.priceType || "merch", ...getFastOrderCartProps(items) };
+      console.log("removed from cart with", newCart.priceType);
       queryClient.setQueryData([queryKeys.fastOrderCart], newCart);
       return newCart;
     },
@@ -138,6 +145,7 @@ export function useClearFastOrderCart() {
   const mutation = useMutation<void, AxiosError<ApiError>, void>({
     mutationFn: async () => {
       queryClient.setQueryData([queryKeys.fastOrderCart], { items: [], priceType: "merch", ...getFastOrderCartProps([]) });
+      console.log("cleared the cart with merch");
     },
   });
   return mutation;
