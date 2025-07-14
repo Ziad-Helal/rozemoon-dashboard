@@ -51,6 +51,8 @@ const ReturnRequests_Page = lazy(() => import("@/pages/return-requests-page"));
 const OrdersIssues_Page = lazy(() => import("@/pages/orders-issues-page"));
 const CreateReturnInvoice_Page = lazy(() => import("@/pages/create-return-invoice-page"));
 const ReturnInvoices_Page = lazy(() => import("@/pages/return-invoices-page"));
+const DamageInvoices_Page = lazy(() => import("@/pages/damage-invoices-page"));
+const CreateDamageInvoice_Page = lazy(() => import("@/pages/create-damage-invoice-page"));
 
 // Stores
 const Stores_Page = lazy(() => import("@/pages/stores-page"));
@@ -166,8 +168,10 @@ export const pageRoutes = createBrowserRouter([
           { path: routes.scheduledOrders, element: <ScheduledOrders_Page /> },
           { path: routes.returnRequests, element: <ReturnRequests_Page /> },
           { path: routes.returnInvoices, element: <ReturnInvoices_Page /> },
+          { path: routes.damageInvoices, element: <DamageInvoices_Page /> },
           { path: routes.ordersIssues, element: <OrdersIssues_Page /> },
           { path: routes.createReturnInvoice, element: <CreateReturnInvoice_Page /> },
+          { path: routes.createDamageInvoice, element: <CreateDamageInvoice_Page /> },
 
           // Stores Routes
           { path: routes.stores, element: <Stores_Page /> },

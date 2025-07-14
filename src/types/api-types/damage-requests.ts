@@ -1,13 +1,13 @@
-import type { Language } from "@/localization";
-import type { Image, Pagination, ProductType } from "@/types/api-types";
+import type { Pagination, ProductType } from "@/types/api-types";
 
-export type DamageInvoiceStatus = "pending" | "approved" | "denied";
+export type DamageInvoiceStatus = "Pending" | "Approved" | "Denied";
+export type OrderType = "order" | "booking";
 
 interface DamageCore {
   orderId?: number;
   bookingId?: number;
   reason?: string;
-  damagedImages?: Image[];
+  damagedImages?: string[];
 }
 
 export interface DamagedItem extends Omit<DamageCore, "orderId" | "bookingId"> {
@@ -20,7 +20,7 @@ export interface DamagedProduct extends Omit<DamagedItem, "reason"> {
   requestId: number;
   branchId: number;
   productType: ProductType;
-  productName: { [Key in Language]: string };
+  productName: string;
   createdAt: Date;
   price?: number;
   standardPriceSAR?: number;
@@ -35,21 +35,24 @@ export interface DamagedProduct extends Omit<DamagedItem, "reason"> {
 
 export interface DamageInvoice extends DamageCore {
   id: number;
+  // customerId: number;
   branchId: number;
   managerStatus: DamageInvoiceStatus;
   adminStatus: DamageInvoiceStatus;
-  CreatedAt: Date;
+  createdAt: Date;
   requestedBy: number;
   ApprovedBy?: number;
   managerStatusUpdatedAt?: Date;
   adminStatusUpdatedAt?: Date;
 }
 
-export interface CreateDamageInvoice extends DamageCore {
+export interface CreateDamageInvoice extends Omit<DamageCore, "damagedImages"> {
+  orderType: OrderType;
   items: DamagedItem[];
+  damagedImages?: File[];
 }
 
-export interface UpdateDamangeInvoiceStatus {
+export interface UpdateDamageInvoiceStatus {
   requestId: number;
   newStatus: DamageInvoiceStatus;
 }
@@ -60,4 +63,17 @@ export interface GetDamageInvoices_Response extends Pagination {
 
 export interface GetDamagedProducts_Response extends Pagination {
   items: DamagedProduct[];
+}
+
+export interface GetDamageInvoice_Request {
+  requestId: number;
+}
+
+export interface GetDamageInvoice_Response extends DamageInvoice {
+  damageItems: DamagedProduct[];
+}
+
+export interface CreateDamageInvoiceItem extends Omit<DamagedItem, "reason" | "damagedImages"> {
+  returnReason?: string;
+  returnImages?: File[];
 }

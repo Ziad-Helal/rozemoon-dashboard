@@ -26,4 +26,5 @@ export * from "./orders-reviews";
 export * from "./coupons";
 export * from "./return-requests";
 export * from "./return-invoices";
+export * from "./damage-invoices";
 export * from "./utils";

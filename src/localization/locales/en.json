@@ -35,6 +35,7 @@
       "scheduled orders": "scheduled orders",
       "return requests": "return requests",
       "return invoices": "return invoices",
+      "damage invoices": "damage invoices",
       "issues": "issues",
       "stores": "stores",
       "all stores": "all stores",
@@ -70,6 +71,9 @@
       "downloadTemplate": "download template"
     },
     "returnInvoice": {
+      "wrongSource": "This invoice is not assossiated with an order!"
+    },
+    "damageInvoice": {
       "wrongSource": "This invoice is not assossiated with an order!"
     },
     "cart": {
@@ -140,6 +144,7 @@
     "ordersReviews": "orders reviews",
     "returnRequests": "return requests",
     "returnInvoices": "return invoices",
+    "damageInvoices": "damage invoices",
     "ordersIssues": "orders issues",
     "fastOrders": "fast orders",
     "scheduledOrders": "scheduled orders",
@@ -290,6 +295,12 @@
         "2": " this return request?"
       }
     },
+    "authenticateDamageRequest": {
+      "description": {
+        "1": "Are you sure that you want to ",
+        "2": " this damage request?"
+      }
+    },
     "authenticateStockRefillRequest": {
       "description": {
         "1": "Are you sure that you want to ",
@@ -396,7 +407,8 @@
         "issue": "expand issue",
         "notification": "read notification",
         "productImages": "see product images",
-        "returnInvoice": "return invoice details"
+        "returnInvoice": "return invoice details",
+        "damageInvoice": "damage invoice details"
       },
       "total": "total"
     },
@@ -415,6 +427,9 @@
     },
     "createReturnInvoice": {
       "tooltip": "create return invoice"
+    },
+    "createDamageInvoice": {
+      "tooltip": "create damage invoice"
     }
   },
   "types&statuses": {
@@ -561,7 +576,9 @@
       "updateCoupon": "The coupon is updated successfully.",
       "toggleCouponActiveness": "The coupon activeness is set successfully.",
       "updateReturnInvoice": "The return invoice is upddated successfully.",
-      "invoiceWithNoProdcts": "You did not include any products."
+      "invoiceWithNoProdcts": "You did not include any products.",
+      "createDamageRequest": "The damage request is created successfully.",
+      "updateDamageInvoice": "The damage invoice is upddated successfully."
     },
     "bad": {
       "selectUser": "Select a user first"
@@ -604,6 +621,9 @@
     },
     "returnInvoice": {
       "heading": "create a return invoice"
+    },
+    "damageInvoice": {
+      "heading": "create a damage invoice"
     },
     "labels": {
       "productId": "product id",
@@ -1191,6 +1211,7 @@
     "coupon": "coupon",
     "setting": "setting",
     "empty": "empty",
-    "return invoice": "return invoice"
+    "return invoice": "return invoice",
+    "damage invoice": "damage invoice"
   }
 }

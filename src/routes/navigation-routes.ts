@@ -48,6 +48,7 @@ export const navigationRoutes: {
       { title: "scheduled orders", url: routes.scheduledOrders },
       // { title: "return requests", url: routes.returnRequests },
       { title: "return invoices", url: routes.returnInvoices },
+      { title: "damage invoices", url: routes.damageInvoices },
       { title: "issues", url: routes.ordersIssues },
     ],
   },

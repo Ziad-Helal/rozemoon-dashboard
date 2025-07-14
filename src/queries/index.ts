@@ -27,3 +27,4 @@ export * from "./settings-queries";
 export * from "./profile-queries";
 export * from "./orders-reviews-queries";
 export * from "./coupons-queries";
+export * from "./damage-invoices-queries";

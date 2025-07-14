@@ -6,7 +6,7 @@ import { useQuerySubscribe } from "@/hooks/misc";
 import { queryKeys, useGetFastOrderInvoice } from "@/queries";
 import { routes } from "@/routes";
 import { AuthenticatedUser, FastOrder } from "@/types/api-types";
-import { ListEndIcon } from "lucide-react";
+import { ListRestartIcon, ListXIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
@@ -46,16 +46,28 @@ export default function Actions(fastOrder: Actions_Props) {
         </UpdateFastOrder_Status>
       )}
       {user?.roles[0] == "Cashier" && (
-        <Link to={`${routes.createReturnInvoice}?id=${fastOrder.id}`}>
-          <ToolTip
-            content={t("tableActions.createReturnInvoice.tooltip")}
-            trigger={
-              <Button size="icon" variant="outline" icon={ListEndIcon}>
-                {t("tableActions.createReturnInvoice.tooltip")}
-              </Button>
-            }
-          />
-        </Link>
+        <>
+          <Link to={`${routes.createReturnInvoice}?id=${fastOrder.id}`}>
+            <ToolTip
+              content={t("tableActions.createReturnInvoice.tooltip")}
+              trigger={
+                <Button size="icon" variant="destructive" icon={ListRestartIcon}>
+                  {t("tableActions.createReturnInvoice.tooltip")}
+                </Button>
+              }
+            />
+          </Link>
+          <Link to={`${routes.createDamageInvoice}?id=${fastOrder.id}`}>
+            <ToolTip
+              content={t("tableActions.createDamageInvoice.tooltip")}
+              trigger={
+                <Button size="icon" variant="destructive" icon={ListXIcon}>
+                  {t("tableActions.createDamageInvoice.tooltip")}
+                </Button>
+              }
+            />
+          </Link>
+        </>
       )}
       {/* {user?.roles[0] == "Manager" && (status == "Charged" || status == "Delivering" || status == "Delivered" || status == "DeliveredConfirmed") && (
         <CashedOnDelivery item="fast order" id={id} onConfirm={() => setAsCODed({ orderId: id })} isLoading={isSettingAsCODed} disabled={isGettingInvoice} />

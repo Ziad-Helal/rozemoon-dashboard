@@ -1,4 +1,3 @@
-// import type { Language } from "@/localization";
 import type { Pagination, ProductType } from "@/types/api-types";
 
 export type ReturnInvoiceStatus = "Pending" | "Approved" | "Denied";
@@ -22,7 +21,6 @@ export interface ReturnedProduct extends Omit<ReturnedItem, "reason"> {
   branchId: number;
   productType: ProductType;
   productName: string;
-  // productName: { [Key in Language]: string };
   createdAt: Date;
   price?: number;
   standardPriceSAR?: number;

@@ -35,6 +35,7 @@
       "scheduled orders": "الطلبيات الآجلة",
       "return requests": "طلبات المرتجعات",
       "return invoices": "فواتير المرتجعات",
+      "damage invoices": "فواتير التوالف",
       "issues": "المشاكل",
       "stores": "المتاجر",
       "all stores": "كل المتاجر",
@@ -70,6 +71,9 @@
       "downloadTemplate": "تحميل القالب"
     },
     "returnInvoice": {
+      "wrongSource": "هذه الفاتورة ليست مقترنة بطلبية!"
+    },
+    "damageInvoice": {
       "wrongSource": "هذه الفاتورة ليست مقترنة بطلبية!"
     },
     "cart": {
@@ -140,6 +144,7 @@
     "ordersReviews": "تقييمات الطلبيات",
     "returnRequests": "طلبات الارجاع",
     "returnInvoices": "فواتير المرتجعات",
+    "damageInvoices": "فواتير التوالف",
     "ordersIssues": "مشاكل الطلبيات",
     "fastOrders": "طلبيات سريعة",
     "scheduledOrders": "طلبيات آجلة",
@@ -290,6 +295,12 @@
         "2": " طلب الإرجاع هذا؟"
       }
     },
+    "authenticateDamageRequest": {
+      "description": {
+        "1": "هل أنت متأكد من أنك تريد ",
+        "2": " طلب التوالف هذا؟"
+      }
+    },
     "authenticateStockRefillRequest": {
       "description": {
         "1": "هل أنت متأكد من أنك تريد ",
@@ -396,7 +407,8 @@
         "issue": "تفاصيل المشكلة",
         "notification": "تفاصيل الإشعار",
         "productImages": "عرض صور السلعة",
-        "returnInvoice": "تفاصيل فاتورة المرتجعات"
+        "returnInvoice": "تفاصيل فاتورة المرتجعات",
+        "damageInvoice": "تفاصيل فاتورة التوالف"
       },
       "total": "الإجمالي"
     },
@@ -415,6 +427,9 @@
     },
     "createReturnInvoice": {
       "tooltip": "إنشاء فاتورة مرتجعات"
+    },
+    "createDamageInvoice": {
+      "tooltip": "إنشاء فاتورة توالف"
     }
   },
   "types&statuses": {
@@ -561,7 +576,9 @@
       "updateCoupon": "تم تحديث قسيمة الخصم بنجاح.",
       "toggleCouponActiveness": "تم تغيير نشاط قسيمة الخصم بنجاح.",
       "updateReturnInvoice": "تم تحديث فاتورة المرتجعات بنجاح.",
-      "invoiceWithNoProdcts": "لم تقم بإرفاق أي سلع."
+      "invoiceWithNoProdcts": "لم تقم بإرفاق أي سلع.",
+      "createDamageRequest": "تم إنشاء طلب توالف بنجاح.",
+      "updateDamageInvoice": "تم تحديث فاتورة التوالف بنجاح."
     },
     "bad": {
       "selectUser": "حدد المستخدم اولا"
@@ -604,6 +621,9 @@
     },
     "returnInvoice": {
       "heading": "إنشاء فاتورة مرتجعات"
+    },
+    "damageInvoice": {
+      "heading": "إنشاء فاتورة توالف"
     },
     "labels": {
       "productId": "معرف السلعة",
@@ -1191,6 +1211,7 @@
     "coupon": "قسيمة الخصم",
     "setting": "الإعداد",
     "empty": "فارغ",
-    "return invoice": "فاتورة مرتجعات"
+    "return invoice": "فاتورة مرتجعات",
+    "damage invoice": "فاتورة توالف"
   }
 }
