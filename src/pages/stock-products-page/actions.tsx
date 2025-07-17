@@ -1,5 +1,5 @@
 import { UpdateFastOrderCart_Form, UpdateRefillCart_Form } from "@/components/forms";
-import { Expand_ProductImages, UpdateCart } from "@/components/table-actions";
+import { Expand_ProductImages, UpdateCart, UpdateDamageCart } from "@/components/table-actions";
 import { useQuerySubscribe } from "@/hooks/misc";
 import { queryKeys } from "@/queries";
 import { AuthenticatedUser, FastOrder_Cart, Refill_Cart, StockProduct } from "@/types/api-types";
@@ -11,6 +11,7 @@ export interface Actions_Props extends StockProduct {}
 export default function Actions(product: Actions_Props) {
   const { t } = useTranslation();
   const [addToCartIsOpen, setAddToCartIsOpen] = useState(false);
+  const [addToDamageCartIsOpen, setAddToDamageCartIsOpen] = useState(false);
   const user = useQuerySubscribe<AuthenticatedUser>([queryKeys.userAuth]);
   const fastOrderCart = useQuerySubscribe<FastOrder_Cart>([queryKeys.fastOrderCart]);
   const stockRefillCart = useQuerySubscribe<Refill_Cart>([queryKeys.refillCart]);
@@ -39,6 +40,17 @@ export default function Actions(product: Actions_Props) {
           )}
         </UpdateCart>
       ) : null}
+      {userRole == "StoreKeeper" && (
+        <UpdateDamageCart
+          productName={product.name}
+          cartQuantity={0}
+          isOpen={addToDamageCartIsOpen}
+          setIsOpen={setAddToDamageCartIsOpen}
+          tooltip={cartQuantity ? t("tableActions.updateDamageCart.tooltip.1") : t("tableActions.updateDamageCart.tooltip.2")}
+        >
+          fgh
+        </UpdateDamageCart>
+      )}
     </>
   );
 }

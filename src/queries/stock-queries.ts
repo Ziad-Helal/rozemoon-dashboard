@@ -80,8 +80,6 @@ export function useUpdateRefillCart() {
   const queryClient = useQueryClient();
   const mutation = useMutation<Refill_Cart, AxiosError<ApiError>, Refill_CartItem>({
     mutationFn: async (refillItem) => {
-      console.log(refillItem);
-
       let { items } = queryClient.getQueryData<Refill_Cart>([queryKeys.refillCart]) as Refill_Cart;
       const itemIndex = items.findIndex(({ productId }) => productId == refillItem.productId);
       if (itemIndex != undefined && itemIndex != -1)

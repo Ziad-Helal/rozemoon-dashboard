@@ -51,4 +51,5 @@ export const queryKeys = {
   allCoupons: "allCoupons",
   couponDetails: "couponDetails",
   orderUsers: "orderUsers",
+  damageCart: "damageCart",
 };

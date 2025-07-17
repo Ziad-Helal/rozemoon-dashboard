@@ -6,10 +6,11 @@ import { useTranslation } from "react-i18next";
 import type { mergeTypes } from "zod";
 import type { CreateDamageInvoice as CreateDamageInvoice_Request, CreateDamageInvoiceItem, FastOrder, ScheduledOrder } from "@/types/api-types";
 import { DamageInvoice_Form } from "@/components/forms";
+import { DamageItem } from "./components";
 
 interface CreateDamageInvoice_Props {
-  orderId?: number;
-  order?: mergeTypes<FastOrder, ScheduledOrder>;
+  orderId: number;
+  order: mergeTypes<FastOrder, ScheduledOrder>;
   isScheduledOrder?: boolean;
 }
 

@@ -11,12 +11,12 @@ export interface Actions_Props {
 }
 
 export default function Actions({ id, managerStatus, adminStatus }: Actions_Props) {
-  const [updatingToBe, setUpdatingToBe] = useState<Exclude<DamageInvoiceStatus, "Pending">>();
+  const [updatingToBe, setUpdatingToBe] = useState<Exclude<DamageInvoiceStatus, "pending">>();
   const user = useQuerySubscribe<AuthenticatedUser>([queryKeys.userAuth]);
   const { mutateAsync, isPending } = useUpdateDamageInvoiceStatus();
-  const useRole = user?.roles[0];
+  const userRole = user?.roles[0];
 
-  function updateStatusTo(newStatus: Exclude<DamageInvoiceStatus, "Pending">) {
+  function updateStatusTo(newStatus: Exclude<DamageInvoiceStatus, "pending">) {
     setUpdatingToBe(newStatus);
     mutateAsync({ requestId: id, newStatus }).finally(() => setUpdatingToBe(undefined));
   }
@@ -24,10 +24,10 @@ export default function Actions({ id, managerStatus, adminStatus }: Actions_Prop
   return (
     <>
       <ExpandDamageInvoice requestId={id} />
-      {(managerStatus == "Pending" && useRole == "Manager") || (adminStatus == "Pending" && useRole == "Admin") ? (
+      {(managerStatus == "pending" && userRole == "Manager") || (adminStatus == "pending" && userRole == "Admin") ? (
         <>
-          <AuthenticateDamageRequest action="approve" isLoading={isPending && updatingToBe == "Approved"} disabled={isPending} onConfirm={() => updateStatusTo("Approved")} />
-          <AuthenticateDamageRequest action="reject" isLoading={isPending && updatingToBe == "Denied"} disabled={isPending} onConfirm={() => updateStatusTo("Denied")} />
+          <AuthenticateDamageRequest action="approve" isLoading={isPending && updatingToBe == "approved"} disabled={isPending} onConfirm={() => updateStatusTo("approved")} />
+          <AuthenticateDamageRequest action="reject" isLoading={isPending && updatingToBe == "denied"} disabled={isPending} onConfirm={() => updateStatusTo("denied")} />
         </>
       ) : null}
     </>

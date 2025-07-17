@@ -31,3 +31,5 @@ export { default as GuestUser_Form } from "./guest-user-form";
 export { default as ReturnInvoice_Form } from "./return-invoice-form";
 export { default as ReturnInvoiceProduct_Form } from "./return-invoice-product-form";
 export { default as DamageInvoice_Form } from "./damage-invoice-form";
+export { default as DamageInvoiceProduct_Form } from "./damage-invoice-product-form";
+export { default as UpdateDamageCart_Form } from "./update-damage-cart-form";

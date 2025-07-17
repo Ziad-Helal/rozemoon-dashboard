@@ -1,1 +1,1 @@
-export { default } from "./return-item";
+export { default as ReturnItem } from "./return-item";

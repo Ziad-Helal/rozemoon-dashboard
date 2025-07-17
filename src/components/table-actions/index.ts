@@ -1,6 +1,7 @@
 export { default as DownloadDocuments } from "./download-documents";
 export { default as AuthenticateRegister } from "./authenticate-register";
 export { default as UpdateCart } from "./update-cart";
+export { default as UpdateDamageCart } from "./update-damage-cart";
 export { default as Expand_Issue } from "./expand-issue";
 export { default as Expand_ProductImages } from "./expand-product-images";
 export { default as Expand_FastOrder } from "./expand-fast-order";
@@ -16,6 +17,7 @@ export { default as ConfirmScheduledOrderCancelation } from "./confirm-scheduled
 export { default as CancelScheduledOrder } from "./cancel-scheduled-order";
 export { default as CashedOnDelivery } from "./cashed-on-delivery";
 export { default as AuthenticateStockRefillRequest } from "./authenticate-stock-refill-request";
+export { default as AuthenticateReturnRequest } from "./authenticate-return-request";
 export { default as AuthenticateDamageRequest } from "./authenticate-damage-request";
 export { default as UpdateFastOrder_Status } from "./update-fast-order-status";
 export { default as ApplyDiscountToProduct } from "./apply-discount-to-product";

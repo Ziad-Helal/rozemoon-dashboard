@@ -1,6 +1,8 @@
 import type {
   ApiError,
   CreateDamageInvoice,
+  Damage_Cart,
+  Damage_CartItem,
   DamagedProduct,
   DamageInvoice,
   GetDamagedProducts_Response,
@@ -90,4 +92,55 @@ export function useGetDamageInvoiceProducts(pagination: Pagination) {
   }, [query.error]);
 
   return query;
+}
+
+export function useInitializeDamageCart() {
+  const query = useQuery<Damage_Cart, AxiosError<ApiError>, Damage_Cart>({
+    queryKey: [queryKeys.damageCart],
+    queryFn: () => ({ items: [] }),
+    enabled: false,
+  });
+  return query;
+}
+
+export function useUpdateDamageCart() {
+  const queryClient = useQueryClient();
+  const mutation = useMutation<Damage_Cart, AxiosError<ApiError>, Damage_CartItem>({
+    mutationFn: async (damageItem) => {
+      let { items, ...cartData } = queryClient.getQueryData<Damage_Cart>([queryKeys.damageCart])!;
+      const itemIndex = items.findIndex(({ productId }) => productId == damageItem.productId);
+      if (itemIndex != undefined && itemIndex != -1)
+        if (damageItem.quantity) items = items.map((item) => (item.productId == damageItem.productId ? damageItem : item));
+        else items.splice(itemIndex, 1);
+      else items.push(damageItem);
+      const newCart = { items, ...cartData };
+      queryClient.setQueryData([queryKeys.damageCart], newCart);
+      return newCart;
+    },
+  });
+  return mutation;
+}
+
+export function useRemoveFromDamageCart() {
+  const queryClient = useQueryClient();
+  const mutation = useMutation<Damage_Cart, AxiosError<ApiError>, number>({
+    mutationFn: async (DamageItemId) => {
+      let { items, ...cartData } = queryClient.getQueryData<Damage_Cart>([queryKeys.damageCart])!;
+      const newItems = items.filter((item) => item.productId != DamageItemId) as Damage_CartItem[];
+      const newCart = { items: newItems, ...cartData };
+      queryClient.setQueryData([queryKeys.damageCart], newCart);
+      return newCart;
+    },
+  });
+  return mutation;
+}
+
+export function useClearDamageCart() {
+  const queryClient = useQueryClient();
+  const mutation = useMutation<void, AxiosError<ApiError>, void>({
+    mutationFn: async () => {
+      queryClient.setQueryData([queryKeys.damageCart], { items: [] });
+    },
+  });
+  return mutation;
 }

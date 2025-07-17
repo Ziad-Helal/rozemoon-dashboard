@@ -389,6 +389,23 @@
         "3": " the cart"
       }
     },
+    "updateDamageCart": {
+      "tooltip": {
+        "1": "update quantity",
+        "2": "add to damage basket"
+      },
+      "description": {
+        "1": {
+          "1": "Update the quantity of ",
+          "2": " in"
+        },
+        "2": {
+          "1": "Add ",
+          "2": " to"
+        },
+        "3": " the damage basket"
+      }
+    },
     "updateItem": {
       "category": "Update category #",
       "color": "Update color #",

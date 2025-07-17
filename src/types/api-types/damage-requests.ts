@@ -1,6 +1,6 @@
 import type { Pagination, ProductType } from "@/types/api-types";
 
-export type DamageInvoiceStatus = "Pending" | "Approved" | "Denied";
+export type DamageInvoiceStatus = "pending" | "approved" | "denied";
 export type OrderType = "order" | "booking";
 
 interface DamageCore {
@@ -74,6 +74,14 @@ export interface GetDamageInvoice_Response extends DamageInvoice {
 }
 
 export interface CreateDamageInvoiceItem extends Omit<DamagedItem, "reason" | "damagedImages"> {
-  returnReason?: string;
-  returnImages?: File[];
+  damageReason?: string;
+  damageImages?: File[];
+}
+
+export type Damage_CartItem = CreateDamageInvoiceItem;
+
+export interface Damage_Cart {
+  items: Damage_CartItem[];
+  damageReason?: string;
+  damageImages?: File[];
 }
