@@ -6,21 +6,22 @@ import { useEffectAfterMount } from "@/hooks/misc";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import type { Dispatch, SetStateAction } from "react";
-import type { CreateDamageInvoiceItem, Currency, FastOrderItem, ScheduledOrderItem } from "@/types/api-types";
-import type { FormFields } from "@/components/forms/damage-invoice-product-form/form-data";
+import type { Currency, Damage_CartItem, FastOrderItem, ScheduledOrderItem } from "@/types/api-types";
 
 const baseUrl = import.meta.env.VITE_API_BASE_URL + "StaticFiles/Images/";
 
 interface DamageItem_Props {
   item: FastOrderItem | ScheduledOrderItem;
   currency: Currency;
-  setInvoiceItems: Dispatch<SetStateAction<CreateDamageInvoiceItem[]>>;
+  isLoading: boolean;
+  setInvoiceItems: Dispatch<SetStateAction<Damage_CartItem[]>>;
 }
 
-export default function DamageItem({ item, currency, setInvoiceItems }: DamageItem_Props) {
+export default function DamageItem({ item, currency, isLoading, setInvoiceItems }: DamageItem_Props) {
   const { t, i18n } = useTranslation();
-  const [productData, setProductData] = useState<FormFields>();
+  const [productData, setProductData] = useState<Damage_CartItem>();
   const { productId, productName, productType, productImages, price, discountPercentage, quantity } = item;
+  console.log(productData);
 
   const discount = price * discountPercentage;
   const priceAfterDiscount = price - discount;
@@ -84,7 +85,12 @@ export default function DamageItem({ item, currency, setInvoiceItems }: DamageIt
           </p>
         </div>
       </div>
-      <DamageInvoiceProduct_Form productId={productId} maxQuantity={quantity} getValues={setProductData} isSubmitting={false} />
+      <DamageInvoiceProduct_Form
+        productId={productId}
+        maxQuantity={quantity}
+        getValues={(values) => setProductData({ ...(item as unknown as Damage_CartItem), ...values })}
+        isSubmitting={isLoading}
+      />
     </div>
   );
 }

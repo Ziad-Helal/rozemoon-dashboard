@@ -8,12 +8,12 @@ export function getFastOrderCartProps(fastOrderItems: FastOrder_CartItem[]) {
     originalMerchPrice = 0,
     merchDiscount = 0;
 
-  fastOrderItems.forEach(({ totalPrice, totalIndiPrice, totalMerchPrice, totalDiscount, totalIndiDiscount, totalMerchDiscount }) => {
-    originalPrice += totalPrice;
+  fastOrderItems.forEach(({ price, indiPrice, merchPrice, totalDiscount, totalIndiDiscount, totalMerchDiscount, cartQuantity }) => {
+    originalPrice += cartQuantity * price;
     discount += totalDiscount;
-    originalIndiPrice += totalIndiPrice;
+    originalIndiPrice += cartQuantity * indiPrice;
     indiDiscount += totalIndiDiscount;
-    originalMerchPrice += totalMerchPrice;
+    originalMerchPrice += cartQuantity * merchPrice;
     merchDiscount += totalMerchDiscount;
   });
 

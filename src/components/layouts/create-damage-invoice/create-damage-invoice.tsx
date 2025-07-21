@@ -4,7 +4,7 @@ import { Button } from "@/components/ui";
 import { badHint } from "@/services/hint";
 import { useTranslation } from "react-i18next";
 import type { mergeTypes } from "zod";
-import type { CreateDamageInvoice as CreateDamageInvoice_Request, CreateDamageInvoiceItem, FastOrder, ScheduledOrder } from "@/types/api-types";
+import type { CreateDamageInvoice as CreateDamageInvoice_Request, CreateDamageInvoiceItem, Damage_CartItem, FastOrder, ScheduledOrder } from "@/types/api-types";
 import { DamageInvoice_Form } from "@/components/forms";
 import { DamageItem } from "./components";
 
@@ -22,7 +22,7 @@ export default function CreateDamageInvoice({ orderId, order, isScheduledOrder }
     orderId: isScheduledOrder ? undefined : orderId,
     bookingId: isScheduledOrder ? orderId : undefined,
   });
-  const [invoiceItems, setInvoiceItems] = useState<CreateDamageInvoiceItem[]>([]);
+  const [invoiceItems, setInvoiceItems] = useState<Damage_CartItem[]>([]);
 
   function submitHandler() {
     if (invoiceItems.length) mutateAsync({ ...invoiceData, items: invoiceItems });
@@ -40,10 +40,12 @@ export default function CreateDamageInvoice({ orderId, order, isScheduledOrder }
       />
       <div className="bg-secondary/25 p-2 mt-3 space-y-3 rounded-xl">
         {order[isScheduledOrder ? "bookingItems" : "orderItems"].map((item) => (
-          <DamageItem key={item.id} item={item} currency={order.currency} setInvoiceItems={setInvoiceItems} />
+          <DamageItem key={item.id} item={item} currency={order.currency} setInvoiceItems={setInvoiceItems} isLoading={isPending} />
         ))}
       </div>
-      <Button onClick={submitHandler}>{t("forms.submit")}</Button>
+      <Button onClick={submitHandler} isLoading={isPending}>
+        {t("forms.submit")}
+      </Button>
     </section>
   );
 }

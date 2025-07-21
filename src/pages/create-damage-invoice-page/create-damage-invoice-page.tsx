@@ -11,7 +11,6 @@ export default function CreateDamageInvoice_Page() {
   const { t } = useTranslation();
   const { pathname } = useLocation();
   const isScheduledOrder = pathname.split("/").includes("scheduled");
-  const damageCart = true;
   const orderId = +useSearchParams()[0].get("id")!;
   const order = queryClient
     .getQueryData<mergeTypes<GetFastOrders_Response, GetScheduledOrders_Response>>([queryKeys[isScheduledOrder ? "storeScheduledOrders" : "myFastOrders"]])
@@ -21,8 +20,6 @@ export default function CreateDamageInvoice_Page() {
     <Form_Page heading={t("forms.damageInvoice.heading")}>
       {order ? (
         <CreateDamageInvoice orderId={orderId} isScheduledOrder={isScheduledOrder} order={order} />
-      ) : damageCart ? (
-        <p>damage cart</p>
       ) : (
         <p className="text-center text-muted-foreground">{t("pages.damageInvoice.wrongSource")}</p>
       )}

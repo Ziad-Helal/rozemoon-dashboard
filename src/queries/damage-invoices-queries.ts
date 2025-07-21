@@ -105,6 +105,19 @@ export function useInitializeDamageCart() {
 
 export function useUpdateDamageCart() {
   const queryClient = useQueryClient();
+  const mutation = useMutation<Damage_Cart, AxiosError<ApiError>, Omit<Damage_Cart, "items">>({
+    mutationFn: async (feedback) => {
+      let { items } = queryClient.getQueryData<Damage_Cart>([queryKeys.damageCart])!;
+      const newCart = { ...feedback, items };
+      queryClient.setQueryData([queryKeys.damageCart], newCart);
+      return newCart;
+    },
+  });
+  return mutation;
+}
+
+export function useUpdateDamageCartItems() {
+  const queryClient = useQueryClient();
   const mutation = useMutation<Damage_Cart, AxiosError<ApiError>, Damage_CartItem>({
     mutationFn: async (damageItem) => {
       let { items, ...cartData } = queryClient.getQueryData<Damage_Cart>([queryKeys.damageCart])!;

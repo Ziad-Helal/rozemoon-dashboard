@@ -42,7 +42,7 @@ export default function ExpandDamageInvoice({ requestId }: ExpandDamageInvoice_P
           <>
             <DamageFeedback reason={data?.reason} damageImages={data?.damagedImages} />
             <div className="space-y-2">
-              {data?.damageItems.map((product) => (
+              {data?.damagedItems.map((product) => (
                 <DamagedProduct_Card key={product.id} product={product} />
               ))}
             </div>

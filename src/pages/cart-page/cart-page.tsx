@@ -88,7 +88,13 @@ export default function Cart_Page() {
                 </p>
                 <p>
                   <span className="font-medium">{t("pages.cart.discount")}:</span>{" "}
-                  {formatNumber(i18n.language as Language, fastOrderCart!.discount, "currency", user?.currency!, "name")}{" "}
+                  {formatNumber(
+                    i18n.language as Language,
+                    switchPrices(fastOrderCart!.priceType, fastOrderCart!.indiDiscount, fastOrderCart!.merchDiscount, fastOrderCart!.discount),
+                    "currency",
+                    user?.currency!,
+                    "name"
+                  )}{" "}
                   {cartDiscount ? <span className="text-muted-foreground">-{formatNumber(i18n.language as Language, cartDiscount, "percent")}</span> : null}
                 </p>
                 <p>

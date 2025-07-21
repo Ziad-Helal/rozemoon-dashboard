@@ -44,10 +44,12 @@ export default function CreateReturnInvoice({ orderId, isScheduledOrder }: Creat
       />
       <div className="bg-secondary/25 p-2 mt-3 space-y-3 rounded-xl">
         {order[isScheduledOrder ? "bookingItems" : "orderItems"].map((item) => (
-          <ReturnItem key={item.id} item={item} currency={order.currency} setInvoiceItems={setInvoiceItems} />
+          <ReturnItem key={item.id} item={item} currency={order.currency} setInvoiceItems={setInvoiceItems} isLoading={isPending} />
         ))}
       </div>
-      <Button onClick={submitHandler}>{t("forms.submit")}</Button>
+      <Button onClick={submitHandler} isLoading={isPending}>
+        {t("forms.submit")}
+      </Button>
     </section>
   );
 }

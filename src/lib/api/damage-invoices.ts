@@ -22,19 +22,14 @@ export function createDamageInvoice(requestBody: CreateDamageInvoice) {
   const formData = new FormData();
   for (const key in requestBody) {
     switch (key as keyof CreateDamageInvoice) {
-      case "orderId":
-        break;
-      case "bookingId":
-        break;
-      case "orderType":
-        break;
       case "damagedImages":
         requestBody.damagedImages?.forEach((image) => formData.append("damagedImages", image));
         break;
       case "items":
         requestBody.items.forEach((item) => {
-          item.damagedImages?.forEach((image) => formData.append("itemImages_" + item.productId, image));
-          delete item.damagedImages;
+          item.damageImages?.forEach((image) => formData.append("itemImages_" + item.productId, image));
+          item.quantity = item.cartQuantity ?? item.quantity;
+          delete item.damageImages;
         });
         formData.append("itemsJson", JSON.stringify(requestBody.items));
         break;

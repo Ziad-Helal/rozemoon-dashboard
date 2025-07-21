@@ -1,4 +1,4 @@
-import type { Pagination, ProductType } from "@/types/api-types";
+import type { Pagination, ProductType, StockProduct } from "@/types/api-types";
 
 export type DamageInvoiceStatus = "pending" | "approved" | "denied";
 export type OrderType = "order" | "booking";
@@ -7,12 +7,13 @@ interface DamageCore {
   orderId?: number;
   bookingId?: number;
   reason?: string;
-  damagedImages?: string[];
+  damageImages?: string[];
 }
 
-export interface DamagedItem extends Omit<DamageCore, "orderId" | "bookingId"> {
+export interface DamagedItem extends Omit<DamageCore, "orderId" | "bookingId" | "reason"> {
   productId: number;
   quantity: number;
+  damageDescription?: string;
 }
 
 export interface DamagedProduct extends Omit<DamagedItem, "reason"> {
@@ -30,10 +31,11 @@ export interface DamagedProduct extends Omit<DamagedItem, "reason"> {
   merchPriceSAR?: number;
   merchPriceUSD?: number;
   updatedAt?: Date;
+  damagedImages?: string[];
   damageDescription?: string;
 }
 
-export interface DamageInvoice extends DamageCore {
+export interface DamageInvoice extends Omit<DamageCore, "damageImages"> {
   id: number;
   // customerId: number;
   branchId: number;
@@ -44,12 +46,17 @@ export interface DamageInvoice extends DamageCore {
   ApprovedBy?: number;
   managerStatusUpdatedAt?: Date;
   adminStatusUpdatedAt?: Date;
+  damagedImages?: string[];
 }
 
-export interface CreateDamageInvoice extends Omit<DamageCore, "damagedImages"> {
-  orderType: OrderType;
-  items: DamagedItem[];
+export interface DamagedInovoiceItem extends Omit<DamagedItem, "damageImages"> {
+  damageImages?: File[];
+}
+
+export interface CreateDamageInvoice extends Omit<DamageCore, "damageImages"> {
+  items: Damage_CartItem[];
   damagedImages?: File[];
+  orderType?: OrderType;
 }
 
 export interface UpdateDamageInvoiceStatus {
@@ -70,18 +77,20 @@ export interface GetDamageInvoice_Request {
 }
 
 export interface GetDamageInvoice_Response extends DamageInvoice {
-  damageItems: DamagedProduct[];
+  damagedItems: DamagedProduct[];
 }
 
-export interface CreateDamageInvoiceItem extends Omit<DamagedItem, "reason" | "damagedImages"> {
+export interface CreateDamageInvoiceItem extends Omit<DamagedItem, "damageDescription" | "damageImages"> {
   damageReason?: string;
   damageImages?: File[];
 }
 
-export type Damage_CartItem = CreateDamageInvoiceItem;
+export interface Damage_CartItem extends CreateDamageInvoiceItem, StockProduct {
+  cartQuantity: number;
+}
 
 export interface Damage_Cart {
   items: Damage_CartItem[];
-  damageReason?: string;
-  damageImages?: File[];
+  reason?: string;
+  damagedImages?: File[];
 }

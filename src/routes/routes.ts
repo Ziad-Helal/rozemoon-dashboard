@@ -27,6 +27,7 @@ export const routes = {
   returnInvoices: "/orders/return-invoices",
   damageInvoices: "/orders/damage-invoices",
   createDamageInvoice: "/orders/damage-invoices/create",
+  damageCart: "/damage-basket",
   ordersIssues: "/orders/issues",
   stores: "/stores",
   createStore: "/stores/create",

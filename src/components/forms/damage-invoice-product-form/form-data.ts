@@ -11,7 +11,7 @@ export type FormFields = z.infer<typeof formSchema>;
 const formSchema = z.object({
   productId: z.number(),
   quantity: z.number().min(0),
-  damageReason: z.string().optional(),
+  damageDescription: z.string().optional(),
   damageImages: z
     .array(z.instanceof(File))
     .max(2)
@@ -19,13 +19,13 @@ const formSchema = z.object({
     .optional(),
 });
 
-export function useFormDataGetter(productId: number, maxQuantity: number) {
+export function useFormDataGetter(productId: number, maxQuantity: number, defauleValues?: FormFields) {
   const { t } = useTranslation();
   const mutation = useCreateDamageInvoice();
 
   const refinedSchema = formSchema.refine(({ quantity }) => quantity <= maxQuantity, { message: t("forms.errors.max"), path: ["quantity"] });
 
-  const defaultValues: FormFields = {
+  const defaultValues: FormFields = defauleValues || {
     productId,
     quantity: 0,
   };
@@ -33,7 +33,7 @@ export function useFormDataGetter(productId: number, maxQuantity: number) {
   const inputFields: InputField<FormFields>[] = [
     { id: "productId", label: t("forms.labels.productId"), type: "text", containerClassName: "hidden", disabled: true },
     { id: "quantity", label: t("forms.labels.quantity"), type: "quantity" },
-    { id: "damageReason", label: t("forms.labels.reason"), type: "textarea" },
+    { id: "damageDescription", label: t("forms.labels.reason"), type: "textarea" },
     { id: "damageImages", label: t("forms.labels.uploadImages"), type: "file", accept: { ".jpeg": [], ".png": [] }, maxFilesCount: 2, maxFileSize: maxFileUploadSize },
   ];
 

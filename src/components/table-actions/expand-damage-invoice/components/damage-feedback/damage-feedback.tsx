@@ -13,7 +13,7 @@ export default function DamageFeedback({ reason, damageImages, className }: Dama
     <div className={className}>
       <div className="grid lg:grid-cols-[1fr_20rem] gap-3">
         <p>{reason}</p>
-        <div className="flex gap-2 *:size-40">
+        <div className="flex flex-row-reverse gap-2 *:size-40">
           {damageImages?.map((image, index) => (
             <Image key={image} src={baseUrl + image} alt={reason + " " + (index + 1)} />
           ))}

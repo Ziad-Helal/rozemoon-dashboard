@@ -8,4 +8,5 @@ export { default as Paginator } from "./paginator";
 export { default as AlertDialog } from "./alert-dialog";
 export { default as Dialog } from "./dialog";
 export { default as InputShell } from "./input-shell";
+export { default as ButtonLink } from "./button-link";
 export * from "./color-theme-toggler";

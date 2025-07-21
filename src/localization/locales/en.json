@@ -9,6 +9,7 @@
   "header": {
     "toggleSidebar": "toggle sidebar",
     "cart": "cart",
+    "damageCart": "damage basket",
     "language": "change language",
     "colorTheme": {
       "tooltip": "change color theme",

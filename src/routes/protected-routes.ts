@@ -120,6 +120,7 @@ export const protectedRoutes = {
     routes.providers,
     routes.publicProviders,
     routes.cart,
+    routes.damageCart,
   ],
   Cashier: [
     routes.home,

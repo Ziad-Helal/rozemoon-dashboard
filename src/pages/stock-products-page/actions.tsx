@@ -1,4 +1,4 @@
-import { UpdateFastOrderCart_Form, UpdateRefillCart_Form } from "@/components/forms";
+import { UpdateDamageCart_Form, UpdateFastOrderCart_Form, UpdateRefillCart_Form } from "@/components/forms";
 import { Expand_ProductImages, UpdateCart, UpdateDamageCart } from "@/components/table-actions";
 import { useQuerySubscribe } from "@/hooks/misc";
 import { queryKeys } from "@/queries";
@@ -12,15 +12,16 @@ export default function Actions(product: Actions_Props) {
   const { t } = useTranslation();
   const [addToCartIsOpen, setAddToCartIsOpen] = useState(false);
   const [addToDamageCartIsOpen, setAddToDamageCartIsOpen] = useState(false);
-  const user = useQuerySubscribe<AuthenticatedUser>([queryKeys.userAuth]);
+  const userRole = useQuerySubscribe<AuthenticatedUser>([queryKeys.userAuth])?.roles[0];
   const fastOrderCart = useQuerySubscribe<FastOrder_Cart>([queryKeys.fastOrderCart]);
   const stockRefillCart = useQuerySubscribe<Refill_Cart>([queryKeys.refillCart]);
+  const damageCart = useQuerySubscribe<Refill_Cart>([queryKeys.damageCart]);
   const cartQuantity =
-    fastOrderCart!.items.find(({ productId }) => productId == product.productId)?.cartQuantity ||
-    stockRefillCart!.items.find(({ productId }) => productId == product.productId)?.cartQuantity ||
+    fastOrderCart?.items.find(({ productId }) => productId == product.productId)?.cartQuantity ||
+    stockRefillCart?.items.find(({ productId }) => productId == product.productId)?.cartQuantity ||
     0;
+  const damageCartQuantity = damageCart?.items.find(({ productId }) => productId == product.productId)?.cartQuantity || 0;
   const purchasePrice = stockRefillCart!.items.find(({ productId }) => productId == product.productId)?.purchasePrice || null;
-  const userRole = user?.roles[0];
 
   return (
     <>
@@ -40,15 +41,20 @@ export default function Actions(product: Actions_Props) {
           )}
         </UpdateCart>
       ) : null}
-      {userRole == "StoreKeeper" && (
+      {userRole == "StoreKeeper" && product.quantity > 0 && (
         <UpdateDamageCart
           productName={product.name}
-          cartQuantity={0}
+          cartQuantity={damageCartQuantity}
           isOpen={addToDamageCartIsOpen}
           setIsOpen={setAddToDamageCartIsOpen}
-          tooltip={cartQuantity ? t("tableActions.updateDamageCart.tooltip.1") : t("tableActions.updateDamageCart.tooltip.2")}
+          tooltip={damageCartQuantity ? t("tableActions.updateDamageCart.tooltip.1") : t("tableActions.updateDamageCart.tooltip.2")}
         >
-          fgh
+          <UpdateDamageCart_Form
+            defaultValues={{ cartQuantity: damageCartQuantity }}
+            maxQuantity={product.quantity}
+            product={{ ...product, cartQuantity: 0 }}
+            onSuccess={() => setAddToDamageCartIsOpen(false)}
+          />
         </UpdateDamageCart>
       )}
     </>

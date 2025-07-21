@@ -14,10 +14,11 @@ const baseUrl = import.meta.env.VITE_API_BASE_URL + "StaticFiles/Images/";
 interface ReturnItem_Props {
   item: FastOrderItem | ScheduledOrderItem;
   currency: Currency;
+  isLoading: boolean;
   setInvoiceItems: Dispatch<SetStateAction<CreateReturnInvoiceItem[]>>;
 }
 
-export default function ReturnItem({ item, currency, setInvoiceItems }: ReturnItem_Props) {
+export default function ReturnItem({ item, currency, isLoading, setInvoiceItems }: ReturnItem_Props) {
   const { t, i18n } = useTranslation();
   const [productData, setProductData] = useState<FormFields>();
   const { productId, productName, productType, productImages, price, discountPercentage, quantity } = item;
@@ -84,7 +85,7 @@ export default function ReturnItem({ item, currency, setInvoiceItems }: ReturnIt
           </p>
         </div>
       </div>
-      <ReturnInvoiceProduct_Form productId={productId} maxQuantity={quantity} getValues={setProductData} isSubmitting={false} />
+      <ReturnInvoiceProduct_Form productId={productId} maxQuantity={quantity} getValues={setProductData} isSubmitting={isLoading} />
     </div>
   );
 }

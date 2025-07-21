@@ -12,6 +12,7 @@ const Home_Page = lazy(() => import("@/pages/home-page"));
 
 // Cart Route
 const Cart_Page = lazy(() => import("@/pages/cart-page"));
+const DamageCart_Page = lazy(() => import("@/pages/damage-cart-page"));
 
 // Profile Routes
 const Profile_Page = lazy(() => import("@/pages/profile-page"));
@@ -131,6 +132,7 @@ export const pageRoutes = createBrowserRouter([
 
           // Cart Route
           { path: routes.cart, element: <Cart_Page /> },
+          { path: routes.damageCart, element: <DamageCart_Page /> },
 
           // Profile Routes
           { path: routes.profile, element: <Profile_Page /> },

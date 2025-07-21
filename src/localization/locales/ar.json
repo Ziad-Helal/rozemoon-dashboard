@@ -9,6 +9,7 @@
   "header": {
     "toggleSidebar": "تبديل القائمة الجانبية",
     "cart": "العربة",
+    "damageCart": "سلة التوالف",
     "language": "غير اللغة",
     "colorTheme": {
       "tooltip": "غير قائمة الألوان",
