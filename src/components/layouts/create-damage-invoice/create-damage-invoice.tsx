@@ -4,7 +4,7 @@ import { Button } from "@/components/ui";
 import { badHint } from "@/services/hint";
 import { useTranslation } from "react-i18next";
 import type { mergeTypes } from "zod";
-import type { CreateDamageInvoice as CreateDamageInvoice_Request, CreateDamageInvoiceItem, Damage_CartItem, FastOrder, ScheduledOrder } from "@/types/api-types";
+import type { CreateDamageInvoice as CreateDamageInvoice_Request, Damage_CartItem, FastOrder, ScheduledOrder } from "@/types/api-types";
 import { DamageInvoice_Form } from "@/components/forms";
 import { DamageItem } from "./components";
 

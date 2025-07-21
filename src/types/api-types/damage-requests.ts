@@ -1,7 +1,6 @@
-import type { Pagination, ProductType, StockProduct } from "@/types/api-types";
+import type { OrderType, Pagination, ProductType, StockProduct } from "@/types/api-types";
 
 export type DamageInvoiceStatus = "pending" | "approved" | "denied";
-export type OrderType = "order" | "booking";
 
 interface DamageCore {
   orderId?: number;
