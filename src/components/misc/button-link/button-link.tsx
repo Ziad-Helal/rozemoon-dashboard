@@ -11,16 +11,17 @@ interface ButtonLink_Props {
   tip: string;
   icon: LucideIcon;
   count?: number;
+  className?: string;
 }
 
-export default function ButtonLink({ route, tip, count, icon: Icon }: ButtonLink_Props) {
+export default function ButtonLink({ route, tip, count, icon: Icon, className }: ButtonLink_Props) {
   const { i18n } = useTranslation();
 
   return (
     <ToolTip
       content={tip}
       trigger={
-        <Link to={route} className="relative" tabIndex={-1}>
+        <Link to={route} className={cn("relative", className)} tabIndex={-1}>
           <Button variant="outline" size="icon" icon={Icon}>
             {tip}
           </Button>

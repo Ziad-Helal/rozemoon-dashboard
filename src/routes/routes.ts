@@ -60,6 +60,7 @@ export const routes = {
   coupons: "/coupons",
   createCoupon: "/coupons/create",
   allCoupons: "/coupons/all",
+  liveNotifications: "/live-notifications",
   signIn: "/sign-in",
   notFound: "/not-found",
 };

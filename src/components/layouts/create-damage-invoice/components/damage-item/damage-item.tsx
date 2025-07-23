@@ -21,7 +21,6 @@ export default function DamageItem({ item, currency, isLoading, setInvoiceItems 
   const { t, i18n } = useTranslation();
   const [productData, setProductData] = useState<Damage_CartItem>();
   const { productId, productName, productType, productImages, price, discountPercentage, quantity } = item;
-  console.log(productData);
 
   const discount = price * discountPercentage;
   const priceAfterDiscount = price - discount;

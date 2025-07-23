@@ -9,5 +9,25 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.0/signalr.min.js"></script>
+    <script>
+      const connection = new signalR.HubConnectionBuilder()
+        .withUrl("https://dev.api.rozemoon.com/ws/notifications", {
+          accessTokenFactory: () =>
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3IiwianRpIjoiODlkZTYwZjAtZGQyMy00NWU2LWI1M2MtYjg2NGE5MjcyZGY1IiwiZW1haWwiOiJjYXNoaWVyQHJvemVtb29uLmNvbSIsIklzQ29uZmlybWVkIjoiVHJ1ZSIsIkN1cnJlbmN5IjoiU0FSIiwiQnJhbmNoSWQiOiIxIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQ2FzaGllciIsImV4cCI6MTc1MzI3ODczMCwiaXNzIjoiUm96ZU1vb24iLCJhdWQiOiJSb3plTW9vblVzZXJzIn0.Fd7J5NBJJpHor2dPBSJ82OU73N3xB8HjuieNNxVYgaA",
+        })
+        .build();
+
+      connection.on("NewItem", (payload) => {
+        console.log("Received event:", payload);
+      });
+
+      connection
+        .start()
+        .then(() => {
+          console.log("Connected to SignalR hub!");
+        })
+        .catch((err) => console.error(err));
+    </script> -->
   </body>
 </html>

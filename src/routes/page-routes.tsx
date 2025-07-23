@@ -87,6 +87,7 @@ const OrdersReviews_Page = lazy(() => import("@/pages/orders-reviews-page"));
 const Notifications_Page = lazy(() => import("@/pages/notifications-page"));
 const CreateNotification_Page = lazy(() => import("@/pages/create-notification-page"));
 const AllNotifications_Page = lazy(() => import("@/pages/all-notifications-page"));
+const LiveNotifications_Page = lazy(() => import("@/pages/live-notifications-page"));
 
 // Discounts Routes
 const Discounts_Page = lazy(() => import("@/pages/discounts-page"));
@@ -207,6 +208,7 @@ export const pageRoutes = createBrowserRouter([
           { path: routes.notifications, element: <Notifications_Page /> },
           { path: routes.createNotification, element: <CreateNotification_Page /> },
           { path: routes.allNotifications, element: <AllNotifications_Page /> },
+          { path: routes.liveNotifications, element: <LiveNotifications_Page /> },
 
           // Discounts Routes
           { path: routes.discounts, element: <Discounts_Page /> },

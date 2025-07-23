@@ -4,3 +4,5 @@ export { default as useCallbackRef } from "./use-callback-ref";
 export { default as useIsMobile } from "./use-mobile";
 export { default as useFavIconHandler } from "./use-favicon-handler";
 export { default as useQuerySubscribe } from "./use-query-subscribe";
+export { default as useWebSocket } from "./use-websocket";
+export { default as useSignalR } from "./use-signalr";

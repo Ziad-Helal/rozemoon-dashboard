@@ -59,5 +59,6 @@ export { default as CreateReturnInvoice_Page } from "./create-return-invoice-pag
 export { default as CreateDamageInvoice_Page } from "./create-damage-invoice-page";
 export { default as DamangeInvoices_Page } from "./damage-invoices-page";
 export { default as DamageCart_Page } from "./damage-cart-page";
+export { default as LiveNotifications_Page } from "./live-notifications-page";
 export { default as SignIn_Page } from "./sign-in-page";
 export { default as NotFound_Page } from "./not-found-page";

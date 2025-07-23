@@ -59,6 +59,7 @@ export const protectedRoutes = {
     routes.coupons,
     routes.createCoupon,
     routes.allCoupons,
+    routes.liveNotifications,
     routes.notFound,
   ],
   Manager: [
@@ -94,6 +95,7 @@ export const protectedRoutes = {
     routes.ordersReviews,
     routes.discounts,
     routes.allDiscounts,
+    routes.liveNotifications,
   ],
   StoreKeeper: [
     routes.home,
@@ -121,6 +123,7 @@ export const protectedRoutes = {
     routes.publicProviders,
     routes.cart,
     routes.damageCart,
+    routes.liveNotifications,
   ],
   Cashier: [
     routes.home,
@@ -147,6 +150,7 @@ export const protectedRoutes = {
     routes.discounts,
     routes.allDiscounts,
     routes.cart,
+    routes.liveNotifications,
   ],
   Customer: [routes.signIn],
 };

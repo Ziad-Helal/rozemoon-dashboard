@@ -4,7 +4,7 @@ import { useQuerySubscribe } from "@/hooks/misc";
 import { queryKeys } from "@/queries";
 import { routes } from "@/routes";
 import { AuthenticatedUser, FastOrder_Cart } from "@/types/api-types";
-import { PackageXIcon, ShoppingBasketIcon } from "lucide-react";
+import { BellRingIcon, PackageXIcon, ShoppingBasketIcon } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 export default function Main_LayoutHeader() {
@@ -26,6 +26,7 @@ export default function Main_LayoutHeader() {
         {(userRole == "StoreKeeper" || userRole == "Cashier") && (
           <ButtonLink route={routes.cart} tip={t("header.cart")} count={fastOrderCart?.items.length || StockRefillCart?.items.length} icon={ShoppingBasketIcon} />
         )}
+        <ButtonLink route={routes.liveNotifications} tip={t("header.liveNotifications")} count={2} icon={BellRingIcon} className="2xl:hidden" />
         <Language_Toggler />
         <ColorTheme_Toggler />
       </div>
