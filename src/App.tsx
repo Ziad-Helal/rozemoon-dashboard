@@ -7,7 +7,9 @@ import { useAxios } from "./services/api";
 import { startTransition, useEffect, useState } from "react";
 import { useRoutesGuard } from "./routes";
 import { useTranslation } from "react-i18next";
+import { init as initAOS } from "aos";
 import "./localization";
+import "aos/dist/aos.css";
 
 export default function App() {
   const { t } = useTranslation();
@@ -17,6 +19,10 @@ export default function App() {
   useRoutesGuard(isPendingAuthentication);
   const [isFirstLoad, setIsFirstLoad] = useState(true);
   const [isAuthenticating, setIsAuthenticating] = useState(true);
+
+  useEffect(() => {
+    initAOS();
+  }, []);
 
   useEffect(() => {
     if (isFirstLoad && !isPendingAuthentication) {

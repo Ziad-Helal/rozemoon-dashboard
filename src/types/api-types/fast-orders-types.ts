@@ -86,6 +86,10 @@ export interface UpdateFastOrderStatus_Request {
   status: FastOrderStatus;
 }
 
+export interface CancelFastOrder_Request {
+  orderId: number;
+}
+
 export interface SetFastOrderAsCODPaid_Request {
   orderId: number;
   notes?: "string";

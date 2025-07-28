@@ -1,6 +1,8 @@
+import { solveAddressTypeIssue } from "./utils";
 import { postRequest, putRequest } from "@/services/api";
-import {
+import type {
   ApiError,
+  CancelFastOrder_Request,
   CreateFastOrder_Request,
   CreateFastOrder_Response,
   GetFastOrders_Response,
@@ -8,7 +10,6 @@ import {
   SetFastOrderAsCODPaid_Request,
   UpdateFastOrderStatus_Request,
 } from "@/types/api-types";
-import { solveAddressTypeIssue } from "./utils";
 
 const endpoints = {
   getAllFastOrders: import.meta.env.VITE_API_END_POINT_GET_ALL_FAST_ORDERS as string,
@@ -16,6 +17,7 @@ const endpoints = {
   getMyFastOrders: import.meta.env.VITE_API_END_POINT_GET_MY_FAST_ORDERS as string,
   createFastOrder: import.meta.env.VITE_API_END_POINT_CREATE_FAST_ORDERS as string,
   updateFastOrderStatus: import.meta.env.VITE_API_END_POINT_UPDATE_FAST_ORDER_STATUS as string,
+  cancelFastOrderByManager: import.meta.env.VITE_API_END_POINT_CANCEL_FAST_ORDER as string,
   setFastOrderAsCODPaid: import.meta.env.VITE_API_END_POINT_SET_FAST_ORDER_AS_COD_PAID as string,
 };
 
@@ -37,6 +39,10 @@ export function createFastOrder(requestBody: CreateFastOrder_Request) {
 
 export function updateFastOrderStatus(requestBody: UpdateFastOrderStatus_Request) {
   return putRequest<UpdateFastOrderStatus_Request, void, ApiError>(endpoints.updateFastOrderStatus, requestBody);
+}
+
+export function cancelFastOrderByManager(requestBody: CancelFastOrder_Request) {
+  return postRequest<CancelFastOrder_Request, void, ApiError>(endpoints.cancelFastOrderByManager, requestBody);
 }
 
 export function setFastOrderAsCODPaid(requestBody: SetFastOrderAsCODPaid_Request) {

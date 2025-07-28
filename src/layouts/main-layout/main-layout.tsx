@@ -5,13 +5,12 @@ import { LoadingSpinner, Sidebar } from "@/components";
 import { Container, SideEvents } from "@/components/layouts";
 import { useInitializeDamageCart, useInitializeFastOrderCart, useInitializeRefillCart } from "@/queries";
 import { Suspense, useEffect } from "react";
-import useLiveEvents from "./use-live-events";
+import { LiveEventsProvider } from "@/store";
 
 export default function Main_Layout() {
   const { refetch: initFastOrderCart } = useInitializeFastOrderCart();
   const { refetch: initRefillCart } = useInitializeRefillCart();
   const { refetch: initDamageCart } = useInitializeDamageCart();
-  useLiveEvents();
 
   useEffect(() => {
     initFastOrderCart();
@@ -20,17 +19,19 @@ export default function Main_Layout() {
   }, []);
 
   return (
-    <SidebarProvider>
-      <Sidebar />
-      <SidebarInset>
-        <Main_LayoutHeader />
-        <Container>
-          <Suspense fallback={<LoadingSpinner isFullPage />}>
-            <Outlet />
-          </Suspense>
-        </Container>
-      </SidebarInset>
-      <SideEvents />
-    </SidebarProvider>
+    <LiveEventsProvider>
+      <SidebarProvider>
+        <Sidebar />
+        <SidebarInset>
+          <Main_LayoutHeader />
+          <Container>
+            <Suspense fallback={<LoadingSpinner isFullPage />}>
+              <Outlet />
+            </Suspense>
+          </Container>
+        </SidebarInset>
+        <SideEvents />
+      </SidebarProvider>
+    </LiveEventsProvider>
   );
 }

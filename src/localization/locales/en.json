@@ -63,6 +63,17 @@
       "coupons": "coupons",
       "all coupons": "all coupons",
       "profile": "profile"
+    },
+    "liveEvents": {
+      "title": "live events",
+      "types": {
+        "order": "New fast order",
+        "booking": "New scheduled order",
+        "issue": "New order issue",
+        "return": "New return request",
+        "damage": "New damage request",
+        "user": "New user"
+      }
     }
   },
   "pages": {
@@ -313,6 +324,11 @@
       "tooltip": "cancel order",
       "title": "cancel scheduled order",
       "description": "Cancel the shceduled order #"
+    },
+    "cancelFastOrder": {
+      "tooltip": "cancel order",
+      "title": "cancel fast order",
+      "description": "Cancel the fast order #"
     },
     "cashedOnDelivery": {
       "tooltip": "cashed on delivery",
@@ -577,6 +593,7 @@
       "createReturnRequest": "The return request is created successfully.",
       "approveReturnRequest": "The return request is approved successfully.",
       "rejectReturnRequest": "The return request is rejected successfully.",
+      "cancelFastOrder": "The fast order is canceled successfully.",
       "approveScheduledOrder": "The scheduled order is assigned to a store successfully.",
       "rejectScheduledOrder": "The scheduled order is rejected successfully.",
       "cancelScheduledOrder": "The scheduled order is canceled successfully.",

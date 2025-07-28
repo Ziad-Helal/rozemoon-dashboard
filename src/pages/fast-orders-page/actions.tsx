@@ -1,9 +1,9 @@
 import { ToolTip } from "@/components";
 import { UpdateFastOrderStatus_Form } from "@/components/forms";
-import { DownloadDocuments, Expand_FastOrder, UpdateFastOrder_Status } from "@/components/table-actions";
+import { CancelFastOrder, DownloadDocuments, Expand_FastOrder, UpdateFastOrder_Status } from "@/components/table-actions";
 import { Button } from "@/components/ui";
 import { useQuerySubscribe } from "@/hooks/misc";
-import { queryKeys, useGetFastOrderInvoice } from "@/queries";
+import { queryKeys, useCancelFastOrderByManager, useGetFastOrderInvoice } from "@/queries";
 import { routes } from "@/routes";
 import { AuthenticatedUser, FastOrder } from "@/types/api-types";
 import { ListRestartIcon, ListXIcon } from "lucide-react";
@@ -18,6 +18,7 @@ export default function Actions(fastOrder: Actions_Props) {
   const { id, status } = fastOrder;
   const [documents, setDocuments] = useState<string[]>([]);
   const { refetch: getInvoice, isFetching: isGettingInvoice } = useGetFastOrderInvoice({ id });
+  const { mutate: cancelOrderByManager, isPending: isCancellingOrderByManger } = useCancelFastOrderByManager();
   // const { mutateAsync: setAsCODed, isPending: isSettingAsCODed } = useSetFastOrderAsCODPaid();
   const user = useQuerySubscribe<AuthenticatedUser>([queryKeys.userAuth]);
 
@@ -40,6 +41,16 @@ export default function Actions(fastOrder: Actions_Props) {
     <>
       <Expand_FastOrder fastOrder={fastOrder} />
       <DownloadDocuments item="invoice" documents={documents} onOpen={downloadDocuments} isLoading={isGettingInvoice} disabled={false} />
+      {user?.roles[0] == "Manager" &&
+        fastOrder.status != "Delivered" &&
+        fastOrder.status != "Cancelled" &&
+        fastOrder.status != "Returned" &&
+        fastOrder.status != "PartiallyReturned" &&
+        fastOrder.status != "DeliveredConfirmed" &&
+        fastOrder.status != "IssueReported" &&
+        fastOrder.status != "pickedUp" && (
+          <CancelFastOrder id={fastOrder.id} onConfirm={() => cancelOrderByManager({ orderId: fastOrder.id })} isLoading={isCancellingOrderByManger} />
+        )}
       {(user?.roles[0] == "StoreKeeper" || user?.roles[0] == "Cashier") && (
         <UpdateFastOrder_Status id={id}>
           <UpdateFastOrderStatus_Form orderId={id} status={status} />

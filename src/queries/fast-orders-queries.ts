@@ -1,4 +1,4 @@
-import { createFastOrder, getAllFastOrders, getMyFastOrders, getStoreFastOrders, setFastOrderAsCODPaid, updateFastOrderStatus } from "@/lib/api";
+import { cancelFastOrderByManager, createFastOrder, getAllFastOrders, getMyFastOrders, getStoreFastOrders, setFastOrderAsCODPaid, updateFastOrderStatus } from "@/lib/api";
 import {
   ApiError,
   FastOrder,
@@ -11,6 +11,7 @@ import {
   UpdateFastOrderStatus_Request,
   SetFastOrderAsCODPaid_Request,
   ProductPricingType,
+  CancelFastOrder_Request,
 } from "@/types/api-types";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
@@ -150,6 +151,23 @@ export function useUpdateFastOrderStatus() {
     mutationFn: (requestBody) => updateFastOrderStatus(requestBody),
     onSuccess: () => {
       goodHint(t("hints.good.updateOrder"));
+      queryClient.invalidateQueries({ queryKey: [queryKeys.storeFastOrders] });
+    },
+    onError: ({ response }) => {
+      const error = response?.data;
+      if (error) badHint(error.title);
+    },
+  });
+  return mutation;
+}
+
+export function useCancelFastOrderByManager() {
+  const { t } = useTranslation();
+  const queryClient = useQueryClient();
+  const mutation = useMutation<void, AxiosError<ApiError, CancelFastOrder_Request>, CancelFastOrder_Request>({
+    mutationFn: (requestBody) => cancelFastOrderByManager(requestBody),
+    onSuccess: () => {
+      goodHint(t("hints.good.cancelFastOrder"));
       queryClient.invalidateQueries({ queryKey: [queryKeys.storeFastOrders] });
     },
     onError: ({ response }) => {

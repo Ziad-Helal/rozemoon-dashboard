@@ -63,6 +63,17 @@
       "coupons": "قسائم الخصومات",
       "all coupons": "كل قسائم الخصومات",
       "profile": "الصفحة الشخصية"
+    },
+    "liveEvents": {
+      "title": "أحداث حية",
+      "types": {
+        "order": "طلبية سريعة جديدة",
+        "booking": "طلبية آجلة جديدة",
+        "issue": "مشكلة جديدة لطلبية",
+        "return": "طلب مرتجع جديد",
+        "damage": "طلب تالف جديد",
+        "user": "مستخدم جديد"
+      }
     }
   },
   "pages": {
@@ -313,6 +324,11 @@
       "tooltip": "إلغاء الطلبية",
       "title": "إالغاء الطلبية الآجلة",
       "description": "إلغاء الطلبية الآجلة بمعرف "
+    },
+    "cancelFastOrder": {
+      "tooltip": "إلغاء الطلبية",
+      "title": "إالغاء الطلبية السريعة",
+      "description": "إلغاء الطلبية السريعة بمعرف "
     },
     "cashedOnDelivery": {
       "tooltip": "دُفع عند الاستلام",
@@ -577,6 +593,7 @@
       "createReturnRequest": "تم إنشاء طلب مرتجع بنجاح.",
       "approveReturnRequest": "تمت الموافقة على طلب المرتجع بنجاح.",
       "rejectReturnRequest": "تم رفض طلب المرتجع بنجاح.",
+      "cancelFastOrder": "تم إلغاء الطلبية السريعة.",
       "approveScheduledOrder": "تم تخصيص الطلبية الجلة للفرع بنجاح.",
       "rejectScheduledOrder": "تم رفض الطلبية الآجلة.",
       "cancelScheduledOrder": "تم إلغاء الطلبية الآجلة.",

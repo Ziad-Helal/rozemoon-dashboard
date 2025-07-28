@@ -3,6 +3,7 @@ import { Button } from "@/components/ui";
 import { cn } from "@/lib/utils";
 import { formatNumber, handleDirectionChange, type Language } from "@/localization";
 import { LucideIcon } from "lucide-react";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
 
@@ -12,10 +13,19 @@ interface ButtonLink_Props {
   icon: LucideIcon;
   count?: number;
   className?: string;
+  onMounted?: VoidFunction;
+  onUnmounted?: VoidFunction;
 }
 
-export default function ButtonLink({ route, tip, count, icon: Icon, className }: ButtonLink_Props) {
+export default function ButtonLink({ route, tip, count, icon: Icon, className, onMounted, onUnmounted }: ButtonLink_Props) {
   const { i18n } = useTranslation();
+
+  useEffect(() => {
+    onMounted?.();
+    return () => {
+      onUnmounted?.();
+    };
+  }, []);
 
   return (
     <ToolTip

@@ -15,6 +15,7 @@ export { default as AssignOrderToStore } from "./assign-order-to-store";
 export { default as RejectScheduledOrder } from "./reject-scheduled-order";
 export { default as ConfirmScheduledOrderCancelation } from "./confirm-scheduled-order-cancelation";
 export { default as CancelScheduledOrder } from "./cancel-scheduled-order";
+export { default as CancelFastOrder } from "./cancel-fast-order";
 export { default as CashedOnDelivery } from "./cashed-on-delivery";
 export { default as AuthenticateStockRefillRequest } from "./authenticate-stock-refill-request";
 export { default as AuthenticateReturnRequest } from "./authenticate-return-request";

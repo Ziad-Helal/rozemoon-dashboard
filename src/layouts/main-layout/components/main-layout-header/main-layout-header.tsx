@@ -3,6 +3,7 @@ import { Separator, SidebarTrigger } from "@/components/ui";
 import { useQuerySubscribe } from "@/hooks/misc";
 import { queryKeys } from "@/queries";
 import { routes } from "@/routes";
+import { useLiveEventsContext } from "@/store";
 import { AuthenticatedUser, FastOrder_Cart } from "@/types/api-types";
 import { BellRingIcon, PackageXIcon, ShoppingBasketIcon } from "lucide-react";
 import { useTranslation } from "react-i18next";
@@ -13,6 +14,7 @@ export default function Main_LayoutHeader() {
   const fastOrderCart = useQuerySubscribe<FastOrder_Cart>([queryKeys.fastOrderCart]);
   const StockRefillCart = useQuerySubscribe<FastOrder_Cart>([queryKeys.refillCart]);
   const damageCart = useQuerySubscribe<FastOrder_Cart>([queryKeys.damageCart]);
+  const { unseenCount, setIsTrackingUnseenCount } = useLiveEventsContext();
 
   return (
     <header className="flex h-16 shrink-0 items-center justify-between border-b">
@@ -26,7 +28,15 @@ export default function Main_LayoutHeader() {
         {(userRole == "StoreKeeper" || userRole == "Cashier") && (
           <ButtonLink route={routes.cart} tip={t("header.cart")} count={fastOrderCart?.items.length || StockRefillCart?.items.length} icon={ShoppingBasketIcon} />
         )}
-        <ButtonLink route={routes.liveNotifications} tip={t("header.liveNotifications")} count={2} icon={BellRingIcon} className="2xl:hidden" />
+        <ButtonLink
+          route={routes.liveNotifications}
+          tip={t("header.liveNotifications")}
+          count={unseenCount}
+          icon={BellRingIcon}
+          className="2xl:hidden"
+          onMounted={() => setIsTrackingUnseenCount(true)}
+          onUnmounted={() => setIsTrackingUnseenCount(false)}
+        />
         <Language_Toggler />
         <ColorTheme_Toggler />
       </div>

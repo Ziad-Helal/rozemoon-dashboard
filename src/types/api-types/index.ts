@@ -26,3 +26,4 @@ export * from "./settings-types";
 export * from "./profile-types";
 export * from "./coupons-types";
 export * from "./damage-requests";
+export * from "./live-events-types";
