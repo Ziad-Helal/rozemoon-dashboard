@@ -1,7 +1,7 @@
 import { Form_Page } from "@/components/layouts";
 import { useQuerySubscribe } from "@/hooks/misc";
 import { queryKeys, useClearFastOrderCart, useClearRefillCart, useUpdateFastOrderCartPriceType } from "@/queries";
-import { CartItem, Choosen_User, OrderUser } from "./components";
+import { CartItem, Choosen_User, OrderUser, Services } from "./components";
 import { Button, Separator, Switch } from "@/components/ui";
 import { useTranslation } from "react-i18next";
 import { formatNumber, Language } from "@/localization";
@@ -66,6 +66,8 @@ export default function Cart_Page() {
           <Separator className="!my-6" />
           {userRole == "Cashier" ? (
             <>
+              <Services />
+              <Separator className="!my-6" />
               <OrderUser
                 setOrderUser={setOrderUser}
                 user={{ ...orderUser, guestName: orderUser?.guestName || "", guestPhoneCode: orderUser?.guestPhoneCode || "", guestPhoneNumber: orderUser?.guestPhoneNumber || "" }}

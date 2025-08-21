@@ -108,6 +108,10 @@
         "title": "New user",
         "description": "Create a new user"
       },
+      "serviecs": {
+        "add": "add more services",
+        "delete": "delete service"
+      },
       "clearAlert": "Are you sure that you want to clear the cart?",
       "originalPrice": "original price",
       "discount": "discount",
@@ -724,6 +728,7 @@
       "redeemFastOrder": "can use for fast orders",
       "redeemScheduledOrder": "can use for scheduled order",
       "expirationDate": "expiration date",
+      "service": "service",
       "name": {
         "default": "name",
         "en": "english name",

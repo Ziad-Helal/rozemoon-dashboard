@@ -13,6 +13,7 @@ interface AdvancedForm_Props<TFieldValues extends FieldValues, TResponse> {
   onSubmit?: (values: TFieldValues) => Promise<TResponse>;
   onSubmitSync?: (values: TFieldValues) => void;
   submitOnChange?: boolean;
+  submitOnBlur?: boolean;
   className?: string;
   resetErrors?: () => void;
   isSubmitting?: boolean;
@@ -30,6 +31,7 @@ export function AdvancedForm<TFieldValues extends FieldValues, TResponse>({
   onSubmit,
   onSubmitSync,
   submitOnChange,
+  submitOnBlur,
   className,
   resetErrors,
   isSubmitting,
@@ -67,7 +69,7 @@ export function AdvancedForm<TFieldValues extends FieldValues, TResponse>({
   // Submit the form synchronously or asynchrounsly
   function submitHandler(values: TFieldValues) {
     onSubmit?.(values)
-      .then(submitOnChange ? undefined : formResetHandler)
+      .then(submitOnChange || submitOnBlur ? undefined : formResetHandler)
       .catch((error: AxiosError<ApiError, TFieldValues>) => {
         const errors = error.response?.data.errors;
         if (errors) {
@@ -83,7 +85,9 @@ export function AdvancedForm<TFieldValues extends FieldValues, TResponse>({
   return (
     <Form {...form}>
       <form className={className} onSubmit={form.handleSubmit(submitHandler)}>
-        <div className={cn("space-y-3", fieldsContainerClassName)}>{inputFields}</div>
+        <div className={cn("space-y-3", fieldsContainerClassName)} onBlur={submitOnBlur ? form.handleSubmit(submitHandler) : undefined}>
+          {inputFields}
+        </div>
         <div className={cn("mt-6 flex items-center gap-3 flex-wrap", actionsContainerClassName)}>
           <Button type="submit" size="lg" className={submitButtonClassName} isLoading={isSubmitting}>
             {submittingPhrase ? submittingPhrase : t("forms.submit")}

@@ -108,6 +108,10 @@
         "title": "مستخدم جديد",
         "description": "إنشاء مستخدم جديد"
       },
+      "serviecs": {
+        "add": "أضف خدمات أخرى",
+        "delete": "احذف الخدمة"
+      },
       "clearAlert": "هل أنت متأكد من أنك تريد محو العربة؟",
       "originalPrice": "السعر الأصلي",
       "discount": "الخصم",
@@ -724,6 +728,7 @@
       "redeemFastOrder": "يمكن استخدامه للطلبيات السريعة",
       "redeemScheduledOrder": "يمكن استخدامه للطلبيات الآجلة",
       "expirationDate": "تاريخ الانتهاء",
+      "service": "الخدمة",
       "name": {
         "default": "الاسم",
         "en": "الاسم الإنجليزي",

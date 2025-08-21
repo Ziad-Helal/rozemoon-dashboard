@@ -11,12 +11,14 @@ interface useFormData_Props<FormFields extends FieldValues> {
   defaultValues: any;
   submitRequest?: UseMutateAsyncFunction<any, Error, void, unknown>;
   isSubmitting?: boolean;
+  shouldFocusError?: boolean;
 }
 
-export function useFormData<FormFields extends FieldValues>({ formSchema, inputFields, defaultValues, isSubmitting }: useFormData_Props<FormFields>) {
+export function useFormData<FormFields extends FieldValues>({ formSchema, inputFields, defaultValues, isSubmitting, shouldFocusError }: useFormData_Props<FormFields>) {
   const form = useForm<FormFields>({
     resolver: zodResolver(formSchema),
     defaultValues,
+    shouldFocusError,
   });
 
   const renderedFields = useMemo(

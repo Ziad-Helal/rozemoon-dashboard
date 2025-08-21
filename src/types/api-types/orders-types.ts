@@ -29,3 +29,8 @@ export interface OrderItemBase {
   productImages: Image[];
   productType: ProductType;
 }
+
+export interface Service {
+  service: string;
+  value: number;
+}

@@ -1,5 +1,5 @@
 import { cancelFastOrderByManager, createFastOrder, getAllFastOrders, getMyFastOrders, getStoreFastOrders, setFastOrderAsCODPaid, updateFastOrderStatus } from "@/lib/api";
-import {
+import type {
   ApiError,
   FastOrder,
   FastOrder_Cart,
@@ -12,6 +12,7 @@ import {
   SetFastOrderAsCODPaid_Request,
   ProductPricingType,
   CancelFastOrder_Request,
+  Service,
 } from "@/types/api-types";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
@@ -113,6 +114,19 @@ export function useUpdateFastOrderCartPriceType() {
     mutationFn: async (priceType) => {
       let prevCart = queryClient.getQueryData<FastOrder_Cart>([queryKeys.fastOrderCart]) as FastOrder_Cart;
       const newCart = { ...prevCart, priceType };
+      queryClient.setQueryData([queryKeys.fastOrderCart], newCart);
+      return newCart;
+    },
+  });
+  return mutation;
+}
+
+export function useUpdateFastOrderCartServices() {
+  const queryClient = useQueryClient();
+  const mutation = useMutation<FastOrder_Cart, AxiosError<ApiError>, Service[]>({
+    mutationFn: async (services) => {
+      let prevCart = queryClient.getQueryData<FastOrder_Cart>([queryKeys.fastOrderCart]) as FastOrder_Cart;
+      const newCart = { ...prevCart, services };
       queryClient.setQueryData([queryKeys.fastOrderCart], newCart);
       return newCart;
     },

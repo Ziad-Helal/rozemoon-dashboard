@@ -1,4 +1,4 @@
-import type { CreateGuestUser_Request, Currency, OrderBase, OrderItemBase, Pagination, PaymentMethod, ProductPricingType, StockProduct } from "@/types/api-types";
+import type { CreateGuestUser_Request, Currency, OrderBase, OrderItemBase, Pagination, PaymentMethod, ProductPricingType, Service, StockProduct } from "@/types/api-types";
 
 export type FastOrderStatus =
   | "NotPaied"
@@ -59,6 +59,7 @@ export interface FastOrder_Cart {
   finalMerchPrice: number;
   currency: Currency;
   items: FastOrder_CartItem[];
+  services?: Service[];
 }
 
 export interface CreateFastOrder_Request extends Partial<CreateGuestUser_Request> {
@@ -73,6 +74,7 @@ export interface CreateFastOrder_Request extends Partial<CreateGuestUser_Request
     productId: number;
     quantity: number;
   }[];
+  services?: Service[];
   extraDiscountAmount?: number;
   taxAmount?: number;
   note?: string;
