@@ -1,0 +1,1 @@
+import{a as s,r,j as t}from"./index-CYRfvyZ6.js";import{F as a}from"./forms-links-page-B0DmHiGe.js";import"./form-data-CRU5TV8D.js";import"./live-events-ByGj6MUn.js";function u(){const{t:e}=s(),o=[{label:e("forms.companyReviews.heading"),route:r.createCompanyReview}];return t.jsx(a,{routes:o})}export{u as default};

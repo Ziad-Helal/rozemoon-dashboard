@@ -1,0 +1,1 @@
+import{a as s,r,j as a}from"./index-CYRfvyZ6.js";import{F as e}from"./forms-links-page-B0DmHiGe.js";import"./form-data-CRU5TV8D.js";import"./live-events-ByGj6MUn.js";function i(){const{t:o}=s(),t=[{label:o("forms.product.heading"),route:r.createProduct},{label:o("forms.product.uploadHeading"),route:r.uploadProducts}];return a.jsx(e,{routes:t})}export{i as default};

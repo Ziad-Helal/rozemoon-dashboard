@@ -1,0 +1,1 @@
+import{a as r,r as s,j as i}from"./index-CYRfvyZ6.js";import{F as a}from"./forms-links-page-B0DmHiGe.js";import"./form-data-CRU5TV8D.js";import"./live-events-ByGj6MUn.js";function u(){const{t:o}=r(),t=[{label:o("forms.notification.heading"),route:s.createNotification}];return i.jsx(a,{routes:t})}export{u as default};

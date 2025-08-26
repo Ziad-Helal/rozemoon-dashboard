@@ -1,0 +1,1 @@
+import{a as o,r as t,j as e}from"./index-CYRfvyZ6.js";import{F as a}from"./forms-links-page-B0DmHiGe.js";import"./form-data-CRU5TV8D.js";import"./live-events-ByGj6MUn.js";function f(){const{t:r}=o(),s=[{label:r("forms.user.heading"),route:t.createUser}];return e.jsx(a,{routes:s})}export{f as default};

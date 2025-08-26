@@ -1,0 +1,1 @@
+import{a as t,r,j as a}from"./index-CYRfvyZ6.js";import{F as e}from"./forms-links-page-B0DmHiGe.js";import"./form-data-CRU5TV8D.js";import"./live-events-ByGj6MUn.js";function c(){const{t:s}=t(),o=[{label:s("forms.discount.heading"),route:r.createDiscount}];return a.jsx(e,{routes:o})}export{c as default};

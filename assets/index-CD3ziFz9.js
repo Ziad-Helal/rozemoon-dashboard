@@ -1,0 +1,1 @@
+import{a as t,j as o}from"./index-CYRfvyZ6.js";import"./form-data-CRU5TV8D.js";import{D as s}from"./discount-form-DJ8WPVYe.js";import{F as i}from"./form-page-Dfy9CcZy.js";import"./live-events-ByGj6MUn.js";import"./use-form-data-DoUwpYvU.js";function c(){const{t:r}=t();return o.jsx(i,{heading:r("forms.discount.heading"),children:o.jsx(s,{})})}export{c as default};
