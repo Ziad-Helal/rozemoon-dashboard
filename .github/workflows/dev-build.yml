@@ -32,6 +32,8 @@ jobs:
         run: |
           rm -rf target-branch/*
           cp -r dist/* target-branch/
+          rm -rf target-branch/.github
+          rm -f target-branch/.gitignore
       - name: Commit and push on 'dev-build' branch
         run: |
           cd target-branch
