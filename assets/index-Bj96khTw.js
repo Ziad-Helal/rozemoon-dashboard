@@ -1,0 +1,1 @@
+import{a as r,r as t,j as a}from"./index-DLlYwCTA.js";import{F as e}from"./forms-links-page-CDBDbbYT.js";import"./form-data-DXhpjEFZ.js";import"./live-events-DARP3Ehg.js";function p(){const{t:o}=r(),s=[{label:o("forms.coupons.heading"),route:t.createCoupon}];return a.jsx(e,{routes:s})}export{p as default};

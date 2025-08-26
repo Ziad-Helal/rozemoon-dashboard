@@ -1,1 +1,0 @@
-import{a as s,r as t,j as a}from"./index-0bceQhp9.js";import{F as e}from"./forms-links-page-BcYerZmA.js";import"./form-data-CsBw2qO9.js";import"./live-events-CeW7MIN-.js";function l(){const{t:o}=s(),r=[{label:o("forms.color.heading"),route:t.createColor}];return a.jsx(e,{routes:r})}export{l as default};
