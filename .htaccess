@@ -1,0 +1,20 @@
+Options -MultiViews
+
+<IfModule mod_rewrite.c>
+
+RewriteEngine On
+
+# Don't rewrite requests for files and directories
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Don't rewrite requests for JS, CSS, or other assets
+
+RewriteCond %{REQUEST_URI} !\.(js|css|png|jpg|jpeg|gif|ico|svg|json)$
+
+# Rewrite all other requests to index.html
+
+RewriteRule . /index.html [QSA,L]
+
+</IfModule>
