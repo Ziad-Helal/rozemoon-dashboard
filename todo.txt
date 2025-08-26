@@ -1,4 +1,0 @@
-INPUTS:
-- tel input.
-- rating input.
-- OTP input.
