@@ -32,6 +32,7 @@ jobs:
       - name: Copy the build files to 'dev-build' branch
         run: |
           rm -rf target-branch/*
+          shopt -s dotglob
           cp -r dist/* target-branch/
           rm -rf target-branch/.github
           rm -f target-branch/.gitignore
