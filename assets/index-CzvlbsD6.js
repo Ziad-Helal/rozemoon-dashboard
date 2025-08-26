@@ -1,1 +1,0 @@
-import{a as t,j as r}from"./index-DHUFDJIb.js";import"./form-data-BXSz1MIa.js";import{P as a}from"./product-form-1Qm6Vk-w.js";import{F as m}from"./form-page-BWofusLt.js";import"./live-events-RBIMCnps.js";import"./use-form-data-3ajLATRM.js";function d(){const{t:o}=t();return r.jsx(m,{heading:o("forms.product.heading"),children:r.jsx(a,{})})}export{d as default};

@@ -1,1 +1,0 @@
-import{a as e,j as o}from"./index-DHUFDJIb.js";import"./form-data-BXSz1MIa.js";import{C as a}from"./company-review-from-D696jpjn.js";import{F as m}from"./form-page-BWofusLt.js";import"./live-events-RBIMCnps.js";import"./use-form-data-3ajLATRM.js";function u(){const{t:r}=e();return o.jsx(m,{heading:r("forms.companyReviews.heading"),children:o.jsx(a,{})})}export{u as default};
