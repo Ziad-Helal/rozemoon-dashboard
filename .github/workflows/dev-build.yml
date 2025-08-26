@@ -22,6 +22,10 @@ jobs:
           cache: "npm"
       - name: Installing Dependencies
         run: npm ci
+      - name: Getting environment variables
+        run: |
+          echo "${{secrets.PRODUCTION_API_BASE}}" > .env
+          echo "${{secrets.API_ENDPOINTS}}" > .env
       - name: Building the project
         run: npm run build
       - name: Checkout 'dev-build' branch
