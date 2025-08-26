@@ -28,7 +28,7 @@ jobs:
       - name: Copy the build files to 'dev-build' branch
         run: |
           rm -rf target-branch/*
-          cp -r build/* target-branch/
+          cp -r dist/* target-branch/
       - name: Commit and push on 'dev-build' branch
         run: |
           cd target-branch
