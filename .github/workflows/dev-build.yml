@@ -10,11 +10,12 @@ permissions:
   contents: write
 
 env:
-  VITE_API_BASE_URL: https://dev.api.rozemoon.com/
+  NODE_ENV: development
 
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
+    environment: Development
     steps:
       - name: Checkout source
         uses: actions/checkout@v4
