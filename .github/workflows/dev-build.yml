@@ -25,7 +25,7 @@ jobs:
           node-version: 22
           cache: "npm"
       - name: Installing Dependencies
-        run: npm ci
+        run: npm ci --include=dev
       - name: Building the project
         run: npm run build
       - name: Checkout 'dev-build' branch
