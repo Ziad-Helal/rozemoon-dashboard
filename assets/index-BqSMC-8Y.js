@@ -1,0 +1,1 @@
+import{a as o,j as t}from"./index-0bceQhp9.js";import"./form-data-CsBw2qO9.js";import{S as e}from"./setting-form-Bc8kNAAF.js";import{F as i}from"./form-page-daH5PM82.js";import"./live-events-CeW7MIN-.js";import"./use-form-data-z8-MBf9J.js";function f(){const{t:r}=o();return t.jsx(i,{heading:r("forms.setting.heading"),children:t.jsx(e,{})})}export{f as default};
