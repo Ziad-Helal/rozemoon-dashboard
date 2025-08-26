@@ -1,0 +1,1 @@
+import{a as t,j as r}from"./index-DHUFDJIb.js";import"./form-data-BXSz1MIa.js";import{P as e}from"./provider-form-Bk2UBS-f.js";import{F as i}from"./form-page-BWofusLt.js";import"./live-events-RBIMCnps.js";import"./use-form-data-3ajLATRM.js";function f(){const{t:o}=t();return r.jsx(i,{heading:o("forms.provider.heading"),children:r.jsx(e,{})})}export{f as default};

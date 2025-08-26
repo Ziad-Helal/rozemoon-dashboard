@@ -1,0 +1,1 @@
+import{a as t,j as o}from"./index-DHUFDJIb.js";import"./form-data-BXSz1MIa.js";import{C as a}from"./coupon-form-CfK-AaNW.js";import{F as s}from"./form-page-BWofusLt.js";import"./live-events-RBIMCnps.js";import"./use-form-data-3ajLATRM.js";function f(){const{t:r}=t();return o.jsx(s,{heading:r("forms.coupons.heading"),children:o.jsx(a,{})})}export{f as default};

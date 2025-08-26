@@ -1,1 +1,0 @@
-import{a as t,r as s,j as e}from"./index-DLlYwCTA.js";import{F as a}from"./forms-links-page-CDBDbbYT.js";import"./form-data-DXhpjEFZ.js";import"./live-events-DARP3Ehg.js";function f(){const{t:r}=t(),o=[{label:r("forms.category.heading"),route:s.createCategory}];return e.jsx(a,{routes:o})}export{f as default};
